@@ -1,0 +1,133 @@
+   1              		.file	"main.cpp"
+   2              		.section	.rodata.str1.1,"aMS",%progbits,1
+   3              	.LC0:
+   4 0000 55617274 		.ascii	"Uart UI\000"
+   4      20554900 
+   5              	.LC1:
+   6 0008 4552524F 		.ascii	"ERROR:  OUT OF MEMORY: Check OS Stack Size or task "
+   6      523A2020 
+   6      4F555420 
+   6      4F46204D 
+   6      454D4F52 
+   7 003b 73746163 		.ascii	"stack size.\012\000"
+   7      6B207369 
+   7      7A652E0A 
+   7      00
+   8              	.LC2:
+   9 0048 0A2D2D20 		.ascii	"\012-- Starting FreeRTOS --\012\000"
+   9      53746172 
+   9      74696E67 
+   9      20467265 
+   9      6552544F 
+  10              	.LC3:
+  11 0062 4552524F 		.ascii	"ERROR: Unexpected OS Exit!\012\000"
+  11      523A2055 
+  11      6E657870 
+  11      65637465 
+  11      64204F53 
+  12              		.text
+  13              		.align	2
+  14              		.global	main
+  16              	main:
+  17              		@ args = 0, pretend = 0, frame = 16
+  18              		@ frame_needed = 0, uses_anonymous_args = 0
+  19 0000 30402DE9 		stmfd	sp!, {r4, r5, lr}
+  20 0004 20D04DE2 		sub	sp, sp, #32
+  21 0008 FEFFFFEB 		bl	cpuSetupHardware
+  22 000c C4009FE5 		ldr	r0, .L4
+  23 0010 FEFFFFEB 		bl	watchdogDelayUs
+  24 0014 4010A0E3 		mov	r1, #64
+  25 0018 960CA0E3 		mov	r0, #38400
+  26 001c FEFFFFEB 		bl	uart0Init
+  27 0020 B4009FE5 		ldr	r0, .L4+4
+  28 0024 FEFFFFEB 		bl	rprintf_devopen
+  29 0028 FEFFFFEB 		bl	cpuPrintMemoryInfo
+  30 002c AC009FE5 		ldr	r0, .L4+8
+  31 0030 FEFFFFEB 		bl	rprintf_devopen
+  32 0034 1C408DE2 		add	r4, sp, #28
+  33 0038 98009FE5 		ldr	r0, .L4
+  34 003c FEFFFFEB 		bl	watchdogDelayUs
+  35 0040 9C109FE5 		ldr	r1, .L4+12
+  36 0044 0A20A0E3 		mov	r2, #10
+  37 0048 0130A0E3 		mov	r3, #1
+  38 004c 0400A0E1 		mov	r0, r4
+  39 0050 FEFFFFEB 		bl	_ZN5TimerC1EPFvPvEm9TimerType
+  40 0054 0400A0E1 		mov	r0, r4
+  41 0058 FEFFFFEB 		bl	_ZN5Timer5startEv
+  42 005c 0100A0E3 		mov	r0, #1
+  43 0060 FEFFFFEB 		bl	xQueueCreateMutex
+  44 0064 10408DE2 		add	r4, sp, #16
+  45 0068 18008DE5 		str	r0, [sp, #24]
+  46 006c 0430A0E1 		mov	r3, r4
+  47 0070 0050A0E3 		mov	r5, #0
+  48 0074 01C0A0E3 		mov	ip, #1
+  49 0078 044084E2 		add	r4, r4, #4
+  50 007c 64009FE5 		ldr	r0, .L4+16
+  51 0080 64109FE5 		ldr	r1, .L4+20
+  52 0084 062CA0E3 		mov	r2, #1536
+  53 0088 00C08DE5 		str	ip, [sp, #0]
+  54 008c 04408DE5 		str	r4, [sp, #4]
+  55 0090 0C508DE5 		str	r5, [sp, #12]
+  56 0094 08508DE5 		str	r5, [sp, #8]
+  57 0098 FEFFFFEB 		bl	xTaskGenericCreate
+  58 009c 010050E3 		cmp	r0, #1
+  59 00a0 48009F15 		ldrne	r0, .L4+24
+  60 00a4 FEFFFF1B 		blne	rprintf
+  61              	.L2:
+  62 00a8 44009FE5 		ldr	r0, .L4+28
+  63 00ac FEFFFFEB 		bl	rprintf
+  64 00b0 FEFFFFEB 		bl	vTaskStartScheduler
+  65 00b4 20009FE5 		ldr	r0, .L4+4
+  66 00b8 FEFFFFEB 		bl	rprintf_devopen
+  67 00bc 34009FE5 		ldr	r0, .L4+32
+  68 00c0 FEFFFFEB 		bl	rprintf
+  69 00c4 1C008DE2 		add	r0, sp, #28
+  70 00c8 FEFFFFEB 		bl	_ZN5TimerD1Ev
+  71 00cc 0000A0E3 		mov	r0, #0
+  72 00d0 20D08DE2 		add	sp, sp, #32
+  73 00d4 3080BDE8 		ldmfd	sp!, {r4, r5, pc}
+  74              	.L5:
+  75              		.align	2
+  76              	.L4:
+  77 00d8 40420F00 		.word	1000000
+  78 00dc 00000000 		.word	uart0PutCharPolling
+  79 00e0 00000000 		.word	uart0PutChar
+  80 00e4 00000000 		.word	_Z14FatFsDiskTimerPv
+  81 00e8 00000000 		.word	_Z6uartUIPv
+  82 00ec 00000000 		.word	.LC0
+  83 00f0 08000000 		.word	.LC1
+  84 00f4 48000000 		.word	.LC2
+  85 00f8 62000000 		.word	.LC3
+  87              		.align	2
+  88              		.global	_Z14FatFsDiskTimerPv
+  90              	_Z14FatFsDiskTimerPv:
+  91              		@ args = 0, pretend = 0, frame = 0
+  92              		@ frame_needed = 0, uses_anonymous_args = 0
+  93              		@ link register save eliminated.
+  94 00fc FEFFFFEA 		b	disk_timerproc
+  96              		.ident	"GCC: (GNU) 4.3.2"
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.cpp
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccCLw2Ae.s:16     .text:00000000 main
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccCLw2Ae.s:19     .text:00000000 $a
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccCLw2Ae.s:77     .text:000000d8 $d
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccCLw2Ae.s:90     .text:000000fc _Z14FatFsDiskTimerPv
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccCLw2Ae.s:94     .text:000000fc $a
+
+UNDEFINED SYMBOLS
+cpuSetupHardware
+watchdogDelayUs
+uart0Init
+rprintf_devopen
+cpuPrintMemoryInfo
+_ZN5TimerC1EPFvPvEm9TimerType
+_ZN5Timer5startEv
+xQueueCreateMutex
+xTaskGenericCreate
+rprintf
+vTaskStartScheduler
+_ZN5TimerD1Ev
+uart0PutCharPolling
+uart0PutChar
+_Z6uartUIPv
+disk_timerproc

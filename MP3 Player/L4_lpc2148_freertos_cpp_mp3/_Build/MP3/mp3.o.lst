@@ -1,0 +1,445 @@
+   1              		.file	"mp3.cpp"
+   2              		.section	.text._ZN6VECTORI7cStringE14changeCapacityEj,"axG",%progbits,_ZN6VECTORI7cStringE14change
+   3              		.align	2
+   4              		.weak	_ZN6VECTORI7cStringE14changeCapacityEj
+   6              	_ZN6VECTORI7cStringE14changeCapacityEj:
+   7              		@ args = 0, pretend = 0, frame = 0
+   8              		@ frame_needed = 0, uses_anonymous_args = 0
+   9 0000 043090E5 		ldr	r3, [r0, #4]
+  10 0004 030051E1 		cmp	r1, r3
+  11 0008 F0452DE9 		stmfd	sp!, {r4, r5, r6, r7, r8, sl, lr}
+  12 000c 0060A0E1 		mov	r6, r0
+  13 0010 0180A0E1 		mov	r8, r1
+  14 0014 F085BD38 		ldmccfd	sp!, {r4, r5, r6, r7, r8, sl, pc}
+  15 0018 0530A0E3 		mov	r3, #5
+  16 001c 930100E0 		mul	r0, r3, r1
+  17 0020 010080E2 		add	r0, r0, #1
+  18 0024 0001A0E1 		mov	r0, r0, asl #2
+  19 0028 FEFFFFEB 		bl	_Znam
+  20 002c 0070A0E1 		mov	r7, r0
+  21 0030 048087E4 		str	r8, [r7], #4
+  22 0034 0050A0E3 		mov	r5, #0
+  23 0038 0740A0E1 		mov	r4, r7
+  24 003c 000000EA 		b	.L3
+  25              	.L4:
+  26 0040 FEFFFFEB 		bl	_ZN7cStringC1Ev
+  27              	.L3:
+  28 0044 080055E1 		cmp	r5, r8
+  29 0048 0400A0E1 		mov	r0, r4
+  30 004c 015085E2 		add	r5, r5, #1
+  31 0050 144084E2 		add	r4, r4, #20
+  32 0054 F9FFFF1A 		bne	.L4
+  33 0058 0C3096E5 		ldr	r3, [r6, #12]
+  34 005c 000053E3 		cmp	r3, #0
+  35 0060 0040A013 		movne	r4, #0
+  36 0064 0450A011 		movne	r5, r4
+  37 0068 14A0A013 		movne	sl, #20
+  38 006c 0300001A 		bne	.L6
+  39 0070 170000EA 		b	.L5
+  40              	.L7:
+  41 0074 9A7420E0 		mla	r0, sl, r4, r7
+  42 0078 FEFFFFEB 		bl	_ZN7cStringaSERKS_
+  43 007c 014084E2 		add	r4, r4, #1
+  44              	.L6:
+  45 0080 083096E5 		ldr	r3, [r6, #8]
+  46 0084 0C0096E5 		ldr	r0, [r6, #12]
+  47 0088 030054E1 		cmp	r4, r3
+  48 008c 051080E0 		add	r1, r0, r5
+  49 0090 145085E2 		add	r5, r5, #20
+  50 0094 F6FFFF3A 		bcc	.L7
+  51 0098 000050E3 		cmp	r0, #0
+  52 009c 0C00000A 		beq	.L5
+  53 00a0 042010E5 		ldr	r2, [r0, #-4]
+  54 00a4 1430A0E3 		mov	r3, #20
+  55 00a8 930224E0 		mla	r4, r3, r2, r0
+  56              	.L9:
+  57 00ac 0C3096E5 		ldr	r3, [r6, #12]
+  58 00b0 0420A0E1 		mov	r2, r4
+  59 00b4 030054E1 		cmp	r4, r3
+  60 00b8 144044E2 		sub	r4, r4, #20
+  61 00bc 0400A0E1 		mov	r0, r4
+  62 00c0 0100000A 		beq	.L8
+  63 00c4 FEFFFFEB 		bl	_ZN7cStringD1Ev
+  64 00c8 F7FFFFEA 		b	.L9
+  65              	.L8:
+  66 00cc 040042E2 		sub	r0, r2, #4
+  67 00d0 FEFFFFEB 		bl	_ZdaPv
+  68              	.L5:
+  69 00d4 048086E5 		str	r8, [r6, #4]
+  70 00d8 0C7086E5 		str	r7, [r6, #12]
+  71 00dc F085BDE8 		ldmfd	sp!, {r4, r5, r6, r7, r8, sl, pc}
+  73              		.section	.text._ZN6VECTORI7cStringE11rotateRightEv,"axG",%progbits,_ZN6VECTORI7cStringE11rotateRig
+  74              		.align	2
+  75              		.weak	_ZN6VECTORI7cStringE11rotateRightEv
+  77              	_ZN6VECTORI7cStringE11rotateRightEv:
+  78              		@ args = 0, pretend = 0, frame = 20
+  79              		@ frame_needed = 0, uses_anonymous_args = 0
+  80 0000 F0452DE9 		stmfd	sp!, {r4, r5, r6, r7, r8, sl, lr}
+  81 0004 088091E5 		ldr	r8, [r1, #8]
+  82 0008 010058E3 		cmp	r8, #1
+  83 000c 0150A0E1 		mov	r5, r1
+  84 0010 14D04DE2 		sub	sp, sp, #20
+  85 0014 00A0A0E1 		mov	sl, r0
+  86 0018 0C109195 		ldrls	r1, [r1, #12]
+  87 001c 2200009A 		bls	.L22
+  88 0020 0C7095E5 		ldr	r7, [r5, #12]
+  89 0024 0D00A0E1 		mov	r0, sp
+  90 0028 0710A0E1 		mov	r1, r7
+  91 002c FEFFFFEB 		bl	_ZN7cStringC1ERKS_
+  92 0030 083095E5 		ldr	r3, [r5, #8]
+  93 0034 010053E3 		cmp	r3, #1
+  94 0038 0060A083 		movhi	r6, #0
+  95 003c 0640A081 		movhi	r4, r6
+  96 0040 0500008A 		bhi	.L14
+  97 0044 090000EA 		b	.L13
+  98              	.L15:
+  99 0048 0C1095E5 		ldr	r1, [r5, #12]
+ 100 004c 040081E0 		add	r0, r1, r4
+ 101 0050 144084E2 		add	r4, r4, #20
+ 102 0054 041081E0 		add	r1, r1, r4
+ 103 0058 FEFFFFEB 		bl	_ZN7cStringaSERKS_
+ 104              	.L14:
+ 105 005c 083095E5 		ldr	r3, [r5, #8]
+ 106 0060 013043E2 		sub	r3, r3, #1
+ 107 0064 030056E1 		cmp	r6, r3
+ 108 0068 016086E2 		add	r6, r6, #1
+ 109 006c F5FFFF3A 		bcc	.L15
+ 110              	.L13:
+ 111 0070 1460A0E3 		mov	r6, #20
+ 112 0074 960800E0 		mul	r0, r6, r8
+ 113 0078 140040E2 		sub	r0, r0, #20
+ 114 007c 0D10A0E1 		mov	r1, sp
+ 115 0080 000087E0 		add	r0, r7, r0
+ 116 0084 FEFFFFEB 		bl	_ZN7cStringaSERKS_
+ 117 0088 0D00A0E1 		mov	r0, sp
+ 118 008c FEFFFFEB 		bl	_ZN7cStringD1Ev
+ 119 0090 083095E5 		ldr	r3, [r5, #8]
+ 120 0094 0C2095E5 		ldr	r2, [r5, #12]
+ 121 0098 013053E2 		subs	r3, r3, #1
+ 122 009c 96232120 		mlacs	r1, r6, r3, r2
+ 123 00a0 0D40A0E1 		mov	r4, sp
+ 124 00a4 0210A031 		movcc	r1, r2
+ 125 00a8 0A00A0E1 		mov	r0, sl
+ 126              	.L22:
+ 127 00ac FEFFFFEB 		bl	_ZN7cStringC1ERKS_
+ 128 00b0 0A00A0E1 		mov	r0, sl
+ 129 00b4 14D08DE2 		add	sp, sp, #20
+ 130 00b8 F085BDE8 		ldmfd	sp!, {r4, r5, r6, r7, r8, sl, pc}
+ 132              		.section	.text._ZN6VECTORI7cStringE10rotateLeftEv,"axG",%progbits,_ZN6VECTORI7cStringE10rotateLeft
+ 133              		.align	2
+ 134              		.weak	_ZN6VECTORI7cStringE10rotateLeftEv
+ 136              	_ZN6VECTORI7cStringE10rotateLeftEv:
+ 137              		@ args = 0, pretend = 0, frame = 20
+ 138              		@ frame_needed = 0, uses_anonymous_args = 0
+ 139 0000 F0412DE9 		stmfd	sp!, {r4, r5, r6, r7, r8, lr}
+ 140 0004 083091E5 		ldr	r3, [r1, #8]
+ 141 0008 010053E3 		cmp	r3, #1
+ 142 000c 0160A0E1 		mov	r6, r1
+ 143 0010 14D04DE2 		sub	sp, sp, #20
+ 144 0014 0080A0E1 		mov	r8, r0
+ 145 0018 0C109195 		ldrls	r1, [r1, #12]
+ 146 001c 1F00009A 		bls	.L34
+ 147 0020 1440A0E3 		mov	r4, #20
+ 148 0024 940301E0 		mul	r1, r4, r3
+ 149 0028 0C7096E5 		ldr	r7, [r6, #12]
+ 150 002c 141041E2 		sub	r1, r1, #20
+ 151 0030 011087E0 		add	r1, r7, r1
+ 152 0034 0D00A0E1 		mov	r0, sp
+ 153 0038 FEFFFFEB 		bl	_ZN7cStringC1ERKS_
+ 154 003c 085096E5 		ldr	r5, [r6, #8]
+ 155 0040 010055E3 		cmp	r5, #1
+ 156 0044 94050380 		mulhi	r3, r4, r5
+ 157 0048 14404382 		subhi	r4, r3, #20
+ 158 004c 0400008A 		bhi	.L26
+ 159 0050 070000EA 		b	.L25
+ 160              	.L27:
+ 161 0054 0C1096E5 		ldr	r1, [r6, #12]
+ 162 0058 030081E0 		add	r0, r1, r3
+ 163 005c 041081E0 		add	r1, r1, r4
+ 164 0060 FEFFFFEB 		bl	_ZN7cStringaSERKS_
+ 165              	.L26:
+ 166 0064 144044E2 		sub	r4, r4, #20
+ 167 0068 015055E2 		subs	r5, r5, #1
+ 168 006c 143084E2 		add	r3, r4, #20
+ 169 0070 F7FFFF1A 		bne	.L27
+ 170              	.L25:
+ 171 0074 0D10A0E1 		mov	r1, sp
+ 172 0078 0700A0E1 		mov	r0, r7
+ 173 007c FEFFFFEB 		bl	_ZN7cStringaSERKS_
+ 174 0080 0D00A0E1 		mov	r0, sp
+ 175 0084 FEFFFFEB 		bl	_ZN7cStringD1Ev
+ 176 0088 083096E5 		ldr	r3, [r6, #8]
+ 177 008c 0C1096E5 		ldr	r1, [r6, #12]
+ 178 0090 010053E3 		cmp	r3, #1
+ 179 0094 0D40A0E1 		mov	r4, sp
+ 180 0098 14108182 		addhi	r1, r1, #20
+ 181 009c 0800A0E1 		mov	r0, r8
+ 182              	.L34:
+ 183 00a0 FEFFFFEB 		bl	_ZN7cStringC1ERKS_
+ 184 00a4 0800A0E1 		mov	r0, r8
+ 185 00a8 14D08DE2 		add	sp, sp, #20
+ 186 00ac F081BDE8 		ldmfd	sp!, {r4, r5, r6, r7, r8, pc}
+ 188              		.section	.rodata.str1.1,"aMS",%progbits,1
+ 189              	.LC0:
+ 190 0000 646F6E65 		.ascii	"done\000"
+ 190      00
+ 191              	.LC1:
+ 192 0005 4572726F 		.ascii	"Error in QueueReceive: song queue is empty (waited "
+ 192      7220696E 
+ 192      20517565 
+ 192      75655265 
+ 192      63656976 
+ 193 0038 696E6669 		.ascii	"infinitely!)\012\000"
+ 193      6E697465 
+ 193      6C792129 
+ 193      0A00
+ 194              	.LC2:
+ 195 0046 52656365 		.ascii	"Received item from queue: %s\012\000"
+ 195      69766564 
+ 195      20697465 
+ 195      6D206672 
+ 195      6F6D2071 
+ 196              	.LC3:
+ 197 0064 506C6179 		.ascii	"Playing %s\012\000"
+ 197      696E6720 
+ 197      25730A00 
+ 198              	.LC4:
+ 199 0070 4572726F 		.ascii	"Error: unable to open file\012\000"
+ 199      723A2075 
+ 199      6E61626C 
+ 199      6520746F 
+ 199      206F7065 
+ 200              	.LC5:
+ 201 008c 4572726F 		.ascii	"Error: unable to read data\012\000"
+ 201      723A2075 
+ 201      6E61626C 
+ 201      6520746F 
+ 201      20726561 
+ 202              		.text
+ 203              		.align	2
+ 204              		.global	_Z7mp3TaskPv
+ 206              	_Z7mp3TaskPv:
+ 207              		@ args = 0, pretend = 0, frame = 668
+ 208              		@ frame_needed = 0, uses_anonymous_args = 0
+ 209 0000 F04F2DE9 		stmfd	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, lr}
+ 210 0004 A7DF4DE2 		sub	sp, sp, #668
+ 211 0008 266E8DE2 		add	r6, sp, #608
+ 212 000c 0040A0E3 		mov	r4, #0
+ 213 0010 0430A0E3 		mov	r3, #4
+ 214 0014 935F8DE2 		add	r5, sp, #588
+ 215 0018 0080A0E1 		mov	r8, r0
+ 216 001c 0600A0E1 		mov	r0, r6
+ 217 0020 74328DE5 		str	r3, [sp, #628]
+ 218 0024 80428DE5 		str	r4, [sp, #640]
+ 219 0028 7C428DE5 		str	r4, [sp, #636]
+ 220 002c 78428DE5 		str	r4, [sp, #632]
+ 221 0030 FEFFFFEB 		bl	_ZN7cStringC1Ev
+ 222 0034 0500A0E1 		mov	r0, r5
+ 223 0038 40129FE5 		ldr	r1, .L66
+ 224 003c A15F8DE2 		add	r5, sp, #644
+ 225 0040 FEFFFFEB 		bl	_ZN7cStringC1EPKc
+ 226 0044 0470A0E1 		mov	r7, r4
+ 227 0048 035085E2 		add	r5, r5, #3
+ 228 004c 30629FE5 		ldr	r6, .L66+4
+ 229 0050 270000EA 		b	.L61
+ 230              	.L41:
+ 231 0054 9D7F8DE2 		add	r7, sp, #628
+ 232 0058 1440A0E3 		mov	r4, #20
+ 233              	.L63:
+ 234 005c 0020E0E3 		mvn	r2, #0
+ 235 0060 0030A0E3 		mov	r3, #0
+ 236 0064 0510A0E1 		mov	r1, r5
+ 237 0068 000098E5 		ldr	r0, [r8, #0]
+ 238 006c FEFFFFEB 		bl	xQueueGenericReceive
+ 239 0070 010050E3 		cmp	r0, #1
+ 240 0074 0C029FE5 		ldr	r0, .L66+8
+ 241 0078 0100000A 		beq	.L37
+ 242 007c FEFFFFEB 		bl	rprintf
+ 243 0080 020000EA 		b	.L38
+ 244              	.L37:
+ 245 0084 0510A0E1 		mov	r1, r5
+ 246 0088 FC019FE5 		ldr	r0, .L66+12
+ 247 008c FEFFFFEB 		bl	rprintf
+ 248              	.L38:
+ 249 0090 0510A0E1 		mov	r1, r5
+ 250 0094 930F8DE2 		add	r0, sp, #588
+ 251 0098 FEFFFFEB 		bl	_ZN7cString9compareToEPKc
+ 252 009c 000050E3 		cmp	r0, #0
+ 253 00a0 0170A013 		movne	r7, #1
+ 254 00a4 1400001A 		bne	.L62
+ 255              	.L39:
+ 256 00a8 260E8DE2 		add	r0, sp, #608
+ 257 00ac 0510A0E1 		mov	r1, r5
+ 258 00b0 FEFFFFEB 		bl	_ZN7cStringaSEPKc
+ 259 00b4 9E2F8DE2 		add	r2, sp, #632
+ 260 00b8 0C0092E8 		ldmia	r2, {r2, r3}	@ phole ldm
+ 261 00bc 020053E1 		cmp	r3, r2
+ 262 00c0 74129D25 		ldrcs	r1, [sp, #628]
+ 263 00c4 0700A021 		movcs	r0, r7
+ 264 00c8 01108220 		addcs	r1, r2, r1
+ 265 00cc FEFFFF2B 		blcs	_ZN6VECTORI7cStringE14changeCapacityEj
+ 266              	.L40:
+ 267 00d0 7C329DE5 		ldr	r3, [sp, #636]
+ 268 00d4 80229DE5 		ldr	r2, [sp, #640]
+ 269 00d8 261E8DE2 		add	r1, sp, #608
+ 270 00dc 942320E0 		mla	r0, r4, r3, r2
+ 271 00e0 FEFFFFEB 		bl	_ZN7cStringaSERKS_
+ 272 00e4 7C329DE5 		ldr	r3, [sp, #636]
+ 273 00e8 013083E2 		add	r3, r3, #1
+ 274 00ec 7C328DE5 		str	r3, [sp, #636]
+ 275 00f0 D9FFFFEA 		b	.L63
+ 276              	.L61:
+ 277 00f4 000057E3 		cmp	r7, #0
+ 278 00f8 D5FFFF0A 		beq	.L41
+ 279              	.L62:
+ 280 00fc 80029DE5 		ldr	r0, [sp, #640]
+ 281 0100 FEFFFFEB 		bl	_ZNK7cStringclEv
+ 282 0104 0010A0E1 		mov	r1, r0
+ 283 0108 80019FE5 		ldr	r0, .L66+16
+ 284 010c FEFFFFEB 		bl	rprintf
+ 285 0110 80029DE5 		ldr	r0, [sp, #640]
+ 286 0114 FEFFFFEB 		bl	_ZNK7cStringclEv
+ 287 0118 0120A0E3 		mov	r2, #1
+ 288 011c 0010A0E1 		mov	r1, r0
+ 289 0120 020C8DE2 		add	r0, sp, #512
+ 290 0124 FEFFFFEB 		bl	f_open
+ 291 0128 000050E3 		cmp	r0, #0
+ 292 012c 60019F15 		ldrne	r0, .L66+20
+ 293 0130 FEFFFF1B 		blne	rprintf
+ 294              	.L46:
+ 295 0134 0030A0E3 		mov	r3, #0
+ 296 0138 A69F8DE2 		add	r9, sp, #664
+ 297 013c 94328DE5 		str	r3, [sp, #660]
+ 298 0140 A5BF8DE2 		add	fp, sp, #660
+ 299 0144 02A2A0E3 		mov	sl, #536870912
+ 300 0148 039089E2 		add	r9, r9, #3
+ 301              	.L60:
+ 302 014c 020C8DE2 		add	r0, sp, #512
+ 303 0150 0D10A0E1 		mov	r1, sp
+ 304 0154 022CA0E3 		mov	r2, #512
+ 305 0158 0B30A0E1 		mov	r3, fp
+ 306 015c FEFFFFEB 		bl	f_read
+ 307 0160 000050E3 		cmp	r0, #0
+ 308 0164 2C019F15 		ldrne	r0, .L66+24
+ 309 0168 FEFFFF1B 		blne	rprintf
+ 310              	.L47:
+ 311 016c 0010A0E3 		mov	r1, #0
+ 312 0170 1C0098E5 		ldr	r0, [r8, #28]
+ 313 0174 20219FE5 		ldr	r2, .L66+28
+ 314 0178 0130A0E1 		mov	r3, r1
+ 315 017c FEFFFFEB 		bl	xQueueGenericReceive
+ 316 0180 000050E3 		cmp	r0, #0
+ 317 0184 14A08615 		strne	sl, [r6, #20]
+ 318 0188 0040A013 		movne	r4, #0
+ 319 018c EEFFFF0A 		beq	.L60
+ 320 0190 070000EA 		b	.L64
+ 321              	.L51:
+ 322 0194 003096E5 		ldr	r3, [r6, #0]
+ 323 0198 020913E3 		tst	r3, #32768
+ 324 019c 0300000A 		beq	.L50
+ 325 01a0 9C0252E5 		ldrb	r0, [r2, #-668]	@ zero_extendqisi2
+ 326 01a4 014084E2 		add	r4, r4, #1
+ 327 01a8 FEFFFFEB 		bl	rxTxByteSSPSPI
+ 328 01ac 000000EA 		b	.L64
+ 329              	.L50:
+ 330 01b0 FEFFFFEB 		bl	vTaskDelay
+ 331              	.L64:
+ 332 01b4 A73F8DE2 		add	r3, sp, #668
+ 333 01b8 042083E0 		add	r2, r3, r4
+ 334 01bc 94329DE5 		ldr	r3, [sp, #660]
+ 335 01c0 030054E1 		cmp	r4, r3
+ 336 01c4 0100A0E3 		mov	r0, #1
+ 337 01c8 F1FFFF3A 		bcc	.L51
+ 338 01cc 0010A0E3 		mov	r1, #0
+ 339 01d0 0120A0E1 		mov	r2, r1
+ 340 01d4 0130A0E1 		mov	r3, r1
+ 341 01d8 1C0098E5 		ldr	r0, [r8, #28]
+ 342 01dc 1CA086E5 		str	sl, [r6, #28]
+ 343 01e0 FEFFFFEB 		bl	xQueueGenericSend
+ 344 01e4 0020A0E3 		mov	r2, #0
+ 345 01e8 0230A0E1 		mov	r3, r2
+ 346 01ec 080098E5 		ldr	r0, [r8, #8]
+ 347 01f0 0910A0E1 		mov	r1, r9
+ 348 01f4 FEFFFFEB 		bl	xQueueGenericReceive
+ 349 01f8 010050E3 		cmp	r0, #1
+ 350 01fc 0030A013 		movne	r3, #0
+ 351 0200 9B32CD15 		strneb	r3, [sp, #667]
+ 352 0204 94329DE5 		ldr	r3, [sp, #660]
+ 353 0208 020C53E3 		cmp	r3, #512
+ 354 020c 0200001A 		bne	.L53
+ 355 0210 9B32DDE5 		ldrb	r3, [sp, #667]	@ zero_extendqisi2
+ 356 0214 030053E3 		cmp	r3, #3
+ 357 0218 0400001A 		bne	.L54
+ 358              	.L53:
+ 359 021c 8E4F8DE2 		add	r4, sp, #568
+ 360 0220 9D1F8DE2 		add	r1, sp, #628
+ 361 0224 0400A0E1 		mov	r0, r4
+ 362 0228 FEFFFFEB 		bl	_ZN6VECTORI7cStringE11rotateRightEv
+ 363 022c 050000EA 		b	.L65
+ 364              	.L54:
+ 365 0230 020053E3 		cmp	r3, #2
+ 366 0234 0800001A 		bne	.L56
+ 367 0238 894F8DE2 		add	r4, sp, #548
+ 368 023c 9D1F8DE2 		add	r1, sp, #628
+ 369 0240 0400A0E1 		mov	r0, r4
+ 370 0244 FEFFFFEB 		bl	_ZN6VECTORI7cStringE10rotateLeftEv
+ 371              	.L65:
+ 372 0248 0400A0E1 		mov	r0, r4
+ 373 024c FEFFFFEB 		bl	_ZN7cStringD1Ev
+ 374 0250 0030A0E3 		mov	r3, #0
+ 375 0254 9B32CDE5 		strb	r3, [sp, #667]
+ 376 0258 050000EA 		b	.L55
+ 377              	.L56:
+ 378 025c 010053E3 		cmp	r3, #1
+ 379 0260 B9FFFF1A 		bne	.L60
+ 380 0264 0030A0E3 		mov	r3, #0
+ 381 0268 9B32CDE5 		strb	r3, [sp, #667]
+ 382 026c 7C328DE5 		str	r3, [sp, #636]
+ 383 0270 0370A0E1 		mov	r7, r3
+ 384              	.L55:
+ 385 0274 020C8DE2 		add	r0, sp, #512
+ 386 0278 FEFFFFEB 		bl	f_close
+ 387 027c 9CFFFFEA 		b	.L61
+ 388              	.L67:
+ 389              		.align	2
+ 390              	.L66:
+ 391 0280 00000000 		.word	.LC0
+ 392 0284 008002E0 		.word	-536707072
+ 393 0288 05000000 		.word	.LC1
+ 394 028c 46000000 		.word	.LC2
+ 395 0290 64000000 		.word	.LC3
+ 396 0294 70000000 		.word	.LC4
+ 397 0298 8C000000 		.word	.LC5
+ 398 029c B80B0000 		.word	3000
+ 400              		.ident	"GCC: (GNU) 4.3.2"
+DEFINED SYMBOLS
+                            *ABS*:00000000 mp3.cpp
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccKzDZle.s:6      .text._ZN6VECTORI7cStringE14changeCapacityEj:00000000 _ZN6VECTORI7cStringE14changeCapacityEj
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccKzDZle.s:9      .text._ZN6VECTORI7cStringE14changeCapacityEj:00000000 $a
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccKzDZle.s:77     .text._ZN6VECTORI7cStringE11rotateRightEv:00000000 _ZN6VECTORI7cStringE11rotateRightEv
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccKzDZle.s:80     .text._ZN6VECTORI7cStringE11rotateRightEv:00000000 $a
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccKzDZle.s:136    .text._ZN6VECTORI7cStringE10rotateLeftEv:00000000 _ZN6VECTORI7cStringE10rotateLeftEv
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccKzDZle.s:139    .text._ZN6VECTORI7cStringE10rotateLeftEv:00000000 $a
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccKzDZle.s:206    .text:00000000 _Z7mp3TaskPv
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccKzDZle.s:209    .text:00000000 $a
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccKzDZle.s:391    .text:00000280 $d
+
+UNDEFINED SYMBOLS
+_Znam
+_ZN7cStringC1Ev
+_ZN7cStringaSERKS_
+_ZN7cStringD1Ev
+_ZdaPv
+_ZN7cStringC1ERKS_
+_ZN7cStringC1EPKc
+xQueueGenericReceive
+rprintf
+_ZN7cString9compareToEPKc
+_ZN7cStringaSEPKc
+_ZNK7cStringclEv
+f_open
+f_read
+rxTxByteSSPSPI
+vTaskDelay
+xQueueGenericSend
+f_close

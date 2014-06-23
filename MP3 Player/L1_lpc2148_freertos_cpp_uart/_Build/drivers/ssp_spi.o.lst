@@ -1,0 +1,33 @@
+   1              		.file	"ssp_spi.c"
+   2              		.text
+   3              		.align	2
+   4              		.global	initialize_SSPSPI
+   6              	initialize_SSPSPI:
+   7              		@ args = 0, pretend = 0, frame = 0
+   8              		@ frame_needed = 0, uses_anonymous_args = 0
+   9              		@ link register save eliminated.
+  10 0000 1EFF2FE1 		bx	lr
+  12              		.align	2
+  13              		.global	rxTxByteSSPSPI
+  15              	rxTxByteSSPSPI:
+  16              		@ args = 0, pretend = 0, frame = 0
+  17              		@ frame_needed = 0, uses_anonymous_args = 0
+  18              		@ link register save eliminated.
+  19 0004 0000A0E3 		mov	r0, #0
+  20 0008 1EFF2FE1 		bx	lr
+  22              		.align	2
+  23              		.global	setSSPSPI_Divider
+  25              	setSSPSPI_Divider:
+  26              		@ args = 0, pretend = 0, frame = 0
+  27              		@ frame_needed = 0, uses_anonymous_args = 0
+  28              		@ link register save eliminated.
+  29 000c 1EFF2FE1 		bx	lr
+  31              		.ident	"GCC: (GNU) 4.3.2"
+DEFINED SYMBOLS
+                            *ABS*:00000000 ssp_spi.c
+/cygdrive/c/Users/jagtar/AppData/Local/Temp/cccDaCak.s:6      .text:00000000 initialize_SSPSPI
+/cygdrive/c/Users/jagtar/AppData/Local/Temp/cccDaCak.s:10     .text:00000000 $a
+/cygdrive/c/Users/jagtar/AppData/Local/Temp/cccDaCak.s:15     .text:00000004 rxTxByteSSPSPI
+/cygdrive/c/Users/jagtar/AppData/Local/Temp/cccDaCak.s:25     .text:0000000c setSSPSPI_Divider
+
+NO UNDEFINED SYMBOLS

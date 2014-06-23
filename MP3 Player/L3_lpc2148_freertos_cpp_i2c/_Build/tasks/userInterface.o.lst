@@ -1,0 +1,747 @@
+   1              		.file	"userInterface.cpp"
+   2              		.section	.rodata.str1.1,"aMS",%progbits,1
+   3              	.LC0:
+   4 0000 08200800 		.ascii	"\010 \010\000"
+   5              		.text
+   6              		.align	2
+   7              		.global	_Z11getUartLinePc
+   9              	_Z11getUartLinePc:
+  10              		@ args = 0, pretend = 0, frame = 4
+  11              		@ frame_needed = 0, uses_anonymous_args = 0
+  12 0000 70402DE9 		stmfd	sp!, {r4, r5, r6, lr}
+  13 0004 04D04DE2 		sub	sp, sp, #4
+  14 0008 0050A0E1 		mov	r5, r0
+  15 000c 0040A0E3 		mov	r4, #0
+  16 0010 03608DE2 		add	r6, sp, #3
+  17              	.L9:
+  18 0014 0010E0E3 		mvn	r1, #0
+  19 0018 0600A0E1 		mov	r0, r6
+  20 001c FEFFFFEB 		bl	uart0GetChar
+  21 0020 000050E3 		cmp	r0, #0
+  22 0024 FAFFFF0A 		beq	.L9
+  23 0028 0320DDE5 		ldrb	r2, [sp, #3]	@ zero_extendqisi2
+  24 002c 0A0052E3 		cmp	r2, #10
+  25 0030 0600001A 		bne	.L3
+  26 0034 0030A0E3 		mov	r3, #0
+  27 0038 0430C5E7 		strb	r3, [r5, r4]
+  28 003c 0200A0E1 		mov	r0, r2
+  29 0040 6410A0E3 		mov	r1, #100
+  30 0044 FEFFFFEB 		bl	uart0PutChar
+  31 0048 04D08DE2 		add	sp, sp, #4
+  32 004c 7080BDE8 		ldmfd	sp!, {r4, r5, r6, pc}
+  33              	.L3:
+  34 0050 0D0052E3 		cmp	r2, #13
+  35 0054 EEFFFF0A 		beq	.L9
+  36 0058 080052E3 		cmp	r2, #8
+  37 005c 0200A0E1 		mov	r0, r2
+  38 0060 6410A0E3 		mov	r1, #100
+  39 0064 0800001A 		bne	.L4
+  40 0068 001054E2 		subs	r1, r4, #0
+  41 006c 2C009FE5 		ldr	r0, .L10
+  42 0070 0200000A 		beq	.L5
+  43 0074 014044E2 		sub	r4, r4, #1
+  44 0078 FEFFFFEB 		bl	rprintf
+  45 007c E4FFFFEA 		b	.L9
+  46              	.L5:
+  47 0080 0700A0E3 		mov	r0, #7
+  48 0084 FEFFFFEB 		bl	uart0PutChar
+  49 0088 E1FFFFEA 		b	.L9
+  50              	.L4:
+  51 008c FEFFFFEB 		bl	uart0PutChar
+  52 0090 0330DDE5 		ldrb	r3, [sp, #3]	@ zero_extendqisi2
+  53 0094 0430C5E7 		strb	r3, [r5, r4]
+  54 0098 014084E2 		add	r4, r4, #1
+  55 009c DCFFFFEA 		b	.L9
+  56              	.L11:
+  57              		.align	2
+  58              	.L10:
+  59 00a0 00000000 		.word	.LC0
+  61              		.section	.rodata.str1.1
+  62              	.LC1:
+  63 0004 2D2D2D2D 		.ascii	"---------------------------------------------------"
+  63      2D2D2D2D 
+  63      2D2D2D2D 
+  63      2D2D2D2D 
+  63      2D2D2D2D 
+  64 0037 2D2D2D2D 		.ascii	"---------------------------------\012\000"
+  64      2D2D2D2D 
+  64      2D2D2D2D 
+  64      2D2D2D2D 
+  64      2D2D2D2D 
+  65              		.text
+  66              		.align	2
+  67              		.global	_Z9printLinev
+  69              	_Z9printLinev:
+  70              		@ args = 0, pretend = 0, frame = 0
+  71              		@ frame_needed = 0, uses_anonymous_args = 0
+  72              		@ link register save eliminated.
+  73 00a4 00009FE5 		ldr	r0, .L14
+  74 00a8 FEFFFFEA 		b	rprintf
+  75              	.L15:
+  76              		.align	2
+  77              	.L14:
+  78 00ac 04000000 		.word	.LC1
+  80              		.section	.rodata.str1.1
+  81              	.LC2:
+  82 005a 5741524E 		.ascii	"WARNING: SD CARD Could not be mounted!\012\000"
+  82      494E473A 
+  82      20534420 
+  82      43415244 
+  82      20436F75 
+  83              	.LC3:
+  84 0082 4C50433A 		.ascii	"LPC: \000"
+  84      2000
+  85              	.LC4:
+  86 0088 2000     		.ascii	" \000"
+  87              	.LC5:
+  88 008a 6563686F 		.ascii	"echo\000"
+  88      00
+  89              	.LC6:
+  90 008f 00       		.ascii	"\000"
+  91              	.LC7:
+  92 0090 4563686F 		.ascii	"Echo: %s\012\000"
+  92      3A202573 
+  92      0A00
+  93              	.LC8:
+  94 009a 6C7300   		.ascii	"ls\000"
+  95              	.LC10:
+  96 009d 496E7661 		.ascii	"Invalid directory: |%s|\012\000"
+  96      6C696420 
+  96      64697265 
+  96      63746F72 
+  96      793A207C 
+  97              	.LC11:
+  98 00b6 44697265 		.ascii	"Directory listing of: %s\012\012\000"
+  98      63746F72 
+  98      79206C69 
+  98      7374696E 
+  98      67206F66 
+  99              	.LC12:
+ 100 00d1 25632563 		.ascii	"%c%c%c%c%c %u/%2u/%2u %2u:%2u %10lu %13s\000"
+ 100      25632563 
+ 100      25632025 
+ 100      752F2532 
+ 100      752F2532 
+ 101              	.LC13:
+ 102 00fa 202D2D20 		.ascii	" -- %s\000"
+ 102      257300
+ 103              	.LC14:
+ 104 0101 0A00     		.ascii	"\012\000"
+ 105              	.LC15:
+ 106 0103 0A253475 		.ascii	"\012%4u File(s), %10u bytes total\012%4u Dir(s)\000"
+ 106      2046696C 
+ 106      65287329 
+ 106      2C202531 
+ 106      30752062 
+ 107              	.LC16:
+ 108 012d 2C202531 		.ascii	", %10uK bytes free\012\000"
+ 108      30754B20 
+ 108      62797465 
+ 108      73206672 
+ 108      65650A00 
+ 109              	.LC17:
+ 110 0141 72656164 		.ascii	"read\000"
+ 110      00
+ 111              	.LC18:
+ 112 0146 46696C65 		.ascii	"File to read: |%s|\012\000"
+ 112      20746F20 
+ 112      72656164 
+ 112      3A207C25 
+ 112      737C0A00 
+ 113              	.LC19:
+ 114 015a 46696C65 		.ascii	"File Contents:\012\000"
+ 114      20436F6E 
+ 114      74656E74 
+ 114      733A0A00 
+ 115              	.LC20:
+ 116 016a 2D2D4661 		.ascii	"--Failed to read file after having it opened--\012\000"
+ 116      696C6564 
+ 116      20746F20 
+ 116      72656164 
+ 116      2066696C 
+ 117              	.LC21:
+ 118 019a 257300   		.ascii	"%s\000"
+ 119              	.LC22:
+ 120 019d 46696C65 		.ascii	"File is closed\012\000"
+ 120      20697320 
+ 120      636C6F73 
+ 120      65640A00 
+ 121              	.LC23:
+ 122 01ad 4661696C 		.ascii	"Failed to open the file\012\000"
+ 122      65642074 
+ 122      6F206F70 
+ 122      656E2074 
+ 122      68652066 
+ 123              	.LC24:
+ 124 01c6 77726974 		.ascii	"write\000"
+ 124      6500
+ 125              	.LC25:
+ 126 01cc 46696C65 		.ascii	"File to write: |%s|\012\000"
+ 126      20746F20 
+ 126      77726974 
+ 126      653A207C 
+ 126      25737C0A 
+ 127              	.LC26:
+ 128 01e1 46696C65 		.ascii	"File successfully opened\012\000"
+ 128      20737563 
+ 128      63657373 
+ 128      66756C6C 
+ 128      79206F70 
+ 129              	.LC28:
+ 130 01fb 4661696C 		.ascii	"Failed to write file\012\000"
+ 130      65642074 
+ 130      6F207772 
+ 130      69746520 
+ 130      66696C65 
+ 131              	.LC29:
+ 132 0211 43505500 		.ascii	"CPU\000"
+ 133              	.LC30:
+ 134 0215 43505572 		.ascii	"CPUr\000"
+ 134      00
+ 135              	.LC31:
+ 136 021a 4350556E 		.ascii	"CPUn\000"
+ 136      00
+ 137              	.LC32:
+ 138 021f 44656C61 		.ascii	"Delaying for %ims.  CPU Usage will be reported afte"
+ 138      79696E67 
+ 138      20666F72 
+ 138      2025696D 
+ 138      732E2020 
+ 139 0252 72776172 		.ascii	"rwards...\012\000"
+ 139      64732E2E 
+ 139      2E0A00
+ 140              	.LC33:
+ 141 025d 596F7520 		.ascii	"You must define a delay time in milliseconds as par"
+ 141      6D757374 
+ 141      20646566 
+ 141      696E6520 
+ 141      61206465 
+ 142 0290 616D6574 		.ascii	"ameter.\012\000"
+ 142      65722E0A 
+ 142      00
+ 143              	.LC34:
+ 144 0299 696E666F 		.ascii	"info\000"
+ 144      00
+ 145              	.LC35:
+ 146 029e 48454C50 		.ascii	"HELP\000"
+ 146      00
+ 147              	.LC36:
+ 148 02a3 436F6D6D 		.ascii	"Command list:\012\000"
+ 148      616E6420 
+ 148      6C697374 
+ 148      3A0A00
+ 149              	.LC37:
+ 150 02b2 6563686F 		.ascii	"echo <anything>    - Echoes back anything sent.\012"
+ 150      203C616E 
+ 150      79746869 
+ 150      6E673E20 
+ 150      2020202D 
+ 151 02e2 00       		.ascii	"\000"
+ 152              	.LC38:
+ 153 02e3 6C732020 		.ascii	"ls                 - Get directory listing.\012\000"
+ 153      20202020 
+ 153      20202020 
+ 153      20202020 
+ 153      2020202D 
+ 154              	.LC39:
+ 155 0310 72656164 		.ascii	"read <filename>    - Read a file.\012\000"
+ 155      203C6669 
+ 155      6C656E61 
+ 155      6D653E20 
+ 155      2020202D 
+ 156              	.LC40:
+ 157 0333 77726974 		.ascii	"write <filename>   - Wrie a file.\012\000"
+ 157      65203C66 
+ 157      696C656E 
+ 157      616D653E 
+ 157      2020202D 
+ 158              	.LC41:
+ 159 0356 43505520 		.ascii	"CPU                - Show tasks and CPU Allocation."
+ 159      20202020 
+ 159      20202020 
+ 159      20202020 
+ 159      2020202D 
+ 160 0389 0A00     		.ascii	"\012\000"
+ 161              	.LC42:
+ 162 038b 43505572 		.ascii	"CPUr               - Show tasks and CPU Allocation "
+ 162      20202020 
+ 162      20202020 
+ 162      20202020 
+ 162      2020202D 
+ 163 03be 26207265 		.ascii	"& reset counters\012\000"
+ 163      73657420 
+ 163      636F756E 
+ 163      74657273 
+ 163      0A00
+ 164              	.LC43:
+ 165 03d0 4350556E 		.ascii	"CPUn <# ms>        - Reset counters, delay, then re"
+ 165      203C2320 
+ 165      6D733E20 
+ 165      20202020 
+ 165      2020202D 
+ 166 0403 706F7274 		.ascii	"port CPU usage & reset counters\012\000"
+ 166      20435055 
+ 166      20757361 
+ 166      67652026 
+ 166      20726573 
+ 167              	.LC44:
+ 168 0424 696E666F 		.ascii	"info               - Show tasks and their Stack-hig"
+ 168      20202020 
+ 168      20202020 
+ 168      20202020 
+ 168      2020202D 
+ 169 0457 68207761 		.ascii	"h watermark.\012\000"
+ 169      7465726D 
+ 169      61726B2E 
+ 169      0A00
+ 170              	.LC45:
+ 171 0465 436F6D6D 		.ascii	"Command not recognized.\012\000"
+ 171      616E6420 
+ 171      6E6F7420 
+ 171      7265636F 
+ 171      676E697A 
+ 172              	.LC9:
+ 173 047e 303A00   		.ascii	"0:\000"
+ 174              	.LC27:
+ 175 0481 46696C65 		.ascii	"File written using FATFS From Chen\012\000"
+ 175      20777269 
+ 175      7474656E 
+ 175      20757369 
+ 175      6E672046 
+ 176              		.text
+ 177              		.align	2
+ 178              		.global	_Z6uartUIPv
+ 180              	_Z6uartUIPv:
+ 181              		@ args = 0, pretend = 0, frame = 1876
+ 182              		@ frame_needed = 0, uses_anonymous_args = 0
+ 183 00b0 F04F2DE9 		stmfd	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, lr}
+ 184 00b4 77DE4DE2 		sub	sp, sp, #1904
+ 185 00b8 08D04DE2 		sub	sp, sp, #8
+ 186 00bc 0040A0E1 		mov	r4, r0
+ 187 00c0 FEFFFFEB 		bl	initialize_SSPSPI
+ 188 00c4 100084E2 		add	r0, r4, #16
+ 189 00c8 FEFFFFEB 		bl	diskio_initializeSPIMutex
+ 190 00cc FEFFFFEB 		bl	initialize_SdCardSignals
+ 191 00d0 0000A0E3 		mov	r0, #0
+ 192 00d4 28108DE2 		add	r1, sp, #40
+ 193 00d8 FEFFFFEB 		bl	f_mount
+ 194 00dc 000050E3 		cmp	r0, #0
+ 195 00e0 E4049F15 		ldrne	r0, .L56
+ 196 00e4 FEFFFF1B 		blne	rprintf
+ 197              	.L48:
+ 198 00e8 1D3D8DE2 		add	r3, sp, #1856
+ 199 00ec 0C3083E2 		add	r3, r3, #12
+ 200 00f0 093083E2 		add	r3, r3, #9
+ 201 00f4 9ABF8DE2 		add	fp, sp, #616
+ 202 00f8 24308DE5 		str	r3, [sp, #36]
+ 203 00fc 09B04BE2 		sub	fp, fp, #9
+ 204              	.L50:
+ 205 0100 C8049FE5 		ldr	r0, .L56+4
+ 206 0104 664E8DE2 		add	r4, sp, #1632
+ 207 0108 FEFFFFEB 		bl	rprintf
+ 208 010c 0010A0E3 		mov	r1, #0
+ 209 0110 8020A0E3 		mov	r2, #128
+ 210 0114 0400A0E1 		mov	r0, r4
+ 211 0118 FEFFFFEB 		bl	memset
+ 212 011c 0400A0E1 		mov	r0, r4
+ 213 0120 FEFFFFEB 		bl	_Z11getUartLinePc
+ 214 0124 6036DDE5 		ldrb	r3, [sp, #1632]	@ zero_extendqisi2
+ 215 0128 000053E3 		cmp	r3, #0
+ 216 012c F3FFFF0A 		beq	.L50
+ 217 0130 0400A0E1 		mov	r0, r4
+ 218 0134 98149FE5 		ldr	r1, .L56+8
+ 219 0138 FEFFFFEB 		bl	strtok
+ 220 013c 94149FE5 		ldr	r1, .L56+12
+ 221 0140 0040A0E1 		mov	r4, r0
+ 222 0144 FEFFFFEB 		bl	strcmp
+ 223 0148 000050E3 		cmp	r0, #0
+ 224 014c 0400001A 		bne	.L18
+ 225 0150 84149FE5 		ldr	r1, .L56+16
+ 226 0154 FEFFFFEB 		bl	strtok
+ 227 0158 0010A0E1 		mov	r1, r0
+ 228 015c 7C049FE5 		ldr	r0, .L56+20
+ 229 0160 F70000EA 		b	.L51
+ 230              	.L18:
+ 231 0164 78049FE5 		ldr	r0, .L56+24
+ 232 0168 0410A0E1 		mov	r1, r4
+ 233 016c FEFFFFEB 		bl	strcmp
+ 234 0170 003050E2 		subs	r3, r0, #0
+ 235 0174 6B00001A 		bne	.L19
+ 236 0178 774E8DE2 		add	r4, sp, #1904
+ 237 017c 054084E2 		add	r4, r4, #5
+ 238 0180 726E8DE2 		add	r6, sp, #1824
+ 239 0184 5C149FE5 		ldr	r1, .L56+28
+ 240 0188 0320A0E3 		mov	r2, #3
+ 241 018c 0400A0E1 		mov	r0, r4
+ 242 0190 086086E2 		add	r6, r6, #8
+ 243 0194 6C378DE5 		str	r3, [sp, #1900]
+ 244 0198 FEFFFFEB 		bl	memcpy
+ 245 019c 0410A0E1 		mov	r1, r4
+ 246 01a0 0600A0E1 		mov	r0, r6
+ 247 01a4 FEFFFFEB 		bl	f_opendir
+ 248 01a8 005050E2 		subs	r5, r0, #0
+ 249 01ac 0410A011 		movne	r1, r4
+ 250 01b0 34049F15 		ldrne	r0, .L56+32
+ 251 01b4 E200001A 		bne	.L51
+ 252 01b8 0410A0E1 		mov	r1, r4
+ 253 01bc 2C049FE5 		ldr	r0, .L56+36
+ 254 01c0 FEFFFFEB 		bl	rprintf
+ 255 01c4 05A0A0E1 		mov	sl, r5
+ 256 01c8 0590A0E1 		mov	r9, r5
+ 257              	.L32:
+ 258 01cc 1D1D8DE2 		add	r1, sp, #1856
+ 259 01d0 720E8DE2 		add	r0, sp, #1824
+ 260 01d4 46CE8DE2 		add	ip, sp, #1120
+ 261 01d8 023CA0E3 		mov	r3, #512
+ 262 01dc 0C1081E2 		add	r1, r1, #12
+ 263 01e0 080080E2 		add	r0, r0, #8
+ 264 01e4 64C78DE5 		str	ip, [sp, #1892]
+ 265 01e8 68378DE5 		str	r3, [sp, #1896]
+ 266 01ec FEFFFFEB 		bl	f_readdir
+ 267 01f0 FF0010E3 		tst	r0, #255
+ 268 01f4 3700001A 		bne	.L21
+ 269 01f8 5537DDE5 		ldrb	r3, [sp, #1877]	@ zero_extendqisi2
+ 270 01fc 000053E3 		cmp	r3, #0
+ 271 0200 3400000A 		beq	.L21
+ 272 0204 5407DDE5 		ldrb	r0, [sp, #1876]	@ zero_extendqisi2
+ 273 0208 07CC8DE2 		add	ip, sp, #1792
+ 274 020c B045DCE1 		ldrh	r4, [ip, #80]
+ 275 0210 100010E3 		tst	r0, #16
+ 276 0214 6C379D05 		ldreq	r3, [sp, #1900]
+ 277 0218 4C279D05 		ldreq	r2, [sp, #1868]
+ 278 021c B265DCE1 		ldrh	r6, [ip, #82]
+ 279 0220 C4C4A0E1 		mov	ip, r4, asr #9
+ 280 0224 02308300 		addeq	r3, r3, r2
+ 281 0228 7BCE8CE2 		add	ip, ip, #1968
+ 282 022c 4410A013 		movne	r1, #68
+ 283 0230 6C378D05 		streq	r3, [sp, #1900]
+ 284 0234 2D10A003 		moveq	r1, #45
+ 285 0238 01908912 		addne	r9, r9, #1
+ 286 023c 01A08A02 		addeq	sl, sl, #1
+ 287 0240 0CC08CE2 		add	ip, ip, #12
+ 288 0244 010010E3 		tst	r0, #1
+ 289 0248 5220A013 		movne	r2, #82
+ 290 024c 2D20A003 		moveq	r2, #45
+ 291 0250 08C08DE5 		str	ip, [sp, #8]
+ 292 0254 020010E3 		tst	r0, #2
+ 293 0258 4CC79DE5 		ldr	ip, [sp, #1868]
+ 294 025c 4830A013 		movne	r3, #72
+ 295 0260 2D30A003 		moveq	r3, #45
+ 296 0264 040010E3 		tst	r0, #4
+ 297 0268 5380A013 		movne	r8, #83
+ 298 026c 2D80A003 		moveq	r8, #45
+ 299 0270 1CC08DE5 		str	ip, [sp, #28]
+ 300 0274 200010E3 		tst	r0, #32
+ 301 0278 24C09DE5 		ldr	ip, [sp, #36]
+ 302 027c C652A0E1 		mov	r5, r6, asr #5
+ 303 0280 C4E2A0E1 		mov	lr, r4, asr #5
+ 304 0284 4170A013 		movne	r7, #65
+ 305 0288 2D70A003 		moveq	r7, #45
+ 306 028c 0FE00EE2 		and	lr, lr, #15
+ 307 0290 1F4004E2 		and	r4, r4, #31
+ 308 0294 3F5005E2 		and	r5, r5, #63
+ 309 0298 C665A0E1 		mov	r6, r6, asr #11
+ 310 029c 50039FE5 		ldr	r0, .L56+40
+ 311 02a0 0CE08DE5 		str	lr, [sp, #12]
+ 312 02a4 20C08DE5 		str	ip, [sp, #32]
+ 313 02a8 00808DE5 		str	r8, [sp, #0]
+ 314 02ac 04708DE5 		str	r7, [sp, #4]
+ 315 02b0 10408DE5 		str	r4, [sp, #16]
+ 316 02b4 14608DE5 		str	r6, [sp, #20]
+ 317 02b8 18508DE5 		str	r5, [sp, #24]
+ 318 02bc FEFFFFEB 		bl	iprintf
+ 319 02c0 461E8DE2 		add	r1, sp, #1120
+ 320 02c4 2C039FE5 		ldr	r0, .L56+44
+ 321 02c8 FEFFFFEB 		bl	iprintf
+ 322 02cc 28039FE5 		ldr	r0, .L56+48
+ 323 02d0 FEFFFFEB 		bl	iprintf
+ 324 02d4 BCFFFFEA 		b	.L32
+ 325              	.L21:
+ 326 02d8 0A10A0E1 		mov	r1, sl
+ 327 02dc 0930A0E1 		mov	r3, r9
+ 328 02e0 6C279DE5 		ldr	r2, [sp, #1900]
+ 329 02e4 14039FE5 		ldr	r0, .L56+52
+ 330 02e8 FEFFFFEB 		bl	iprintf
+ 331 02ec 761E8DE2 		add	r1, sp, #1888
+ 332 02f0 660E8DE2 		add	r0, sp, #1632
+ 333 02f4 0C1081E2 		add	r1, r1, #12
+ 334 02f8 772E8DE2 		add	r2, sp, #1904
+ 335 02fc FEFFFFEB 		bl	f_getfree
+ 336 0300 000050E3 		cmp	r0, #0
+ 337 0304 7DFFFF1A 		bne	.L50
+ 338 0308 70379DE5 		ldr	r3, [sp, #1904]
+ 339 030c 0220D3E5 		ldrb	r2, [r3, #2]	@ zero_extendqisi2
+ 340 0310 6C379DE5 		ldr	r3, [sp, #1900]
+ 341 0314 930201E0 		mul	r1, r3, r2
+ 342 0318 E4029FE5 		ldr	r0, .L56+56
+ 343 031c A110A0E1 		mov	r1, r1, lsr #1
+ 344 0320 FEFFFFEB 		bl	iprintf
+ 345 0324 75FFFFEA 		b	.L50
+ 346              	.L19:
+ 347 0328 0400A0E1 		mov	r0, r4
+ 348 032c D4129FE5 		ldr	r1, .L56+60
+ 349 0330 FEFFFFEB 		bl	strcmp
+ 350 0334 000050E3 		cmp	r0, #0
+ 351 0338 2600001A 		bne	.L33
+ 352 033c 98129FE5 		ldr	r1, .L56+16
+ 353 0340 FEFFFFEB 		bl	strtok
+ 354 0344 0010A0E1 		mov	r1, r0
+ 355 0348 0040A0E1 		mov	r4, r0
+ 356 034c B8029FE5 		ldr	r0, .L56+64
+ 357 0350 FEFFFFEB 		bl	rprintf
+ 358 0354 070C8DE2 		add	r0, sp, #1792
+ 359 0358 040080E2 		add	r0, r0, #4
+ 360 035c 0410A0E1 		mov	r1, r4
+ 361 0360 0120A0E3 		mov	r2, #1
+ 362 0364 FEFFFFEB 		bl	f_open
+ 363 0368 005050E2 		subs	r5, r0, #0
+ 364 036c 4200001A 		bne	.L38
+ 365 0370 774E8DE2 		add	r4, sp, #1904
+ 366 0374 94229FE5 		ldr	r2, .L56+68
+ 367 0378 0510A0E1 		mov	r1, r5
+ 368 037c 084084E2 		add	r4, r4, #8
+ 369 0380 0B00A0E1 		mov	r0, fp
+ 370 0384 FEFFFFEB 		bl	memset
+ 371 0388 84029FE5 		ldr	r0, .L56+72
+ 372 038c 0C5024E5 		str	r5, [r4, #-12]!
+ 373 0390 FEFFFFEB 		bl	rprintf
+ 374 0394 FEFFFFEB 		bl	_Z9printLinev
+ 375 0398 070C8DE2 		add	r0, sp, #1792
+ 376 039c 040080E2 		add	r0, r0, #4
+ 377 03a0 0B10A0E1 		mov	r1, fp
+ 378 03a4 0430A0E1 		mov	r3, r4
+ 379 03a8 022CA0E3 		mov	r2, #512
+ 380 03ac FEFFFFEB 		bl	f_read
+ 381 03b0 000050E3 		cmp	r0, #0
+ 382 03b4 0200000A 		beq	.L35
+ 383 03b8 58029FE5 		ldr	r0, .L56+76
+ 384 03bc FEFFFFEB 		bl	rprintf
+ 385 03c0 020000EA 		b	.L36
+ 386              	.L35:
+ 387 03c4 50029FE5 		ldr	r0, .L56+80
+ 388 03c8 0B10A0E1 		mov	r1, fp
+ 389 03cc FEFFFFEB 		bl	rprintf
+ 390              	.L36:
+ 391 03d0 FEFFFFEB 		bl	_Z9printLinev
+ 392 03d4 230000EA 		b	.L39
+ 393              	.L33:
+ 394 03d8 0400A0E1 		mov	r0, r4
+ 395 03dc 3C129FE5 		ldr	r1, .L56+84
+ 396 03e0 FEFFFFEB 		bl	strcmp
+ 397 03e4 000050E3 		cmp	r0, #0
+ 398 03e8 2500001A 		bne	.L37
+ 399 03ec E8119FE5 		ldr	r1, .L56+16
+ 400 03f0 FEFFFFEB 		bl	strtok
+ 401 03f4 0010A0E1 		mov	r1, r0
+ 402 03f8 0040A0E1 		mov	r4, r0
+ 403 03fc 20029FE5 		ldr	r0, .L56+88
+ 404 0400 FEFFFFEB 		bl	rprintf
+ 405 0404 070C8DE2 		add	r0, sp, #1792
+ 406 0408 040080E2 		add	r0, r0, #4
+ 407 040c 0410A0E1 		mov	r1, r4
+ 408 0410 0A20A0E3 		mov	r2, #10
+ 409 0414 FEFFFFEB 		bl	f_open
+ 410 0418 005050E2 		subs	r5, r0, #0
+ 411 041c 1600001A 		bne	.L38
+ 412 0420 00029FE5 		ldr	r0, .L56+92
+ 413 0424 6E4E8DE2 		add	r4, sp, #1760
+ 414 0428 FEFFFFEB 		bl	rprintf
+ 415 042c F8119FE5 		ldr	r1, .L56+96
+ 416 0430 2420A0E3 		mov	r2, #36
+ 417 0434 0400A0E1 		mov	r0, r4
+ 418 0438 FEFFFFEB 		bl	memcpy
+ 419 043c 773E8DE2 		add	r3, sp, #1904
+ 420 0440 083083E2 		add	r3, r3, #8
+ 421 0444 070C8DE2 		add	r0, sp, #1792
+ 422 0448 0C5023E5 		str	r5, [r3, #-12]!
+ 423 044c 0410A0E1 		mov	r1, r4
+ 424 0450 040080E2 		add	r0, r0, #4
+ 425 0454 2420A0E3 		mov	r2, #36
+ 426 0458 FEFFFFEB 		bl	f_write
+ 427 045c 000050E3 		cmp	r0, #0
+ 428 0460 C8019F15 		ldrne	r0, .L56+100
+ 429 0464 FEFFFF1B 		blne	rprintf
+ 430              	.L39:
+ 431 0468 070C8DE2 		add	r0, sp, #1792
+ 432 046c 040080E2 		add	r0, r0, #4
+ 433 0470 FEFFFFEB 		bl	f_close
+ 434 0474 B8019FE5 		ldr	r0, .L56+104
+ 435 0478 510000EA 		b	.L52
+ 436              	.L38:
+ 437 047c B4019FE5 		ldr	r0, .L56+108
+ 438 0480 4F0000EA 		b	.L52
+ 439              	.L37:
+ 440 0484 0400A0E1 		mov	r0, r4
+ 441 0488 AC119FE5 		ldr	r1, .L56+112
+ 442 048c FEFFFFEB 		bl	strcmp
+ 443 0490 000050E3 		cmp	r0, #0
+ 444 0494 464E8D02 		addeq	r4, sp, #1120
+ 445 0498 0010A001 		moveq	r1, r0
+ 446 049c 0400A001 		moveq	r0, r4
+ 447 04a0 1B00000A 		beq	.L54
+ 448 04a4 0400A0E1 		mov	r0, r4
+ 449 04a8 90119FE5 		ldr	r1, .L56+116
+ 450 04ac FEFFFFEB 		bl	strcmp
+ 451 04b0 000050E3 		cmp	r0, #0
+ 452 04b4 464E8D02 		addeq	r4, sp, #1120
+ 453 04b8 1300000A 		beq	.L55
+ 454 04bc 0400A0E1 		mov	r0, r4
+ 455 04c0 7C119FE5 		ldr	r1, .L56+120
+ 456 04c4 FEFFFFEB 		bl	strcmp
+ 457 04c8 000050E3 		cmp	r0, #0
+ 458 04cc 1200001A 		bne	.L42
+ 459 04d0 04119FE5 		ldr	r1, .L56+16
+ 460 04d4 FEFFFFEB 		bl	strtok
+ 461 04d8 FEFFFFEB 		bl	atoi
+ 462 04dc 005050E2 		subs	r5, r0, #0
+ 463 04e0 60019FD5 		ldrle	r0, .L56+124
+ 464 04e4 360000DA 		ble	.L52
+ 465 04e8 0510A0E1 		mov	r1, r5
+ 466 04ec 58019FE5 		ldr	r0, .L56+128
+ 467 04f0 464E8DE2 		add	r4, sp, #1120
+ 468 04f4 FEFFFFEB 		bl	rprintf
+ 469 04f8 0400A0E1 		mov	r0, r4
+ 470 04fc 0110A0E3 		mov	r1, #1
+ 471 0500 FEFFFFEB 		bl	vTaskGetRunTimeStats
+ 472 0504 0500A0E1 		mov	r0, r5
+ 473 0508 FEFFFFEB 		bl	vTaskDelay
+ 474              	.L55:
+ 475 050c 0400A0E1 		mov	r0, r4
+ 476 0510 0110A0E3 		mov	r1, #1
+ 477              	.L54:
+ 478 0514 FEFFFFEB 		bl	vTaskGetRunTimeStats
+ 479 0518 070000EA 		b	.L53
+ 480              	.L42:
+ 481 051c 0400A0E1 		mov	r0, r4
+ 482 0520 28119FE5 		ldr	r1, .L56+132
+ 483 0524 FEFFFFEB 		bl	strcmp
+ 484 0528 000050E3 		cmp	r0, #0
+ 485 052c 0600001A 		bne	.L44
+ 486 0530 464E8DE2 		add	r4, sp, #1120
+ 487 0534 0400A0E1 		mov	r0, r4
+ 488 0538 FEFFFFEB 		bl	vTaskList
+ 489              	.L53:
+ 490 053c D8009FE5 		ldr	r0, .L56+80
+ 491 0540 0410A0E1 		mov	r1, r4
+ 492              	.L51:
+ 493 0544 FEFFFFEB 		bl	rprintf
+ 494 0548 ECFEFFEA 		b	.L50
+ 495              	.L44:
+ 496 054c 0410A0E1 		mov	r1, r4
+ 497 0550 FC009FE5 		ldr	r0, .L56+136
+ 498 0554 FEFFFFEB 		bl	strcmp
+ 499 0558 000050E3 		cmp	r0, #0
+ 500 055c F4009F15 		ldrne	r0, .L56+140
+ 501 0560 1700001A 		bne	.L52
+ 502 0564 90009FE5 		ldr	r0, .L56+48
+ 503 0568 FEFFFFEB 		bl	rprintf
+ 504 056c FEFFFFEB 		bl	_Z9printLinev
+ 505 0570 E4009FE5 		ldr	r0, .L56+144
+ 506 0574 FEFFFFEB 		bl	rprintf
+ 507 0578 FEFFFFEB 		bl	_Z9printLinev
+ 508 057c DC009FE5 		ldr	r0, .L56+148
+ 509 0580 FEFFFFEB 		bl	rprintf
+ 510 0584 D8009FE5 		ldr	r0, .L56+152
+ 511 0588 FEFFFFEB 		bl	rprintf
+ 512 058c D4009FE5 		ldr	r0, .L56+156
+ 513 0590 FEFFFFEB 		bl	rprintf
+ 514 0594 D0009FE5 		ldr	r0, .L56+160
+ 515 0598 FEFFFFEB 		bl	rprintf
+ 516 059c CC009FE5 		ldr	r0, .L56+164
+ 517 05a0 FEFFFFEB 		bl	rprintf
+ 518 05a4 C8009FE5 		ldr	r0, .L56+168
+ 519 05a8 FEFFFFEB 		bl	rprintf
+ 520 05ac C4009FE5 		ldr	r0, .L56+172
+ 521 05b0 FEFFFFEB 		bl	rprintf
+ 522 05b4 C0009FE5 		ldr	r0, .L56+176
+ 523 05b8 FEFFFFEB 		bl	rprintf
+ 524 05bc FEFFFFEB 		bl	_Z9printLinev
+ 525 05c0 CEFEFFEA 		b	.L50
+ 526              	.L52:
+ 527 05c4 FEFFFFEB 		bl	rprintf
+ 528 05c8 CCFEFFEA 		b	.L50
+ 529              	.L57:
+ 530              		.align	2
+ 531              	.L56:
+ 532 05cc 5A000000 		.word	.LC2
+ 533 05d0 82000000 		.word	.LC3
+ 534 05d4 88000000 		.word	.LC4
+ 535 05d8 8A000000 		.word	.LC5
+ 536 05dc 8F000000 		.word	.LC6
+ 537 05e0 90000000 		.word	.LC7
+ 538 05e4 9A000000 		.word	.LC8
+ 539 05e8 7E040000 		.word	.LC9
+ 540 05ec 9D000000 		.word	.LC10
+ 541 05f0 B6000000 		.word	.LC11
+ 542 05f4 D1000000 		.word	.LC12
+ 543 05f8 FA000000 		.word	.LC13
+ 544 05fc 01010000 		.word	.LC14
+ 545 0600 03010000 		.word	.LC15
+ 546 0604 2D010000 		.word	.LC16
+ 547 0608 41010000 		.word	.LC17
+ 548 060c 46010000 		.word	.LC18
+ 549 0610 01020000 		.word	513
+ 550 0614 5A010000 		.word	.LC19
+ 551 0618 6A010000 		.word	.LC20
+ 552 061c 9A010000 		.word	.LC21
+ 553 0620 C6010000 		.word	.LC24
+ 554 0624 CC010000 		.word	.LC25
+ 555 0628 E1010000 		.word	.LC26
+ 556 062c 81040000 		.word	.LC27
+ 557 0630 FB010000 		.word	.LC28
+ 558 0634 9D010000 		.word	.LC22
+ 559 0638 AD010000 		.word	.LC23
+ 560 063c 11020000 		.word	.LC29
+ 561 0640 15020000 		.word	.LC30
+ 562 0644 1A020000 		.word	.LC31
+ 563 0648 5D020000 		.word	.LC33
+ 564 064c 1F020000 		.word	.LC32
+ 565 0650 99020000 		.word	.LC34
+ 566 0654 9E020000 		.word	.LC35
+ 567 0658 65040000 		.word	.LC45
+ 568 065c A3020000 		.word	.LC36
+ 569 0660 B2020000 		.word	.LC37
+ 570 0664 E3020000 		.word	.LC38
+ 571 0668 10030000 		.word	.LC39
+ 572 066c 33030000 		.word	.LC40
+ 573 0670 56030000 		.word	.LC41
+ 574 0674 8B030000 		.word	.LC42
+ 575 0678 D0030000 		.word	.LC43
+ 576 067c 24040000 		.word	.LC44
+ 578              		.ident	"GCC: (GNU) 4.3.2"
+DEFINED SYMBOLS
+                            *ABS*:00000000 userInterface.cpp
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccb4NJPv.s:9      .text:00000000 _Z11getUartLinePc
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccb4NJPv.s:12     .text:00000000 $a
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccb4NJPv.s:59     .text:000000a0 $d
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccb4NJPv.s:69     .text:000000a4 _Z9printLinev
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccb4NJPv.s:73     .text:000000a4 $a
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccb4NJPv.s:78     .text:000000ac $d
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccb4NJPv.s:180    .text:000000b0 _Z6uartUIPv
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccb4NJPv.s:183    .text:000000b0 $a
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccb4NJPv.s:532    .text:000005cc $d
+
+UNDEFINED SYMBOLS
+uart0GetChar
+uart0PutChar
+rprintf
+initialize_SSPSPI
+diskio_initializeSPIMutex
+initialize_SdCardSignals
+f_mount
+memset
+strtok
+strcmp
+memcpy
+f_opendir
+f_readdir
+iprintf
+f_getfree
+f_open
+f_read
+f_write
+f_close
+atoi
+vTaskGetRunTimeStats
+vTaskDelay
+vTaskList

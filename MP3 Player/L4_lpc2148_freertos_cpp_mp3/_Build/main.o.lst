@@ -1,0 +1,207 @@
+   1              		.file	"main.cpp"
+   2              		.section	.rodata.str1.1,"aMS",%progbits,1
+   3              	.LC0:
+   4 0000 55617274 		.ascii	"Uart UI\000"
+   4      20554900 
+   5              	.LC1:
+   6 0008 4D503300 		.ascii	"MP3\000"
+   7              	.LC2:
+   8 000c 42757474 		.ascii	"ButtonTask\000"
+   8      6F6E5461 
+   8      736B00
+   9              	.LC3:
+  10 0017 436F6E74 		.ascii	"ControlTask\000"
+  10      726F6C54 
+  10      61736B00 
+  11              	.LC4:
+  12 0023 4552524F 		.ascii	"ERROR:  OUT OF MEMORY: Check OS Stack Size or task "
+  12      523A2020 
+  12      4F555420 
+  12      4F46204D 
+  12      454D4F52 
+  13 0056 73746163 		.ascii	"stack size.\012\000"
+  13      6B207369 
+  13      7A652E0A 
+  13      00
+  14              	.LC5:
+  15 0063 0A2D2D20 		.ascii	"\012-- Starting FreeRTOS --\012\000"
+  15      53746172 
+  15      74696E67 
+  15      20467265 
+  15      6552544F 
+  16              	.LC6:
+  17 007d 4552524F 		.ascii	"ERROR: Unexpected OS Exit!\012\000"
+  17      523A2055 
+  17      6E657870 
+  17      65637465 
+  17      64204F53 
+  18              		.text
+  19              		.align	2
+  20              		.global	main
+  22              	main:
+  23              		@ args = 0, pretend = 0, frame = 36
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25 0000 70402DE9 		stmfd	sp!, {r4, r5, r6, lr}
+  26 0004 34D04DE2 		sub	sp, sp, #52
+  27 0008 FEFFFFEB 		bl	cpuSetupHardware
+  28 000c 98019FE5 		ldr	r0, .L5
+  29 0010 FEFFFFEB 		bl	watchdogDelayUs
+  30 0014 8010A0E3 		mov	r1, #128
+  31 0018 960CA0E3 		mov	r0, #38400
+  32 001c FEFFFFEB 		bl	uart0Init
+  33 0020 88019FE5 		ldr	r0, .L5+4
+  34 0024 FEFFFFEB 		bl	rprintf_devopen
+  35 0028 FEFFFFEB 		bl	cpuPrintMemoryInfo
+  36 002c 80019FE5 		ldr	r0, .L5+8
+  37 0030 FEFFFFEB 		bl	rprintf_devopen
+  38 0034 30408DE2 		add	r4, sp, #48
+  39 0038 6C019FE5 		ldr	r0, .L5
+  40 003c FEFFFFEB 		bl	watchdogDelayUs
+  41 0040 0130A0E3 		mov	r3, #1
+  42 0044 6C119FE5 		ldr	r1, .L5+12
+  43 0048 0A20A0E3 		mov	r2, #10
+  44 004c 0400A0E1 		mov	r0, r4
+  45 0050 FEFFFFEB 		bl	_ZN5TimerC1EPFvPvEm9TimerType
+  46 0054 0400A0E1 		mov	r0, r4
+  47 0058 FEFFFFEB 		bl	_ZN5Timer5startEv
+  48 005c 0100A0E3 		mov	r0, #1
+  49 0060 FEFFFFEB 		bl	xQueueCreateMutex
+  50 0064 0D10A0E3 		mov	r1, #13
+  51 0068 2C008DE5 		str	r0, [sp, #44]
+  52 006c 0020A0E3 		mov	r2, #0
+  53 0070 0A00A0E3 		mov	r0, #10
+  54 0074 FEFFFFEB 		bl	xQueueGenericCreate
+  55 0078 0110A0E3 		mov	r1, #1
+  56 007c 10008DE5 		str	r0, [sp, #16]
+  57 0080 0020A0E3 		mov	r2, #0
+  58 0084 0A00A0E3 		mov	r0, #10
+  59 0088 FEFFFFEB 		bl	xQueueGenericCreate
+  60 008c 14008DE5 		str	r0, [sp, #20]
+  61 0090 0100A0E3 		mov	r0, #1
+  62 0094 0010A0E1 		mov	r1, r0
+  63 0098 0020A0E3 		mov	r2, #0
+  64 009c FEFFFFEB 		bl	xQueueGenericCreate
+  65 00a0 10508DE2 		add	r5, sp, #16
+  66 00a4 18008DE5 		str	r0, [sp, #24]
+  67 00a8 0060A0E3 		mov	r6, #0
+  68 00ac 01C0A0E3 		mov	ip, #1
+  69 00b0 0C4085E2 		add	r4, r5, #12
+  70 00b4 00019FE5 		ldr	r0, .L5+16
+  71 00b8 00119FE5 		ldr	r1, .L5+20
+  72 00bc 062CA0E3 		mov	r2, #1536
+  73 00c0 0530A0E1 		mov	r3, r5
+  74 00c4 00C08DE5 		str	ip, [sp, #0]
+  75 00c8 50008DE9 		stmib	sp, {r4, r6}	@ phole stm
+  76 00cc 0C608DE5 		str	r6, [sp, #12]
+  77 00d0 FEFFFFEB 		bl	xTaskGenericCreate
+  78 00d4 010050E3 		cmp	r0, #1
+  79 00d8 2500001A 		bne	.L2
+  80 00dc 10E085E2 		add	lr, r5, #16
+  81 00e0 03C0A0E3 		mov	ip, #3
+  82 00e4 D8009FE5 		ldr	r0, .L5+24
+  83 00e8 D8109FE5 		ldr	r1, .L5+28
+  84 00ec 062CA0E3 		mov	r2, #1536
+  85 00f0 0530A0E1 		mov	r3, r5
+  86 00f4 00508DE8 		stmia	sp, {ip, lr}	@ phole stm
+  87 00f8 08608DE5 		str	r6, [sp, #8]
+  88 00fc 0C608DE5 		str	r6, [sp, #12]
+  89 0100 FEFFFFEB 		bl	xTaskGenericCreate
+  90 0104 010050E3 		cmp	r0, #1
+  91 0108 00E0A0E1 		mov	lr, r0
+  92 010c 1800001A 		bne	.L2
+  93 0110 14C085E2 		add	ip, r5, #20
+  94 0114 B0009FE5 		ldr	r0, .L5+32
+  95 0118 B0109FE5 		ldr	r1, .L5+36
+  96 011c 012CA0E3 		mov	r2, #256
+  97 0120 0530A0E1 		mov	r3, r5
+  98 0124 00E08DE5 		str	lr, [sp, #0]
+  99 0128 04C08DE5 		str	ip, [sp, #4]
+ 100 012c 08608DE5 		str	r6, [sp, #8]
+ 101 0130 0C608DE5 		str	r6, [sp, #12]
+ 102 0134 FEFFFFEB 		bl	xTaskGenericCreate
+ 103 0138 010050E3 		cmp	r0, #1
+ 104 013c 00E0A0E1 		mov	lr, r0
+ 105 0140 0B00001A 		bne	.L2
+ 106 0144 18C085E2 		add	ip, r5, #24
+ 107 0148 0530A0E1 		mov	r3, r5
+ 108 014c 80009FE5 		ldr	r0, .L5+40
+ 109 0150 80109FE5 		ldr	r1, .L5+44
+ 110 0154 022CA0E3 		mov	r2, #512
+ 111 0158 00E08DE5 		str	lr, [sp, #0]
+ 112 015c 04C08DE5 		str	ip, [sp, #4]
+ 113 0160 0C608DE5 		str	r6, [sp, #12]
+ 114 0164 08608DE5 		str	r6, [sp, #8]
+ 115 0168 FEFFFFEB 		bl	xTaskGenericCreate
+ 116 016c 010050E3 		cmp	r0, #1
+ 117 0170 0100000A 		beq	.L3
+ 118              	.L2:
+ 119 0174 60009FE5 		ldr	r0, .L5+48
+ 120 0178 FEFFFFEB 		bl	rprintf
+ 121              	.L3:
+ 122 017c 5C009FE5 		ldr	r0, .L5+52
+ 123 0180 FEFFFFEB 		bl	rprintf
+ 124 0184 FEFFFFEB 		bl	vTaskStartScheduler
+ 125 0188 20009FE5 		ldr	r0, .L5+4
+ 126 018c FEFFFFEB 		bl	rprintf_devopen
+ 127 0190 4C009FE5 		ldr	r0, .L5+56
+ 128 0194 FEFFFFEB 		bl	rprintf
+ 129 0198 30008DE2 		add	r0, sp, #48
+ 130 019c FEFFFFEB 		bl	_ZN5TimerD1Ev
+ 131 01a0 0000A0E3 		mov	r0, #0
+ 132 01a4 34D08DE2 		add	sp, sp, #52
+ 133 01a8 7080BDE8 		ldmfd	sp!, {r4, r5, r6, pc}
+ 134              	.L6:
+ 135              		.align	2
+ 136              	.L5:
+ 137 01ac 40420F00 		.word	1000000
+ 138 01b0 00000000 		.word	uart0PutCharPolling
+ 139 01b4 00000000 		.word	uart0PutChar
+ 140 01b8 00000000 		.word	_Z14FatFsDiskTimerPv
+ 141 01bc 00000000 		.word	_Z6uartUIPv
+ 142 01c0 00000000 		.word	.LC0
+ 143 01c4 00000000 		.word	_Z7mp3TaskPv
+ 144 01c8 08000000 		.word	.LC1
+ 145 01cc 00000000 		.word	_Z10buttonTaskPv
+ 146 01d0 0C000000 		.word	.LC2
+ 147 01d4 00000000 		.word	_Z11controlTaskPv
+ 148 01d8 17000000 		.word	.LC3
+ 149 01dc 23000000 		.word	.LC4
+ 150 01e0 63000000 		.word	.LC5
+ 151 01e4 7D000000 		.word	.LC6
+ 153              		.align	2
+ 154              		.global	_Z14FatFsDiskTimerPv
+ 156              	_Z14FatFsDiskTimerPv:
+ 157              		@ args = 0, pretend = 0, frame = 0
+ 158              		@ frame_needed = 0, uses_anonymous_args = 0
+ 159              		@ link register save eliminated.
+ 160 01e8 FEFFFFEA 		b	disk_timerproc
+ 162              		.ident	"GCC: (GNU) 4.3.2"
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.cpp
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccJ9CZle.s:22     .text:00000000 main
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccJ9CZle.s:25     .text:00000000 $a
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccJ9CZle.s:137    .text:000001ac $d
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccJ9CZle.s:156    .text:000001e8 _Z14FatFsDiskTimerPv
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccJ9CZle.s:160    .text:000001e8 $a
+
+UNDEFINED SYMBOLS
+cpuSetupHardware
+watchdogDelayUs
+uart0Init
+rprintf_devopen
+cpuPrintMemoryInfo
+_ZN5TimerC1EPFvPvEm9TimerType
+_ZN5Timer5startEv
+xQueueCreateMutex
+xQueueGenericCreate
+xTaskGenericCreate
+rprintf
+vTaskStartScheduler
+_ZN5TimerD1Ev
+uart0PutCharPolling
+uart0PutChar
+_Z6uartUIPv
+_Z7mp3TaskPv
+_Z10buttonTaskPv
+_Z11controlTaskPv
+disk_timerproc

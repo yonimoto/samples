@@ -1,0 +1,136 @@
+   1              		.file	"button.cpp"
+   2              		.section	.rodata.str1.1,"aMS",%progbits,1
+   3              	.LC0:
+   4 0000 4572726F 		.ascii	"Error in QueueSend: control queue is full (waited 3"
+   4      7220696E 
+   4      20517565 
+   4      75655365 
+   4      6E643A20 
+   5 0033 20736563 		.ascii	" seconds)\012\000"
+   5      6F6E6473 
+   5      290A00
+   6              	.LC1:
+   7 003e 566F6C75 		.ascii	"Volume Level: %i\012\000"
+   7      6D65204C 
+   7      6576656C 
+   7      3A202569 
+   7      0A00
+   8              		.global	__divsi3
+   9              		.text
+  10              		.align	2
+  11              		.global	_Z10buttonTaskPv
+  13              	_Z10buttonTaskPv:
+  14              		@ args = 0, pretend = 0, frame = 4
+  15              		@ frame_needed = 0, uses_anonymous_args = 0
+  16 0000 F0412DE9 		stmfd	sp!, {r4, r5, r6, r7, r8, lr}
+  17 0004 0060A0E1 		mov	r6, r0
+  18 0008 04D04DE2 		sub	sp, sp, #4
+  19 000c 34019FE5 		ldr	r0, .L17
+  20 0010 FEFFFFEB 		bl	initialize_I2C0
+  21 0014 0610A0E3 		mov	r1, #6
+  22 0018 0020A0E3 		mov	r2, #0
+  23 001c 4000A0E3 		mov	r0, #64
+  24 0020 FEFFFFEB 		bl	i2cWriteDeviceRegister
+  25 0024 4000A0E3 		mov	r0, #64
+  26 0028 0710A0E3 		mov	r1, #7
+  27 002c FF20A0E3 		mov	r2, #255
+  28 0030 FEFFFFEB 		bl	i2cWriteDeviceRegister
+  29 0034 0050A0E3 		mov	r5, #0
+  30 0038 03808DE2 		add	r8, sp, #3
+  31 003c 4B7FA0E3 		mov	r7, #300
+  32              	.L13:
+  33 0040 0110A0E3 		mov	r1, #1
+  34 0044 4000A0E3 		mov	r0, #64
+  35 0048 FEFFFFEB 		bl	i2cReadDeviceRegister
+  36 004c 0300CDE5 		strb	r0, [sp, #3]
+  37 0050 0810A0E1 		mov	r1, r8
+  38 0054 040096E5 		ldr	r0, [r6, #4]
+  39 0058 EC209FE5 		ldr	r2, .L17+4
+  40 005c 0030A0E3 		mov	r3, #0
+  41 0060 FEFFFFEB 		bl	xQueueGenericSend
+  42 0064 010050E3 		cmp	r0, #1
+  43 0068 E0009F15 		ldrne	r0, .L17+8
+  44 006c FEFFFF1B 		blne	rprintf
+  45              	.L2:
+  46 0070 FEFFFFEB 		bl	pcm1774_GetVolume
+  47 0074 050050E1 		cmp	r0, r5
+  48 0078 0040A0E1 		mov	r4, r0
+  49 007c 0500000A 		beq	.L3
+  50 0080 BE10A0E3 		mov	r1, #190
+  51 0084 970400E0 		mul	r0, r7, r4
+  52 0088 FEFFFFEB 		bl	__divsi3
+  53 008c 0010A0E1 		mov	r1, r0
+  54 0090 BC009FE5 		ldr	r0, .L17+12
+  55 0094 FEFFFFEB 		bl	rprintf
+  56              	.L3:
+  57 0098 000054E3 		cmp	r4, #0
+  58 009c 0210A003 		moveq	r1, #2
+  59 00a0 0420A001 		moveq	r2, r4
+  60 00a4 1B00000A 		beq	.L16
+  61 00a8 080054E3 		cmp	r4, #8
+  62 00ac 0210A093 		movls	r1, #2
+  63 00b0 0120A093 		movls	r2, #1
+  64 00b4 1700009A 		bls	.L16
+  65 00b8 110054E3 		cmp	r4, #17
+  66 00bc 0210A093 		movls	r1, #2
+  67 00c0 0320A093 		movls	r2, #3
+  68 00c4 1300009A 		bls	.L16
+  69 00c8 1A0054E3 		cmp	r4, #26
+  70 00cc 0210A093 		movls	r1, #2
+  71 00d0 0720A093 		movls	r2, #7
+  72 00d4 0F00009A 		bls	.L16
+  73 00d8 230054E3 		cmp	r4, #35
+  74 00dc 0210A093 		movls	r1, #2
+  75 00e0 0F20A093 		movls	r2, #15
+  76 00e4 0B00009A 		bls	.L16
+  77 00e8 2C0054E3 		cmp	r4, #44
+  78 00ec 0210A093 		movls	r1, #2
+  79 00f0 1F20A093 		movls	r2, #31
+  80 00f4 0700009A 		bls	.L16
+  81 00f8 350054E3 		cmp	r4, #53
+  82 00fc 0210A093 		movls	r1, #2
+  83 0100 3F20A093 		movls	r2, #63
+  84 0104 0300009A 		bls	.L16
+  85 0108 3E0054E3 		cmp	r4, #62
+  86 010c 0300008A 		bhi	.L12
+  87 0110 0210A0E3 		mov	r1, #2
+  88 0114 7F20A0E3 		mov	r2, #127
+  89              	.L16:
+  90 0118 4000A0E3 		mov	r0, #64
+  91 011c 040000EA 		b	.L15
+  92              	.L12:
+  93 0120 3F0054E3 		cmp	r4, #63
+  94 0124 0300001A 		bne	.L5
+  95 0128 4000A0E3 		mov	r0, #64
+  96 012c 0210A0E3 		mov	r1, #2
+  97 0130 FF20A0E3 		mov	r2, #255
+  98              	.L15:
+  99 0134 FEFFFFEB 		bl	i2cWriteDeviceRegister
+ 100              	.L5:
+ 101 0138 C800A0E3 		mov	r0, #200
+ 102 013c FEFFFFEB 		bl	vTaskDelay
+ 103 0140 0450A0E1 		mov	r5, r4
+ 104 0144 BDFFFFEA 		b	.L13
+ 105              	.L18:
+ 106              		.align	2
+ 107              	.L17:
+ 108 0148 A0860100 		.word	100000
+ 109 014c B80B0000 		.word	3000
+ 110 0150 00000000 		.word	.LC0
+ 111 0154 3E000000 		.word	.LC1
+ 113              		.ident	"GCC: (GNU) 4.3.2"
+DEFINED SYMBOLS
+                            *ABS*:00000000 button.cpp
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccPti7N4.s:13     .text:00000000 _Z10buttonTaskPv
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccPti7N4.s:16     .text:00000000 $a
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccPti7N4.s:108    .text:00000148 $d
+
+UNDEFINED SYMBOLS
+__divsi3
+initialize_I2C0
+i2cWriteDeviceRegister
+i2cReadDeviceRegister
+xQueueGenericSend
+rprintf
+pcm1774_GetVolume
+vTaskDelay

@@ -1,0 +1,413 @@
+   1              		.file	"userInterface.cpp"
+   2              		.section	.rodata.str1.1,"aMS",%progbits,1
+   3              	.LC0:
+   4 0000 08200800 		.ascii	"\010 \010\000"
+   5              		.text
+   6              		.align	2
+   7              		.global	_Z11getUartLinePc
+   9              	_Z11getUartLinePc:
+  10              		@ args = 0, pretend = 0, frame = 4
+  11              		@ frame_needed = 0, uses_anonymous_args = 0
+  12 0000 70402DE9 		stmfd	sp!, {r4, r5, r6, lr}
+  13 0004 04D04DE2 		sub	sp, sp, #4
+  14 0008 0050A0E1 		mov	r5, r0
+  15 000c 0040A0E3 		mov	r4, #0
+  16 0010 03608DE2 		add	r6, sp, #3
+  17              	.L9:
+  18 0014 0010E0E3 		mvn	r1, #0
+  19 0018 0600A0E1 		mov	r0, r6
+  20 001c FEFFFFEB 		bl	uart0GetChar
+  21 0020 000050E3 		cmp	r0, #0
+  22 0024 FAFFFF0A 		beq	.L9
+  23 0028 0320DDE5 		ldrb	r2, [sp, #3]	@ zero_extendqisi2
+  24 002c 0A0052E3 		cmp	r2, #10
+  25 0030 0600001A 		bne	.L3
+  26 0034 0030A0E3 		mov	r3, #0
+  27 0038 0430C5E7 		strb	r3, [r5, r4]
+  28 003c 0200A0E1 		mov	r0, r2
+  29 0040 6410A0E3 		mov	r1, #100
+  30 0044 FEFFFFEB 		bl	uart0PutChar
+  31 0048 04D08DE2 		add	sp, sp, #4
+  32 004c 7080BDE8 		ldmfd	sp!, {r4, r5, r6, pc}
+  33              	.L3:
+  34 0050 0D0052E3 		cmp	r2, #13
+  35 0054 EEFFFF0A 		beq	.L9
+  36 0058 080052E3 		cmp	r2, #8
+  37 005c 0200A0E1 		mov	r0, r2
+  38 0060 6410A0E3 		mov	r1, #100
+  39 0064 0800001A 		bne	.L4
+  40 0068 001054E2 		subs	r1, r4, #0
+  41 006c 2C009FE5 		ldr	r0, .L10
+  42 0070 0200000A 		beq	.L5
+  43 0074 014044E2 		sub	r4, r4, #1
+  44 0078 FEFFFFEB 		bl	rprintf
+  45 007c E4FFFFEA 		b	.L9
+  46              	.L5:
+  47 0080 0700A0E3 		mov	r0, #7
+  48 0084 FEFFFFEB 		bl	uart0PutChar
+  49 0088 E1FFFFEA 		b	.L9
+  50              	.L4:
+  51 008c FEFFFFEB 		bl	uart0PutChar
+  52 0090 0330DDE5 		ldrb	r3, [sp, #3]	@ zero_extendqisi2
+  53 0094 0430C5E7 		strb	r3, [r5, r4]
+  54 0098 014084E2 		add	r4, r4, #1
+  55 009c DCFFFFEA 		b	.L9
+  56              	.L11:
+  57              		.align	2
+  58              	.L10:
+  59 00a0 00000000 		.word	.LC0
+  61              		.section	.rodata.str1.1
+  62              	.LC1:
+  63 0004 2D2D2D2D 		.ascii	"---------------------------------------------------"
+  63      2D2D2D2D 
+  63      2D2D2D2D 
+  63      2D2D2D2D 
+  63      2D2D2D2D 
+  64 0037 2D2D2D2D 		.ascii	"---------------------------------\012\000"
+  64      2D2D2D2D 
+  64      2D2D2D2D 
+  64      2D2D2D2D 
+  64      2D2D2D2D 
+  65              		.text
+  66              		.align	2
+  67              		.global	_Z9printLinev
+  69              	_Z9printLinev:
+  70              		@ args = 0, pretend = 0, frame = 0
+  71              		@ frame_needed = 0, uses_anonymous_args = 0
+  72              		@ link register save eliminated.
+  73 00a4 00009FE5 		ldr	r0, .L14
+  74 00a8 FEFFFFEA 		b	rprintf
+  75              	.L15:
+  76              		.align	2
+  77              	.L14:
+  78 00ac 04000000 		.word	.LC1
+  80              		.section	.rodata.str1.1
+  81              	.LC2:
+  82 005a 4C50433A 		.ascii	"LPC: \000"
+  82      2000
+  83              	.LC3:
+  84 0060 2000     		.ascii	" \000"
+  85              	.LC4:
+  86 0062 6563686F 		.ascii	"echo\000"
+  86      00
+  87              	.LC5:
+  88 0067 00       		.ascii	"\000"
+  89              	.LC6:
+  90 0068 4563686F 		.ascii	"Echo: %s\012\000"
+  90      3A202573 
+  90      0A00
+  91              	.LC7:
+  92 0072 43505500 		.ascii	"CPU\000"
+  93              	.LC8:
+  94 0076 257300   		.ascii	"%s\000"
+  95              	.LC9:
+  96 0079 43505572 		.ascii	"CPUr\000"
+  96      00
+  97              	.LC10:
+  98 007e 4350556E 		.ascii	"CPUn\000"
+  98      00
+  99              	.LC11:
+ 100 0083 44656C61 		.ascii	"Delaying for %ims.  CPU Usage will be reported afte"
+ 100      79696E67 
+ 100      20666F72 
+ 100      2025696D 
+ 100      732E2020 
+ 101 00b6 72776172 		.ascii	"rwards...\012\000"
+ 101      64732E2E 
+ 101      2E0A00
+ 102              	.LC12:
+ 103 00c1 596F7520 		.ascii	"You must define a delay time in milliseconds as par"
+ 103      6D757374 
+ 103      20646566 
+ 103      696E6520 
+ 103      61206465 
+ 104 00f4 616D6574 		.ascii	"ameter.\012\000"
+ 104      65722E0A 
+ 104      00
+ 105              	.LC13:
+ 106 00fd 696E666F 		.ascii	"info\000"
+ 106      00
+ 107              	.LC14:
+ 108 0102 48454C50 		.ascii	"HELP\000"
+ 108      00
+ 109              	.LC15:
+ 110 0107 0A00     		.ascii	"\012\000"
+ 111              	.LC16:
+ 112 0109 436F6D6D 		.ascii	"Command list:\012\000"
+ 112      616E6420 
+ 112      6C697374 
+ 112      3A0A00
+ 113              	.LC17:
+ 114 0118 6563686F 		.ascii	"echo <anything>    - Echoes back anything sent.\012"
+ 114      203C616E 
+ 114      79746869 
+ 114      6E673E20 
+ 114      2020202D 
+ 115 0148 00       		.ascii	"\000"
+ 116              	.LC18:
+ 117 0149 6C732020 		.ascii	"ls                 - Get directory listing.\012\000"
+ 117      20202020 
+ 117      20202020 
+ 117      20202020 
+ 117      2020202D 
+ 118              	.LC19:
+ 119 0176 72656164 		.ascii	"read <filename>    - Read a file.\012\000"
+ 119      203C6669 
+ 119      6C656E61 
+ 119      6D653E20 
+ 119      2020202D 
+ 120              	.LC20:
+ 121 0199 77726974 		.ascii	"write <filename>   - Wrie a file.\012\000"
+ 121      65203C66 
+ 121      696C656E 
+ 121      616D653E 
+ 121      2020202D 
+ 122              	.LC21:
+ 123 01bc 43505520 		.ascii	"CPU                - Show tasks and CPU Allocation."
+ 123      20202020 
+ 123      20202020 
+ 123      20202020 
+ 123      2020202D 
+ 124 01ef 0A00     		.ascii	"\012\000"
+ 125              	.LC22:
+ 126 01f1 43505572 		.ascii	"CPUr               - Show tasks and CPU Allocation "
+ 126      20202020 
+ 126      20202020 
+ 126      20202020 
+ 126      2020202D 
+ 127 0224 26207265 		.ascii	"& reset counters\012\000"
+ 127      73657420 
+ 127      636F756E 
+ 127      74657273 
+ 127      0A00
+ 128              	.LC23:
+ 129 0236 4350556E 		.ascii	"CPUn <# ms>        - Reset counters, delay, then re"
+ 129      203C2320 
+ 129      6D733E20 
+ 129      20202020 
+ 129      2020202D 
+ 130 0269 706F7274 		.ascii	"port CPU usage & reset counters\012\000"
+ 130      20435055 
+ 130      20757361 
+ 130      67652026 
+ 130      20726573 
+ 131              	.LC24:
+ 132 028a 696E666F 		.ascii	"info               - Show tasks and their Stack-hig"
+ 132      20202020 
+ 132      20202020 
+ 132      20202020 
+ 132      2020202D 
+ 133 02bd 68207761 		.ascii	"h watermark.\012\000"
+ 133      7465726D 
+ 133      61726B2E 
+ 133      0A00
+ 134              	.LC25:
+ 135 02cb 64656D6F 		.ascii	"demo\000"
+ 135      00
+ 136              	.LC26:
+ 137 02d0 456E7465 		.ascii	"Enter your name: \000"
+ 137      7220796F 
+ 137      7572206E 
+ 137      616D653A 
+ 137      2000
+ 138              	.LC27:
+ 139 02e2 596F7572 		.ascii	"Your name is %s\012\000"
+ 139      206E616D 
+ 139      65206973 
+ 139      2025730A 
+ 139      00
+ 140              	.LC28:
+ 141 02f3 436F6D6D 		.ascii	"Command not recognized.\012\000"
+ 141      616E6420 
+ 141      6E6F7420 
+ 141      7265636F 
+ 141      676E697A 
+ 142              		.text
+ 143              		.align	2
+ 144              		.global	_Z6uartUIPv
+ 146              	_Z6uartUIPv:
+ 147              		@ args = 0, pretend = 0, frame = 640
+ 148              		@ frame_needed = 0, uses_anonymous_args = 0
+ 149 00b0 70402DE9 		stmfd	sp!, {r4, r5, r6, lr}
+ 150 00b4 0ADD4DE2 		sub	sp, sp, #640
+ 151 00b8 026C8DE2 		add	r6, sp, #512
+ 152              	.L29:
+ 153 00bc C4019FE5 		ldr	r0, .L35
+ 154 00c0 FEFFFFEB 		bl	rprintf
+ 155 00c4 0010A0E3 		mov	r1, #0
+ 156 00c8 8020A0E3 		mov	r2, #128
+ 157 00cc 0600A0E1 		mov	r0, r6
+ 158 00d0 FEFFFFEB 		bl	memset
+ 159 00d4 0600A0E1 		mov	r0, r6
+ 160 00d8 FEFFFFEB 		bl	_Z11getUartLinePc
+ 161 00dc 0032DDE5 		ldrb	r3, [sp, #512]	@ zero_extendqisi2
+ 162 00e0 000053E3 		cmp	r3, #0
+ 163 00e4 F4FFFF0A 		beq	.L29
+ 164 00e8 9C119FE5 		ldr	r1, .L35+4
+ 165 00ec 0600A0E1 		mov	r0, r6
+ 166 00f0 FEFFFFEB 		bl	strtok
+ 167 00f4 94119FE5 		ldr	r1, .L35+8
+ 168 00f8 0040A0E1 		mov	r4, r0
+ 169 00fc FEFFFFEB 		bl	strcmp
+ 170 0100 000050E3 		cmp	r0, #0
+ 171 0104 0400001A 		bne	.L18
+ 172 0108 84119FE5 		ldr	r1, .L35+12
+ 173 010c FEFFFFEB 		bl	strtok
+ 174 0110 0010A0E1 		mov	r1, r0
+ 175 0114 7C019FE5 		ldr	r0, .L35+16
+ 176 0118 560000EA 		b	.L30
+ 177              	.L18:
+ 178 011c 78119FE5 		ldr	r1, .L35+20
+ 179 0120 0400A0E1 		mov	r0, r4
+ 180 0124 FEFFFFEB 		bl	strcmp
+ 181 0128 000050E3 		cmp	r0, #0
+ 182 012c 0010A001 		moveq	r1, r0
+ 183 0130 0D00A001 		moveq	r0, sp
+ 184 0134 0600000A 		beq	.L33
+ 185 0138 0400A0E1 		mov	r0, r4
+ 186 013c 5C119FE5 		ldr	r1, .L35+24
+ 187 0140 FEFFFFEB 		bl	strcmp
+ 188 0144 000050E3 		cmp	r0, #0
+ 189 0148 0300001A 		bne	.L20
+ 190              	.L34:
+ 191 014c 0D00A0E1 		mov	r0, sp
+ 192 0150 0110A0E3 		mov	r1, #1
+ 193              	.L33:
+ 194 0154 FEFFFFEB 		bl	vTaskGetRunTimeStats
+ 195 0158 1A0000EA 		b	.L32
+ 196              	.L20:
+ 197 015c 0400A0E1 		mov	r0, r4
+ 198 0160 3C119FE5 		ldr	r1, .L35+28
+ 199 0164 FEFFFFEB 		bl	strcmp
+ 200 0168 000050E3 		cmp	r0, #0
+ 201 016c 0E00001A 		bne	.L21
+ 202 0170 1C119FE5 		ldr	r1, .L35+12
+ 203 0174 FEFFFFEB 		bl	strtok
+ 204 0178 FEFFFFEB 		bl	atoi
+ 205 017c 004050E2 		subs	r4, r0, #0
+ 206 0180 20019FD5 		ldrle	r0, .L35+32
+ 207 0184 3D0000DA 		ble	.L31
+ 208 0188 0410A0E1 		mov	r1, r4
+ 209 018c 18019FE5 		ldr	r0, .L35+36
+ 210 0190 FEFFFFEB 		bl	rprintf
+ 211 0194 0D00A0E1 		mov	r0, sp
+ 212 0198 0110A0E3 		mov	r1, #1
+ 213 019c FEFFFFEB 		bl	vTaskGetRunTimeStats
+ 214 01a0 0400A0E1 		mov	r0, r4
+ 215 01a4 FEFFFFEB 		bl	vTaskDelay
+ 216 01a8 E7FFFFEA 		b	.L34
+ 217              	.L21:
+ 218 01ac 0400A0E1 		mov	r0, r4
+ 219 01b0 F8109FE5 		ldr	r1, .L35+40
+ 220 01b4 FEFFFFEB 		bl	strcmp
+ 221 01b8 000050E3 		cmp	r0, #0
+ 222 01bc 0400001A 		bne	.L23
+ 223 01c0 0D00A0E1 		mov	r0, sp
+ 224 01c4 FEFFFFEB 		bl	vTaskList
+ 225              	.L32:
+ 226 01c8 E4009FE5 		ldr	r0, .L35+44
+ 227 01cc 0D10A0E1 		mov	r1, sp
+ 228 01d0 280000EA 		b	.L30
+ 229              	.L23:
+ 230 01d4 DC009FE5 		ldr	r0, .L35+48
+ 231 01d8 0410A0E1 		mov	r1, r4
+ 232 01dc FEFFFFEB 		bl	strcmp
+ 233 01e0 000050E3 		cmp	r0, #0
+ 234 01e4 1700001A 		bne	.L24
+ 235 01e8 CC009FE5 		ldr	r0, .L35+52
+ 236 01ec FEFFFFEB 		bl	rprintf
+ 237 01f0 FEFFFFEB 		bl	_Z9printLinev
+ 238 01f4 C4009FE5 		ldr	r0, .L35+56
+ 239 01f8 FEFFFFEB 		bl	rprintf
+ 240 01fc FEFFFFEB 		bl	_Z9printLinev
+ 241 0200 BC009FE5 		ldr	r0, .L35+60
+ 242 0204 FEFFFFEB 		bl	rprintf
+ 243 0208 B8009FE5 		ldr	r0, .L35+64
+ 244 020c FEFFFFEB 		bl	rprintf
+ 245 0210 B4009FE5 		ldr	r0, .L35+68
+ 246 0214 FEFFFFEB 		bl	rprintf
+ 247 0218 B0009FE5 		ldr	r0, .L35+72
+ 248 021c FEFFFFEB 		bl	rprintf
+ 249 0220 AC009FE5 		ldr	r0, .L35+76
+ 250 0224 FEFFFFEB 		bl	rprintf
+ 251 0228 A8009FE5 		ldr	r0, .L35+80
+ 252 022c FEFFFFEB 		bl	rprintf
+ 253 0230 A4009FE5 		ldr	r0, .L35+84
+ 254 0234 FEFFFFEB 		bl	rprintf
+ 255 0238 A0009FE5 		ldr	r0, .L35+88
+ 256 023c FEFFFFEB 		bl	rprintf
+ 257 0240 FEFFFFEB 		bl	_Z9printLinev
+ 258 0244 9CFFFFEA 		b	.L29
+ 259              	.L24:
+ 260 0248 0400A0E1 		mov	r0, r4
+ 261 024c 90109FE5 		ldr	r1, .L35+92
+ 262 0250 FEFFFFEB 		bl	strcmp
+ 263 0254 000050E3 		cmp	r0, #0
+ 264 0258 88009F15 		ldrne	r0, .L35+96
+ 265 025c 0700001A 		bne	.L31
+ 266 0260 84009FE5 		ldr	r0, .L35+100
+ 267 0264 FEFFFFEB 		bl	rprintf
+ 268 0268 0600A0E1 		mov	r0, r6
+ 269 026c FEFFFFEB 		bl	_Z11getUartLinePc
+ 270 0270 78009FE5 		ldr	r0, .L35+104
+ 271 0274 0610A0E1 		mov	r1, r6
+ 272              	.L30:
+ 273 0278 FEFFFFEB 		bl	rprintf
+ 274 027c 8EFFFFEA 		b	.L29
+ 275              	.L31:
+ 276 0280 FEFFFFEB 		bl	rprintf
+ 277 0284 8CFFFFEA 		b	.L29
+ 278              	.L36:
+ 279              		.align	2
+ 280              	.L35:
+ 281 0288 5A000000 		.word	.LC2
+ 282 028c 60000000 		.word	.LC3
+ 283 0290 62000000 		.word	.LC4
+ 284 0294 67000000 		.word	.LC5
+ 285 0298 68000000 		.word	.LC6
+ 286 029c 72000000 		.word	.LC7
+ 287 02a0 79000000 		.word	.LC9
+ 288 02a4 7E000000 		.word	.LC10
+ 289 02a8 C1000000 		.word	.LC12
+ 290 02ac 83000000 		.word	.LC11
+ 291 02b0 FD000000 		.word	.LC13
+ 292 02b4 76000000 		.word	.LC8
+ 293 02b8 02010000 		.word	.LC14
+ 294 02bc 07010000 		.word	.LC15
+ 295 02c0 09010000 		.word	.LC16
+ 296 02c4 18010000 		.word	.LC17
+ 297 02c8 49010000 		.word	.LC18
+ 298 02cc 76010000 		.word	.LC19
+ 299 02d0 99010000 		.word	.LC20
+ 300 02d4 BC010000 		.word	.LC21
+ 301 02d8 F1010000 		.word	.LC22
+ 302 02dc 36020000 		.word	.LC23
+ 303 02e0 8A020000 		.word	.LC24
+ 304 02e4 CB020000 		.word	.LC25
+ 305 02e8 F3020000 		.word	.LC28
+ 306 02ec D0020000 		.word	.LC26
+ 307 02f0 E2020000 		.word	.LC27
+ 309              		.ident	"GCC: (GNU) 4.3.2"
+DEFINED SYMBOLS
+                            *ABS*:00000000 userInterface.cpp
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccrZybSX.s:9      .text:00000000 _Z11getUartLinePc
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccrZybSX.s:12     .text:00000000 $a
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccrZybSX.s:59     .text:000000a0 $d
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccrZybSX.s:69     .text:000000a4 _Z9printLinev
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccrZybSX.s:73     .text:000000a4 $a
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccrZybSX.s:78     .text:000000ac $d
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccrZybSX.s:146    .text:000000b0 _Z6uartUIPv
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccrZybSX.s:149    .text:000000b0 $a
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccrZybSX.s:281    .text:00000288 $d
+
+UNDEFINED SYMBOLS
+uart0GetChar
+uart0PutChar
+rprintf
+memset
+strtok
+strcmp
+vTaskGetRunTimeStats
+atoi
+vTaskDelay
+vTaskList

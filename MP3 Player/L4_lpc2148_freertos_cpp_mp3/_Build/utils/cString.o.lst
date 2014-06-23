@@ -1,0 +1,1936 @@
+   1              		.file	"cString.cpp"
+   2              		.global	__divsi3
+   3              		.section	.rodata.str1.1,"aMS",%progbits,1
+   4              	.LC0:
+   5 0000 7A797877 		.ascii	"zyxwvutsrqponmlkjihgfedcba9876543210123456789abcdef"
+   5      76757473 
+   5      7271706F 
+   5      6E6D6C6B 
+   5      6A696867 
+   6 0033 6768696A 		.ascii	"ghijklmnopqrstuvwxyz\000"
+   6      6B6C6D6E 
+   6      6F707172 
+   6      73747576 
+   6      7778797A 
+   7              		.text
+   8              		.align	2
+   9              		.global	_ZN7cString4itoaEiPci
+  11              	_ZN7cString4itoaEiPci:
+  12              		@ args = 0, pretend = 0, frame = 0
+  13              		@ frame_needed = 0, uses_anonymous_args = 0
+  14 0000 F0412DE9 		stmfd	sp!, {r4, r5, r6, r7, r8, lr}
+  15 0004 0360A0E1 		mov	r6, r3
+  16 0008 023043E2 		sub	r3, r3, #2
+  17 000c 220053E3 		cmp	r3, #34
+  18 0010 0030A083 		movhi	r3, #0
+  19 0014 0150A0E1 		mov	r5, r1
+  20 0018 0270A0E1 		mov	r7, r2
+  21 001c 0030C285 		strhib	r3, [r2, #0]
+  22 0020 1C00008A 		bhi	.L3
+  23 0024 74809FE5 		ldr	r8, .L10
+  24 0028 0240A0E1 		mov	r4, r2
+  25              	.L5:
+  26 002c 0500A0E1 		mov	r0, r5
+  27 0030 0610A0E1 		mov	r1, r6
+  28 0034 FEFFFFEB 		bl	__divsi3
+  29 0038 960003E0 		mul	r3, r6, r0
+  30 003c 232085E2 		add	r2, r5, #35
+  31 0040 022063E0 		rsb	r2, r3, r2
+  32 0044 0230D8E7 		ldrb	r3, [r8, r2]	@ zero_extendqisi2
+  33 0048 000050E3 		cmp	r0, #0
+  34 004c 0130C4E4 		strb	r3, [r4], #1
+  35 0050 0050A011 		movne	r5, r0
+  36 0054 F4FFFF1A 		bne	.L5
+  37              	.L4:
+  38 0058 000055E3 		cmp	r5, #0
+  39 005c 2D30A0B3 		movlt	r3, #45
+  40 0060 0130C4B4 		strltb	r3, [r4], #1
+  41 0064 0030A0E3 		mov	r3, #0
+  42 0068 0410A0E1 		mov	r1, r4
+  43 006c 013041E4 		strb	r3, [r1], #-1
+  44 0070 0700A0E1 		mov	r0, r7
+  45 0074 030000EA 		b	.L7
+  46              	.L8:
+  47 0078 0120D1E5 		ldrb	r2, [r1, #1]	@ zero_extendqisi2
+  48 007c 013050E5 		ldrb	r3, [r0, #-1]	@ zero_extendqisi2
+  49 0080 0130C1E5 		strb	r3, [r1, #1]
+  50 0084 012040E5 		strb	r2, [r0, #-1]
+  51              	.L7:
+  52 0088 010050E1 		cmp	r0, r1
+  53 008c 011041E2 		sub	r1, r1, #1
+  54 0090 010080E2 		add	r0, r0, #1
+  55 0094 F7FFFF3A 		bcc	.L8
+  56              	.L3:
+  57 0098 0700A0E1 		mov	r0, r7
+  58 009c F081BDE8 		ldmfd	sp!, {r4, r5, r6, r7, r8, pc}
+  59              	.L11:
+  60              		.align	2
+  61              	.L10:
+  62 00a0 00000000 		.word	.LC0
+  64              		.align	2
+  65              		.global	_ZNK7cStringclEv
+  67              	_ZNK7cStringclEv:
+  68              		@ args = 0, pretend = 0, frame = 0
+  69              		@ frame_needed = 0, uses_anonymous_args = 0
+  70              		@ link register save eliminated.
+  71 00a4 0C0090E5 		ldr	r0, [r0, #12]
+  72 00a8 1EFF2FE1 		bx	lr
+  74              		.align	2
+  75              		.global	_ZN7cString18singleHexCharToIntEh
+  77              	_ZN7cString18singleHexCharToIntEh:
+  78              		@ args = 0, pretend = 0, frame = 0
+  79              		@ frame_needed = 0, uses_anonymous_args = 0
+  80              		@ link register save eliminated.
+  81 00ac FF1001E2 		and	r1, r1, #255
+  82 00b0 613041E2 		sub	r3, r1, #97
+  83 00b4 FF3003E2 		and	r3, r3, #255
+  84 00b8 050053E3 		cmp	r3, #5
+  85 00bc 0300009A 		bls	.L19
+  86              	.L15:
+  87 00c0 413041E2 		sub	r3, r1, #65
+  88 00c4 FF3003E2 		and	r3, r3, #255
+  89 00c8 050053E3 		cmp	r3, #5
+  90 00cc 0200008A 		bhi	.L17
+  91              	.L19:
+  92 00d0 0A3083E2 		add	r3, r3, #10
+  93 00d4 FF0003E2 		and	r0, r3, #255
+  94 00d8 1EFF2FE1 		bx	lr
+  95              	.L17:
+  96 00dc 303041E2 		sub	r3, r1, #48
+  97 00e0 FF0003E2 		and	r0, r3, #255
+  98 00e4 1EFF2FE1 		bx	lr
+ 100              		.align	2
+ 101              		.global	_ZN7cString17hexStrDigitsToIntEPc
+ 103              	_ZN7cString17hexStrDigitsToIntEPc:
+ 104              		@ args = 0, pretend = 0, frame = 0
+ 105              		@ frame_needed = 0, uses_anonymous_args = 0
+ 106              		@ link register save eliminated.
+ 107 00e8 0020D1E5 		ldrb	r2, [r1, #0]	@ zero_extendqisi2
+ 108 00ec 613042E2 		sub	r3, r2, #97
+ 109 00f0 FF3003E2 		and	r3, r3, #255
+ 110 00f4 050053E3 		cmp	r3, #5
+ 111 00f8 0110D1E5 		ldrb	r1, [r1, #1]	@ zero_extendqisi2
+ 112 00fc 0400009A 		bls	.L30
+ 113              	.L21:
+ 114 0100 413042E2 		sub	r3, r2, #65
+ 115 0104 FF3003E2 		and	r3, r3, #255
+ 116 0108 050053E3 		cmp	r3, #5
+ 117 010c 30304282 		subhi	r3, r2, #48
+ 118 0110 0000008A 		bhi	.L28
+ 119              	.L30:
+ 120 0114 0A3083E2 		add	r3, r3, #10
+ 121              	.L28:
+ 122 0118 FF2003E2 		and	r2, r3, #255
+ 123 011c 613041E2 		sub	r3, r1, #97
+ 124 0120 FF3003E2 		and	r3, r3, #255
+ 125 0124 050053E3 		cmp	r3, #5
+ 126 0128 0400009A 		bls	.L31
+ 127              	.L24:
+ 128 012c 413041E2 		sub	r3, r1, #65
+ 129 0130 FF3003E2 		and	r3, r3, #255
+ 130 0134 050053E3 		cmp	r3, #5
+ 131 0138 30304182 		subhi	r3, r1, #48
+ 132 013c 0000008A 		bhi	.L29
+ 133              	.L31:
+ 134 0140 0A3083E2 		add	r3, r3, #10
+ 135              	.L29:
+ 136 0144 FF3003E2 		and	r3, r3, #255
+ 137 0148 020283E0 		add	r0, r3, r2, asl #4
+ 138 014c 1EFF2FE1 		bx	lr
+ 140              		.align	2
+ 141              		.global	_ZN7cString7encryptEPKci
+ 143              	_ZN7cString7encryptEPKci:
+ 144              		@ args = 0, pretend = 0, frame = 0
+ 145              		@ frame_needed = 0, uses_anonymous_args = 0
+ 146 0150 70402DE9 		stmfd	sp!, {r4, r5, r6, lr}
+ 147 0154 0060A0E1 		mov	r6, r0
+ 148 0158 0100A0E1 		mov	r0, r1
+ 149 015c 0140A0E1 		mov	r4, r1
+ 150 0160 0250A0E1 		mov	r5, r2
+ 151 0164 FEFFFFEB 		bl	strlen
+ 152 0168 00E0A0E3 		mov	lr, #0
+ 153 016c 080000EA 		b	.L33
+ 154              	.L34:
+ 155 0170 0C1096E5 		ldr	r1, [r6, #12]
+ 156 0174 0C20D4E7 		ldrb	r2, [r4, ip]	@ zero_extendqisi2
+ 157 0178 0E30D1E7 		ldrb	r3, [r1, lr]	@ zero_extendqisi2
+ 158 017c 023023E0 		eor	r3, r3, r2
+ 159 0180 0E30C1E7 		strb	r3, [r1, lr]
+ 160 0184 01C08CE2 		add	ip, ip, #1
+ 161              	.L36:
+ 162 0188 00005CE1 		cmp	ip, r0
+ 163 018c F7FFFFBA 		blt	.L34
+ 164 0190 01E08EE2 		add	lr, lr, #1
+ 165              	.L33:
+ 166 0194 05005EE1 		cmp	lr, r5
+ 167 0198 7080BDA8 		ldmgefd	sp!, {r4, r5, r6, pc}
+ 168 019c 00C0A0E3 		mov	ip, #0
+ 169 01a0 F8FFFFEA 		b	.L36
+ 171              		.align	2
+ 172              		.global	_ZN7cString7decryptEPKc
+ 174              	_ZN7cString7decryptEPKc:
+ 175              		@ args = 0, pretend = 0, frame = 0
+ 176              		@ frame_needed = 0, uses_anonymous_args = 0
+ 177              		@ link register save eliminated.
+ 178 01a4 042090E5 		ldr	r2, [r0, #4]
+ 179 01a8 FEFFFFEA 		b	_ZN7cString7encryptEPKci
+ 181              		.align	2
+ 182              		.global	_ZNK7cString6getLenEv
+ 184              	_ZNK7cString6getLenEv:
+ 185              		@ args = 0, pretend = 0, frame = 0
+ 186              		@ frame_needed = 0, uses_anonymous_args = 0
+ 187              		@ link register save eliminated.
+ 188 01ac 0C0090E5 		ldr	r0, [r0, #12]
+ 189 01b0 FEFFFFEA 		b	strlen
+ 191              		.align	2
+ 192              		.global	_ZN7cStringixEi
+ 194              	_ZN7cStringixEi:
+ 195              		@ args = 0, pretend = 0, frame = 0
+ 196              		@ frame_needed = 0, uses_anonymous_args = 0
+ 197 01b4 30402DE9 		stmfd	sp!, {r4, r5, lr}
+ 198 01b8 0C4090E5 		ldr	r4, [r0, #12]
+ 199 01bc 0400A0E1 		mov	r0, r4
+ 200 01c0 0150A0E1 		mov	r5, r1
+ 201 01c4 FEFFFFEB 		bl	strlen
+ 202 01c8 000055E1 		cmp	r5, r0
+ 203 01cc 054084B0 		addlt	r4, r4, r5
+ 204 01d0 0400A0E1 		mov	r0, r4
+ 205 01d4 3080BDE8 		ldmfd	sp!, {r4, r5, pc}
+ 207              		.align	2
+ 208              		.global	_ZN7cString12checksum_GetEv
+ 210              	_ZN7cString12checksum_GetEv:
+ 211              		@ args = 0, pretend = 0, frame = 0
+ 212              		@ frame_needed = 0, uses_anonymous_args = 0
+ 213 01d8 10402DE9 		stmfd	sp!, {r4, lr}
+ 214 01dc 0C4090E5 		ldr	r4, [r0, #12]
+ 215 01e0 0400A0E1 		mov	r0, r4
+ 216 01e4 FEFFFFEB 		bl	strlen
+ 217 01e8 0010A0E1 		mov	r1, r0
+ 218 01ec 0000A0E3 		mov	r0, #0
+ 219 01f0 0020A0E1 		mov	r2, r0
+ 220 01f4 020000EA 		b	.L46
+ 221              	.L47:
+ 222 01f8 0230D4E7 		ldrb	r3, [r4, r2]	@ zero_extendqisi2
+ 223 01fc 012082E2 		add	r2, r2, #1
+ 224 0200 030020E0 		eor	r0, r0, r3
+ 225              	.L46:
+ 226 0204 010052E1 		cmp	r2, r1
+ 227 0208 FAFFFFBA 		blt	.L47
+ 228 020c 1080BDE8 		ldmfd	sp!, {r4, pc}
+ 230              		.align	2
+ 231              		.global	_ZN7cString7encryptEPKc
+ 233              	_ZN7cString7encryptEPKc:
+ 234              		@ args = 0, pretend = 0, frame = 0
+ 235              		@ frame_needed = 0, uses_anonymous_args = 0
+ 236 0210 30402DE9 		stmfd	sp!, {r4, r5, lr}
+ 237 0214 0040A0E1 		mov	r4, r0
+ 238 0218 0C0090E5 		ldr	r0, [r0, #12]
+ 239 021c 0150A0E1 		mov	r5, r1
+ 240 0220 FEFFFFEB 		bl	strlen
+ 241 0224 0510A0E1 		mov	r1, r5
+ 242 0228 0020A0E1 		mov	r2, r0
+ 243 022c 040084E5 		str	r0, [r4, #4]
+ 244 0230 0400A0E1 		mov	r0, r4
+ 245 0234 3040BDE8 		ldmfd	sp!, {r4, r5, lr}
+ 246 0238 FEFFFFEA 		b	_ZN7cString7encryptEPKci
+ 248              		.align	2
+ 249              		.global	_ZN7cString5isIntEv
+ 251              	_ZN7cString5isIntEv:
+ 252              		@ args = 0, pretend = 0, frame = 0
+ 253              		@ frame_needed = 0, uses_anonymous_args = 0
+ 254 023c 10402DE9 		stmfd	sp!, {r4, lr}
+ 255 0240 0C4090E5 		ldr	r4, [r0, #12]
+ 256 0244 0400A0E1 		mov	r0, r4
+ 257 0248 FEFFFFEB 		bl	strlen
+ 258 024c 0030D4E5 		ldrb	r3, [r4, #0]	@ zero_extendqisi2
+ 259 0250 2D0053E3 		cmp	r3, #45
+ 260 0254 0020A013 		movne	r2, #0
+ 261 0258 0120A003 		moveq	r2, #1
+ 262 025c 024084E0 		add	r4, r4, r2
+ 263 0260 050000EA 		b	.L52
+ 264              	.L55:
+ 265 0264 0130D4E4 		ldrb	r3, [r4], #1	@ zero_extendqisi2
+ 266 0268 303043E2 		sub	r3, r3, #48
+ 267 026c 090053E3 		cmp	r3, #9
+ 268 0270 0100009A 		bls	.L52
+ 269 0274 0000A0E3 		mov	r0, #0
+ 270 0278 1080BDE8 		ldmfd	sp!, {r4, pc}
+ 271              	.L52:
+ 272 027c 000052E1 		cmp	r2, r0
+ 273 0280 012082E2 		add	r2, r2, #1
+ 274 0284 F6FFFFBA 		blt	.L55
+ 275 0288 0100A0E3 		mov	r0, #1
+ 276 028c 1080BDE8 		ldmfd	sp!, {r4, pc}
+ 278              		.align	2
+ 279              		.global	_ZN7cString6isUintEv
+ 281              	_ZN7cString6isUintEv:
+ 282              		@ args = 0, pretend = 0, frame = 0
+ 283              		@ frame_needed = 0, uses_anonymous_args = 0
+ 284 0290 10402DE9 		stmfd	sp!, {r4, lr}
+ 285 0294 0C4090E5 		ldr	r4, [r0, #12]
+ 286 0298 0400A0E1 		mov	r0, r4
+ 287 029c FEFFFFEB 		bl	strlen
+ 288 02a0 0020A0E3 		mov	r2, #0
+ 289 02a4 060000EA 		b	.L58
+ 290              	.L61:
+ 291 02a8 0230D4E7 		ldrb	r3, [r4, r2]	@ zero_extendqisi2
+ 292 02ac 303043E2 		sub	r3, r3, #48
+ 293 02b0 090053E3 		cmp	r3, #9
+ 294 02b4 0100009A 		bls	.L59
+ 295 02b8 0000A0E3 		mov	r0, #0
+ 296 02bc 1080BDE8 		ldmfd	sp!, {r4, pc}
+ 297              	.L59:
+ 298 02c0 012082E2 		add	r2, r2, #1
+ 299              	.L58:
+ 300 02c4 000052E1 		cmp	r2, r0
+ 301 02c8 F6FFFFBA 		blt	.L61
+ 302 02cc 0100A0E3 		mov	r0, #1
+ 303 02d0 1080BDE8 		ldmfd	sp!, {r4, pc}
+ 305              		.align	2
+ 306              		.global	_ZN7cString14isAlphaNumericEv
+ 308              	_ZN7cString14isAlphaNumericEv:
+ 309              		@ args = 0, pretend = 0, frame = 0
+ 310              		@ frame_needed = 0, uses_anonymous_args = 0
+ 311 02d4 10402DE9 		stmfd	sp!, {r4, lr}
+ 312 02d8 0C4090E5 		ldr	r4, [r0, #12]
+ 313 02dc 0400A0E1 		mov	r0, r4
+ 314 02e0 FEFFFFEB 		bl	strlen
+ 315 02e4 0010A0E3 		mov	r1, #0
+ 316 02e8 080000EA 		b	.L64
+ 317              	.L67:
+ 318 02ec 0130D4E7 		ldrb	r3, [r4, r1]	@ zero_extendqisi2
+ 319 02f0 302043E2 		sub	r2, r3, #48
+ 320 02f4 413043E2 		sub	r3, r3, #65
+ 321 02f8 390053E3 		cmp	r3, #57
+ 322 02fc 09005283 		cmphi	r2, #9
+ 323 0300 0100009A 		bls	.L65
+ 324 0304 0000A0E3 		mov	r0, #0
+ 325 0308 1080BDE8 		ldmfd	sp!, {r4, pc}
+ 326              	.L65:
+ 327 030c 011081E2 		add	r1, r1, #1
+ 328              	.L64:
+ 329 0310 000051E1 		cmp	r1, r0
+ 330 0314 F4FFFFBA 		blt	.L67
+ 331 0318 0100A0E3 		mov	r0, #1
+ 332 031c 1080BDE8 		ldmfd	sp!, {r4, pc}
+ 334              		.align	2
+ 335              		.global	_ZN7cString10isAllAlphaEv
+ 337              	_ZN7cString10isAllAlphaEv:
+ 338              		@ args = 0, pretend = 0, frame = 0
+ 339              		@ frame_needed = 0, uses_anonymous_args = 0
+ 340 0320 10402DE9 		stmfd	sp!, {r4, lr}
+ 341 0324 0C4090E5 		ldr	r4, [r0, #12]
+ 342 0328 0400A0E1 		mov	r0, r4
+ 343 032c FEFFFFEB 		bl	strlen
+ 344 0330 0020A0E3 		mov	r2, #0
+ 345 0334 060000EA 		b	.L70
+ 346              	.L73:
+ 347 0338 0230D4E7 		ldrb	r3, [r4, r2]	@ zero_extendqisi2
+ 348 033c 413043E2 		sub	r3, r3, #65
+ 349 0340 390053E3 		cmp	r3, #57
+ 350 0344 0100009A 		bls	.L71
+ 351 0348 0000A0E3 		mov	r0, #0
+ 352 034c 1080BDE8 		ldmfd	sp!, {r4, pc}
+ 353              	.L71:
+ 354 0350 012082E2 		add	r2, r2, #1
+ 355              	.L70:
+ 356 0354 000052E1 		cmp	r2, r0
+ 357 0358 F6FFFFBA 		blt	.L73
+ 358 035c 0100A0E3 		mov	r0, #1
+ 359 0360 1080BDE8 		ldmfd	sp!, {r4, pc}
+ 361              		.align	2
+ 362              		.global	_ZN7cString9subStringEi
+ 364              	_ZN7cString9subStringEi:
+ 365              		@ args = 0, pretend = 0, frame = 0
+ 366              		@ frame_needed = 0, uses_anonymous_args = 0
+ 367 0364 70402DE9 		stmfd	sp!, {r4, r5, r6, lr}
+ 368 0368 104090E5 		ldr	r4, [r0, #16]
+ 369 036c 0030A0E3 		mov	r3, #0
+ 370 0370 006051E2 		subs	r6, r1, #0
+ 371 0374 0030C4E5 		strb	r3, [r4, #0]
+ 372 0378 040000BA 		blt	.L76
+ 373 037c 0C5090E5 		ldr	r5, [r0, #12]
+ 374 0380 0500A0E1 		mov	r0, r5
+ 375 0384 FEFFFFEB 		bl	strlen
+ 376 0388 000056E1 		cmp	r6, r0
+ 377 038c 064085B0 		addlt	r4, r5, r6
+ 378              	.L76:
+ 379 0390 0400A0E1 		mov	r0, r4
+ 380 0394 7080BDE8 		ldmfd	sp!, {r4, r5, r6, pc}
+ 382              		.align	2
+ 383              		.global	_ZN7cString7trimEndEPKc
+ 385              	_ZN7cString7trimEndEPKc:
+ 386              		@ args = 0, pretend = 0, frame = 0
+ 387              		@ frame_needed = 0, uses_anonymous_args = 0
+ 388 0398 70402DE9 		stmfd	sp!, {r4, r5, r6, lr}
+ 389 039c 0040A0E1 		mov	r4, r0
+ 390 03a0 0100A0E1 		mov	r0, r1
+ 391 03a4 0150A0E1 		mov	r5, r1
+ 392 03a8 FEFFFFEB 		bl	strlen
+ 393 03ac 0060A0E1 		mov	r6, r0
+ 394 03b0 0C0094E5 		ldr	r0, [r4, #12]
+ 395 03b4 FEFFFFEB 		bl	strlen
+ 396 03b8 00E0A0E3 		mov	lr, #0
+ 397 03bc 010040E2 		sub	r0, r0, #1
+ 398 03c0 0B0000EA 		b	.L79
+ 399              	.L81:
+ 400 03c4 0C1094E5 		ldr	r1, [r4, #12]
+ 401 03c8 0C30D5E7 		ldrb	r3, [r5, ip]	@ zero_extendqisi2
+ 402 03cc 0020D1E7 		ldrb	r2, [r1, r0]	@ zero_extendqisi2
+ 403 03d0 020053E1 		cmp	r3, r2
+ 404 03d4 001081E0 		add	r1, r1, r0
+ 405 03d8 00E0C105 		streqb	lr, [r1, #0]
+ 406 03dc 01004002 		subeq	r0, r0, #1
+ 407 03e0 0300000A 		beq	.L79
+ 408              	.L80:
+ 409 03e4 01C08CE2 		add	ip, ip, #1
+ 410              	.L83:
+ 411 03e8 06005CE1 		cmp	ip, r6
+ 412 03ec F4FFFFBA 		blt	.L81
+ 413 03f0 7080BDE8 		ldmfd	sp!, {r4, r5, r6, pc}
+ 414              	.L79:
+ 415 03f4 000050E3 		cmp	r0, #0
+ 416 03f8 7080BDB8 		ldmltfd	sp!, {r4, r5, r6, pc}
+ 417 03fc 00C0A0E3 		mov	ip, #0
+ 418 0400 F8FFFFEA 		b	.L83
+ 420              		.align	2
+ 421              		.global	_ZN7cString13eraseAllAfterEi
+ 423              	_ZN7cString13eraseAllAfterEi:
+ 424              		@ args = 0, pretend = 0, frame = 0
+ 425              		@ frame_needed = 0, uses_anonymous_args = 0
+ 426 0404 30402DE9 		stmfd	sp!, {r4, r5, lr}
+ 427 0408 005051E2 		subs	r5, r1, #0
+ 428 040c 3080BDB8 		ldmltfd	sp!, {r4, r5, pc}
+ 429 0410 0C4090E5 		ldr	r4, [r0, #12]
+ 430 0414 0400A0E1 		mov	r0, r4
+ 431 0418 FEFFFFEB 		bl	strlen
+ 432 041c 000055E1 		cmp	r5, r0
+ 433 0420 0030A0B3 		movlt	r3, #0
+ 434 0424 0530C4B7 		strltb	r3, [r4, r5]
+ 435 0428 3080BDE8 		ldmfd	sp!, {r4, r5, pc}
+ 437              		.align	2
+ 438              		.global	_ZN7cString9eraseLastEi
+ 440              	_ZN7cString9eraseLastEi:
+ 441              		@ args = 0, pretend = 0, frame = 0
+ 442              		@ frame_needed = 0, uses_anonymous_args = 0
+ 443 042c 30402DE9 		stmfd	sp!, {r4, r5, lr}
+ 444 0430 0C5090E5 		ldr	r5, [r0, #12]
+ 445 0434 0500A0E1 		mov	r0, r5
+ 446 0438 0140A0E1 		mov	r4, r1
+ 447 043c FEFFFFEB 		bl	strlen
+ 448 0440 000054E1 		cmp	r4, r0
+ 449 0444 002064D0 		rsble	r2, r4, r0
+ 450 0448 0030A0D3 		movle	r3, #0
+ 451 044c 0230C5D7 		strleb	r3, [r5, r2]
+ 452 0450 3080BDE8 		ldmfd	sp!, {r4, r5, pc}
+ 454              		.align	2
+ 455              		.global	_ZN7cString5clearEv
+ 457              	_ZN7cString5clearEv:
+ 458              		@ args = 0, pretend = 0, frame = 0
+ 459              		@ frame_needed = 0, uses_anonymous_args = 0
+ 460              		@ link register save eliminated.
+ 461 0454 002090E5 		ldr	r2, [r0, #0]
+ 462 0458 0C0090E5 		ldr	r0, [r0, #12]
+ 463 045c 0010A0E3 		mov	r1, #0
+ 464 0460 FEFFFFEA 		b	memset
+ 466              		.align	2
+ 467              		.global	_ZN7cString13reAllocateMemEi
+ 469              	_ZN7cString13reAllocateMemEi:
+ 470              		@ args = 0, pretend = 0, frame = 0
+ 471              		@ frame_needed = 0, uses_anonymous_args = 0
+ 472 0464 30402DE9 		stmfd	sp!, {r4, r5, lr}
+ 473 0468 0C4090E5 		ldr	r4, [r0, #12]
+ 474 046c 000054E3 		cmp	r4, #0
+ 475 0470 001080E5 		str	r1, [r0, #0]
+ 476 0474 0050A0E1 		mov	r5, r0
+ 477 0478 011081E2 		add	r1, r1, #1
+ 478 047c 0600001A 		bne	.L94
+ 479 0480 0100A0E1 		mov	r0, r1
+ 480 0484 FEFFFFEB 		bl	malloc
+ 481 0488 002095E5 		ldr	r2, [r5, #0]
+ 482 048c 0410A0E1 		mov	r1, r4
+ 483 0490 0C0085E5 		str	r0, [r5, #12]
+ 484 0494 3040BDE8 		ldmfd	sp!, {r4, r5, lr}
+ 485 0498 FEFFFFEA 		b	memset
+ 486              	.L94:
+ 487 049c 0400A0E1 		mov	r0, r4
+ 488 04a0 FEFFFFEB 		bl	realloc
+ 489 04a4 0C0085E5 		str	r0, [r5, #12]
+ 490 04a8 3080BDE8 		ldmfd	sp!, {r4, r5, pc}
+ 492              		.align	2
+ 493              		.global	_ZN7cString8copyFromEPKc
+ 495              	_ZN7cString8copyFromEPKc:
+ 496              		@ args = 0, pretend = 0, frame = 0
+ 497              		@ frame_needed = 0, uses_anonymous_args = 0
+ 498 04ac 70402DE9 		stmfd	sp!, {r4, r5, r6, lr}
+ 499 04b0 0050A0E1 		mov	r5, r0
+ 500 04b4 0100A0E1 		mov	r0, r1
+ 501 04b8 0160A0E1 		mov	r6, r1
+ 502 04bc FEFFFFEB 		bl	strlen
+ 503 04c0 003095E5 		ldr	r3, [r5, #0]
+ 504 04c4 030050E1 		cmp	r0, r3
+ 505 04c8 0040A0E1 		mov	r4, r0
+ 506 04cc 0500A0C1 		movgt	r0, r5
+ 507 04d0 0410A0C1 		movgt	r1, r4
+ 508 04d4 FEFFFFCB 		blgt	_ZN7cString13reAllocateMemEi
+ 509              	.L97:
+ 510 04d8 0C0095E5 		ldr	r0, [r5, #12]
+ 511 04dc 0610A0E1 		mov	r1, r6
+ 512 04e0 012084E2 		add	r2, r4, #1
+ 513 04e4 7040BDE8 		ldmfd	sp!, {r4, r5, r6, lr}
+ 514 04e8 FEFFFFEA 		b	memcpy
+ 516              		.align	2
+ 517              		.global	_ZN7cStringaSEi
+ 519              	_ZN7cStringaSEi:
+ 520              		@ args = 0, pretend = 0, frame = 32
+ 521              		@ frame_needed = 0, uses_anonymous_args = 0
+ 522 04ec 30402DE9 		stmfd	sp!, {r4, r5, lr}
+ 523 04f0 20D04DE2 		sub	sp, sp, #32
+ 524 04f4 0050A0E1 		mov	r5, r0
+ 525 04f8 0D20A0E1 		mov	r2, sp
+ 526 04fc 0A30A0E3 		mov	r3, #10
+ 527 0500 FEFFFFEB 		bl	_ZN7cString4itoaEiPci
+ 528 0504 0500A0E1 		mov	r0, r5
+ 529 0508 0D10A0E1 		mov	r1, sp
+ 530 050c 0D40A0E1 		mov	r4, sp
+ 531 0510 FEFFFFEB 		bl	_ZN7cString8copyFromEPKc
+ 532 0514 20D08DE2 		add	sp, sp, #32
+ 533 0518 3080BDE8 		ldmfd	sp!, {r4, r5, pc}
+ 535              		.align	2
+ 536              		.global	_ZN7cStringaSEPKc
+ 538              	_ZN7cStringaSEPKc:
+ 539              		@ args = 0, pretend = 0, frame = 0
+ 540              		@ frame_needed = 0, uses_anonymous_args = 0
+ 541              		@ link register save eliminated.
+ 542 051c FEFFFFEA 		b	_ZN7cString8copyFromEPKc
+ 544              		.align	2
+ 545              		.global	_ZN7cStringaSERKS_
+ 547              	_ZN7cStringaSERKS_:
+ 548              		@ args = 0, pretend = 0, frame = 0
+ 549              		@ frame_needed = 0, uses_anonymous_args = 0
+ 550 0520 010050E1 		cmp	r0, r1
+ 551 0524 10402DE9 		stmfd	sp!, {r4, lr}
+ 552 0528 0040A0E1 		mov	r4, r0
+ 553 052c 0C109115 		ldrne	r1, [r1, #12]
+ 554 0530 FEFFFF1B 		blne	_ZN7cString8copyFromEPKc
+ 555              	.L104:
+ 556 0534 0400A0E1 		mov	r0, r4
+ 557 0538 1080BDE8 		ldmfd	sp!, {r4, pc}
+ 559              		.align	2
+ 560              		.global	_ZN7cString26ensureMemoryToInsertNCharsEi
+ 562              	_ZN7cString26ensureMemoryToInsertNCharsEi:
+ 563              		@ args = 0, pretend = 0, frame = 0
+ 564              		@ frame_needed = 0, uses_anonymous_args = 0
+ 565 053c 30402DE9 		stmfd	sp!, {r4, r5, lr}
+ 566 0540 0050A0E1 		mov	r5, r0
+ 567 0544 0C0090E5 		ldr	r0, [r0, #12]
+ 568 0548 0140A0E1 		mov	r4, r1
+ 569 054c FEFFFFEB 		bl	strlen
+ 570 0550 003095E5 		ldr	r3, [r5, #0]
+ 571 0554 001084E0 		add	r1, r4, r0
+ 572 0558 010053E1 		cmp	r3, r1
+ 573 055c 3080BDA8 		ldmgefd	sp!, {r4, r5, pc}
+ 574 0560 0500A0E1 		mov	r0, r5
+ 575 0564 3040BDE8 		ldmfd	sp!, {r4, r5, lr}
+ 576 0568 FEFFFFEA 		b	_ZN7cString13reAllocateMemEi
+ 578              		.align	2
+ 579              		.global	_ZN7cString4initEi
+ 581              	_ZN7cString4initEi:
+ 582              		@ args = 0, pretend = 0, frame = 0
+ 583              		@ frame_needed = 0, uses_anonymous_args = 0
+ 584              		@ link register save eliminated.
+ 585 056c 0030A0E3 		mov	r3, #0
+ 586 0570 103080E5 		str	r3, [r0, #16]
+ 587 0574 003080E5 		str	r3, [r0, #0]
+ 588 0578 043080E5 		str	r3, [r0, #4]
+ 589 057c 083080E5 		str	r3, [r0, #8]
+ 590 0580 0C3080E5 		str	r3, [r0, #12]
+ 591 0584 FEFFFFEA 		b	_ZN7cString13reAllocateMemEi
+ 593              		.align	2
+ 594              		.global	_ZN7cStringC1ERKS_
+ 596              	_ZN7cStringC1ERKS_:
+ 597              		@ args = 0, pretend = 0, frame = 0
+ 598              		@ frame_needed = 0, uses_anonymous_args = 0
+ 599 0588 30402DE9 		stmfd	sp!, {r4, r5, lr}
+ 600 058c 0040A0E1 		mov	r4, r0
+ 601 0590 0C0091E5 		ldr	r0, [r1, #12]
+ 602 0594 0150A0E1 		mov	r5, r1
+ 603 0598 FEFFFFEB 		bl	strlen
+ 604 059c 0010A0E1 		mov	r1, r0
+ 605 05a0 0400A0E1 		mov	r0, r4
+ 606 05a4 FEFFFFEB 		bl	_ZN7cString4initEi
+ 607 05a8 0400A0E1 		mov	r0, r4
+ 608 05ac 0510A0E1 		mov	r1, r5
+ 609 05b0 3040BDE8 		ldmfd	sp!, {r4, r5, lr}
+ 610 05b4 FEFFFFEA 		b	_ZN7cStringaSERKS_
+ 612              		.align	2
+ 613              		.global	_ZN7cStringC2ERKS_
+ 615              	_ZN7cStringC2ERKS_:
+ 616              		@ args = 0, pretend = 0, frame = 0
+ 617              		@ frame_needed = 0, uses_anonymous_args = 0
+ 618 05b8 30402DE9 		stmfd	sp!, {r4, r5, lr}
+ 619 05bc 0040A0E1 		mov	r4, r0
+ 620 05c0 0C0091E5 		ldr	r0, [r1, #12]
+ 621 05c4 0150A0E1 		mov	r5, r1
+ 622 05c8 FEFFFFEB 		bl	strlen
+ 623 05cc 0010A0E1 		mov	r1, r0
+ 624 05d0 0400A0E1 		mov	r0, r4
+ 625 05d4 FEFFFFEB 		bl	_ZN7cString4initEi
+ 626 05d8 0400A0E1 		mov	r0, r4
+ 627 05dc 0510A0E1 		mov	r1, r5
+ 628 05e0 3040BDE8 		ldmfd	sp!, {r4, r5, lr}
+ 629 05e4 FEFFFFEA 		b	_ZN7cStringaSERKS_
+ 631              		.align	2
+ 632              		.global	_ZN7cStringC1EPKc
+ 634              	_ZN7cStringC1EPKc:
+ 635              		@ args = 0, pretend = 0, frame = 0
+ 636              		@ frame_needed = 0, uses_anonymous_args = 0
+ 637 05e8 30402DE9 		stmfd	sp!, {r4, r5, lr}
+ 638 05ec 0040A0E1 		mov	r4, r0
+ 639 05f0 0100A0E1 		mov	r0, r1
+ 640 05f4 0150A0E1 		mov	r5, r1
+ 641 05f8 FEFFFFEB 		bl	strlen
+ 642 05fc 0010A0E1 		mov	r1, r0
+ 643 0600 0400A0E1 		mov	r0, r4
+ 644 0604 FEFFFFEB 		bl	_ZN7cString4initEi
+ 645 0608 0400A0E1 		mov	r0, r4
+ 646 060c 0510A0E1 		mov	r1, r5
+ 647 0610 3040BDE8 		ldmfd	sp!, {r4, r5, lr}
+ 648 0614 FEFFFFEA 		b	_ZN7cString8copyFromEPKc
+ 650              		.align	2
+ 651              		.global	_ZN7cStringC2EPKc
+ 653              	_ZN7cStringC2EPKc:
+ 654              		@ args = 0, pretend = 0, frame = 0
+ 655              		@ frame_needed = 0, uses_anonymous_args = 0
+ 656 0618 30402DE9 		stmfd	sp!, {r4, r5, lr}
+ 657 061c 0040A0E1 		mov	r4, r0
+ 658 0620 0100A0E1 		mov	r0, r1
+ 659 0624 0150A0E1 		mov	r5, r1
+ 660 0628 FEFFFFEB 		bl	strlen
+ 661 062c 0010A0E1 		mov	r1, r0
+ 662 0630 0400A0E1 		mov	r0, r4
+ 663 0634 FEFFFFEB 		bl	_ZN7cString4initEi
+ 664 0638 0400A0E1 		mov	r0, r4
+ 665 063c 0510A0E1 		mov	r1, r5
+ 666 0640 3040BDE8 		ldmfd	sp!, {r4, r5, lr}
+ 667 0644 FEFFFFEA 		b	_ZN7cString8copyFromEPKc
+ 669              		.align	2
+ 670              		.global	_ZN7cStringC1Ev
+ 672              	_ZN7cStringC1Ev:
+ 673              		@ args = 0, pretend = 0, frame = 0
+ 674              		@ frame_needed = 0, uses_anonymous_args = 0
+ 675              		@ link register save eliminated.
+ 676 0648 1010A0E3 		mov	r1, #16
+ 677 064c FEFFFFEA 		b	_ZN7cString4initEi
+ 679              		.align	2
+ 680              		.global	_ZN7cStringC2Ev
+ 682              	_ZN7cStringC2Ev:
+ 683              		@ args = 0, pretend = 0, frame = 0
+ 684              		@ frame_needed = 0, uses_anonymous_args = 0
+ 685              		@ link register save eliminated.
+ 686 0650 1010A0E3 		mov	r1, #16
+ 687 0654 FEFFFFEA 		b	_ZN7cString4initEi
+ 689              		.align	2
+ 690              		.global	_ZN7cString27ensureMemoryForBackupStringEi
+ 692              	_ZN7cString27ensureMemoryForBackupStringEi:
+ 693              		@ args = 0, pretend = 0, frame = 0
+ 694              		@ frame_needed = 0, uses_anonymous_args = 0
+ 695 0658 083090E5 		ldr	r3, [r0, #8]
+ 696 065c 030051E1 		cmp	r1, r3
+ 697 0660 10402DE9 		stmfd	sp!, {r4, lr}
+ 698 0664 0040A0E1 		mov	r4, r0
+ 699 0668 1080BDD8 		ldmlefd	sp!, {r4, pc}
+ 700 066c 081084E5 		str	r1, [r4, #8]
+ 701 0670 100090E5 		ldr	r0, [r0, #16]
+ 702 0674 FEFFFFEB 		bl	realloc
+ 703 0678 100084E5 		str	r0, [r4, #16]
+ 704 067c 1080BDE8 		ldmfd	sp!, {r4, pc}
+ 706              		.align	2
+ 707              		.global	_ZN7cStringcviEv
+ 709              	_ZN7cStringcviEv:
+ 710              		@ args = 0, pretend = 0, frame = 0
+ 711              		@ frame_needed = 0, uses_anonymous_args = 0
+ 712              		@ link register save eliminated.
+ 713 0680 0C0090E5 		ldr	r0, [r0, #12]
+ 714 0684 FEFFFFEA 		b	atoi
+ 716              		.align	2
+ 717              		.global	_ZN7cString15toBaseNumberStrEi
+ 719              	_ZN7cString15toBaseNumberStrEi:
+ 720              		@ args = 0, pretend = 0, frame = 0
+ 721              		@ frame_needed = 0, uses_anonymous_args = 0
+ 722 0688 70402DE9 		stmfd	sp!, {r4, r5, r6, lr}
+ 723 068c 0040A0E1 		mov	r4, r0
+ 724 0690 0160A0E1 		mov	r6, r1
+ 725 0694 2110A0E3 		mov	r1, #33
+ 726 0698 FEFFFFEB 		bl	_ZN7cString27ensureMemoryForBackupStringEi
+ 727 069c 105094E5 		ldr	r5, [r4, #16]
+ 728 06a0 0030A0E3 		mov	r3, #0
+ 729 06a4 0030C5E5 		strb	r3, [r5, #0]
+ 730 06a8 0400A0E1 		mov	r0, r4
+ 731 06ac FEFFFFEB 		bl	_ZN7cString5isIntEv
+ 732 06b0 000050E3 		cmp	r0, #0
+ 733 06b4 0600000A 		beq	.L129
+ 734 06b8 0C0094E5 		ldr	r0, [r4, #12]
+ 735 06bc FEFFFFEB 		bl	atoi
+ 736 06c0 0520A0E1 		mov	r2, r5
+ 737 06c4 0010A0E1 		mov	r1, r0
+ 738 06c8 0630A0E1 		mov	r3, r6
+ 739 06cc 0400A0E1 		mov	r0, r4
+ 740 06d0 FEFFFFEB 		bl	_ZN7cString4itoaEiPci
+ 741              	.L129:
+ 742 06d4 0500A0E1 		mov	r0, r5
+ 743 06d8 7080BDE8 		ldmfd	sp!, {r4, r5, r6, pc}
+ 745              		.align	2
+ 746              		.global	_ZN7cStringeqEi
+ 748              	_ZN7cStringeqEi:
+ 749              		@ args = 0, pretend = 0, frame = 0
+ 750              		@ frame_needed = 0, uses_anonymous_args = 0
+ 751 06dc 10402DE9 		stmfd	sp!, {r4, lr}
+ 752 06e0 0C0090E5 		ldr	r0, [r0, #12]
+ 753 06e4 0140A0E1 		mov	r4, r1
+ 754 06e8 FEFFFFEB 		bl	atoi
+ 755 06ec 040050E1 		cmp	r0, r4
+ 756 06f0 0000A013 		movne	r0, #0
+ 757 06f4 0100A003 		moveq	r0, #1
+ 758 06f8 1080BDE8 		ldmfd	sp!, {r4, pc}
+ 760              		.align	2
+ 761              		.global	_ZN7cStringneEi
+ 763              	_ZN7cStringneEi:
+ 764              		@ args = 0, pretend = 0, frame = 0
+ 765              		@ frame_needed = 0, uses_anonymous_args = 0
+ 766 06fc 10402DE9 		stmfd	sp!, {r4, lr}
+ 767 0700 0C0090E5 		ldr	r0, [r0, #12]
+ 768 0704 0140A0E1 		mov	r4, r1
+ 769 0708 FEFFFFEB 		bl	atoi
+ 770 070c 040050E0 		subs	r0, r0, r4
+ 771 0710 0100A013 		movne	r0, #1
+ 772 0714 1080BDE8 		ldmfd	sp!, {r4, pc}
+ 774              		.align	2
+ 775              		.global	_ZN7cStringmIEi
+ 777              	_ZN7cStringmIEi:
+ 778              		@ args = 0, pretend = 0, frame = 0
+ 779              		@ frame_needed = 0, uses_anonymous_args = 0
+ 780 0718 30402DE9 		stmfd	sp!, {r4, r5, lr}
+ 781 071c 0150A0E1 		mov	r5, r1
+ 782 0720 0040A0E1 		mov	r4, r0
+ 783 0724 FEFFFFEB 		bl	_ZN7cString5isIntEv
+ 784 0728 000050E3 		cmp	r0, #0
+ 785 072c 3080BD08 		ldmeqfd	sp!, {r4, r5, pc}
+ 786 0730 0C0094E5 		ldr	r0, [r4, #12]
+ 787 0734 FEFFFFEB 		bl	atoi
+ 788 0738 001065E0 		rsb	r1, r5, r0
+ 789 073c 0400A0E1 		mov	r0, r4
+ 790 0740 3040BDE8 		ldmfd	sp!, {r4, r5, lr}
+ 791 0744 FEFFFFEA 		b	_ZN7cStringaSEi
+ 793              		.align	2
+ 794              		.global	_ZN7cStringmmEi
+ 796              	_ZN7cStringmmEi:
+ 797              		@ args = 0, pretend = 0, frame = 0
+ 798              		@ frame_needed = 0, uses_anonymous_args = 0
+ 799              		@ link register save eliminated.
+ 800 0748 0110A0E3 		mov	r1, #1
+ 801 074c FEFFFFEA 		b	_ZN7cStringmIEi
+ 803              		.align	2
+ 804              		.global	_ZN7cStringmmEv
+ 806              	_ZN7cStringmmEv:
+ 807              		@ args = 0, pretend = 0, frame = 0
+ 808              		@ frame_needed = 0, uses_anonymous_args = 0
+ 809              		@ link register save eliminated.
+ 810 0750 0110A0E3 		mov	r1, #1
+ 811 0754 FEFFFFEA 		b	_ZN7cStringmIEi
+ 813              		.align	2
+ 814              		.global	_ZN7cStringpLEi
+ 816              	_ZN7cStringpLEi:
+ 817              		@ args = 0, pretend = 0, frame = 0
+ 818              		@ frame_needed = 0, uses_anonymous_args = 0
+ 819 0758 30402DE9 		stmfd	sp!, {r4, r5, lr}
+ 820 075c 0150A0E1 		mov	r5, r1
+ 821 0760 0040A0E1 		mov	r4, r0
+ 822 0764 FEFFFFEB 		bl	_ZN7cString5isIntEv
+ 823 0768 000050E3 		cmp	r0, #0
+ 824 076c 3080BD08 		ldmeqfd	sp!, {r4, r5, pc}
+ 825 0770 0C0094E5 		ldr	r0, [r4, #12]
+ 826 0774 FEFFFFEB 		bl	atoi
+ 827 0778 051080E0 		add	r1, r0, r5
+ 828 077c 0400A0E1 		mov	r0, r4
+ 829 0780 3040BDE8 		ldmfd	sp!, {r4, r5, lr}
+ 830 0784 FEFFFFEA 		b	_ZN7cStringaSEi
+ 832              		.align	2
+ 833              		.global	_ZN7cStringppEi
+ 835              	_ZN7cStringppEi:
+ 836              		@ args = 0, pretend = 0, frame = 0
+ 837              		@ frame_needed = 0, uses_anonymous_args = 0
+ 838              		@ link register save eliminated.
+ 839 0788 0110A0E3 		mov	r1, #1
+ 840 078c FEFFFFEA 		b	_ZN7cStringpLEi
+ 842              		.align	2
+ 843              		.global	_ZN7cStringppEv
+ 845              	_ZN7cStringppEv:
+ 846              		@ args = 0, pretend = 0, frame = 0
+ 847              		@ frame_needed = 0, uses_anonymous_args = 0
+ 848              		@ link register save eliminated.
+ 849 0790 0110A0E3 		mov	r1, #1
+ 850 0794 FEFFFFEA 		b	_ZN7cStringpLEi
+ 852              		.section	.rodata.str1.1
+ 853              	.LC1:
+ 854 0048 256600   		.ascii	"%f\000"
+ 855              		.global	__extendsfdf2
+ 856              		.text
+ 857              		.align	2
+ 858              		.global	_ZN7cStringaSEf
+ 860              	_ZN7cStringaSEf:
+ 861              		@ args = 0, pretend = 0, frame = 32
+ 862              		@ frame_needed = 0, uses_anonymous_args = 0
+ 863 0798 30402DE9 		stmfd	sp!, {r4, r5, lr}
+ 864 079c 0050A0E1 		mov	r5, r0
+ 865 07a0 20D04DE2 		sub	sp, sp, #32
+ 866 07a4 0100A0E1 		mov	r0, r1
+ 867 07a8 FEFFFFEB 		bl	__extendsfdf2
+ 868 07ac 0020A0E1 		mov	r2, r0
+ 869 07b0 0130A0E1 		mov	r3, r1
+ 870 07b4 0D00A0E1 		mov	r0, sp
+ 871 07b8 18109FE5 		ldr	r1, .L151
+ 872 07bc FEFFFFEB 		bl	sprintf
+ 873 07c0 0500A0E1 		mov	r0, r5
+ 874 07c4 0D10A0E1 		mov	r1, sp
+ 875 07c8 0D40A0E1 		mov	r4, sp
+ 876 07cc FEFFFFEB 		bl	_ZN7cString8copyFromEPKc
+ 877 07d0 20D08DE2 		add	sp, sp, #32
+ 878 07d4 3080BDE8 		ldmfd	sp!, {r4, r5, pc}
+ 879              	.L152:
+ 880              		.align	2
+ 881              	.L151:
+ 882 07d8 48000000 		.word	.LC1
+ 884              		.align	2
+ 885              		.global	_ZN7cString9subStringEii
+ 887              	_ZN7cString9subStringEii:
+ 888              		@ args = 0, pretend = 0, frame = 0
+ 889              		@ frame_needed = 0, uses_anonymous_args = 0
+ 890 07dc F0412DE9 		stmfd	sp!, {r4, r5, r6, r7, r8, lr}
+ 891 07e0 104090E5 		ldr	r4, [r0, #16]
+ 892 07e4 0080A0E3 		mov	r8, #0
+ 893 07e8 000051E3 		cmp	r1, #0
+ 894 07ec 000052A3 		cmpge	r2, #0
+ 895 07f0 0050A0E1 		mov	r5, r0
+ 896 07f4 0160A0E1 		mov	r6, r1
+ 897 07f8 0270A0E1 		mov	r7, r2
+ 898 07fc 0080C4E5 		strb	r8, [r4, #0]
+ 899 0800 0D0000DA 		ble	.L154
+ 900 0804 0C0090E5 		ldr	r0, [r0, #12]
+ 901 0808 FEFFFFEB 		bl	strlen
+ 902 080c 000056E1 		cmp	r6, r0
+ 903 0810 090000AA 		bge	.L154
+ 904 0814 0500A0E1 		mov	r0, r5
+ 905 0818 0710A0E1 		mov	r1, r7
+ 906 081c FEFFFFEB 		bl	_ZN7cString27ensureMemoryForBackupStringEi
+ 907 0820 0C1095E5 		ldr	r1, [r5, #12]
+ 908 0824 100095E5 		ldr	r0, [r5, #16]
+ 909 0828 061081E0 		add	r1, r1, r6
+ 910 082c 0720A0E1 		mov	r2, r7
+ 911 0830 FEFFFFEB 		bl	strncpy
+ 912 0834 0780C0E7 		strb	r8, [r0, r7]
+ 913 0838 0040A0E1 		mov	r4, r0
+ 914              	.L154:
+ 915 083c 0400A0E1 		mov	r0, r4
+ 916 0840 F081BDE8 		ldmfd	sp!, {r4, r5, r6, r7, r8, pc}
+ 918              		.align	2
+ 919              		.global	_ZN7cString10eraseAfterEii
+ 921              	_ZN7cString10eraseAfterEii:
+ 922              		@ args = 0, pretend = 0, frame = 0
+ 923              		@ frame_needed = 0, uses_anonymous_args = 0
+ 924 0844 70402DE9 		stmfd	sp!, {r4, r5, r6, lr}
+ 925 0848 0C5090E5 		ldr	r5, [r0, #12]
+ 926 084c 0500A0E1 		mov	r0, r5
+ 927 0850 0140A0E1 		mov	r4, r1
+ 928 0854 0260A0E1 		mov	r6, r2
+ 929 0858 FEFFFFEB 		bl	strlen
+ 930 085c 0430E0E1 		mvn	r3, r4
+ 931 0860 A33FA0E1 		mov	r3, r3, lsr #31
+ 932 0864 000054E1 		cmp	r4, r0
+ 933 0868 0030A0A3 		movge	r3, #0
+ 934 086c 000053E3 		cmp	r3, #0
+ 935 0870 7080BD08 		ldmeqfd	sp!, {r4, r5, r6, pc}
+ 936 0874 000056E3 		cmp	r6, #0
+ 937 0878 7080BDD8 		ldmlefd	sp!, {r4, r5, r6, pc}
+ 938 087c 002064E0 		rsb	r2, r4, r0
+ 939 0880 060052E1 		cmp	r2, r6
+ 940 0884 0230A0B1 		movlt	r3, r2
+ 941 0888 0630A0A1 		movge	r3, r6
+ 942 088c 041083E0 		add	r1, r3, r4
+ 943 0890 012082E2 		add	r2, r2, #1
+ 944 0894 011085E0 		add	r1, r5, r1
+ 945 0898 022063E0 		rsb	r2, r3, r2
+ 946 089c 040085E0 		add	r0, r5, r4
+ 947 08a0 7040BDE8 		ldmfd	sp!, {r4, r5, r6, lr}
+ 948 08a4 FEFFFFEA 		b	memmove
+ 950              		.align	2
+ 951              		.global	_ZN7cString11eraseCharAtEi
+ 953              	_ZN7cString11eraseCharAtEi:
+ 954              		@ args = 0, pretend = 0, frame = 0
+ 955              		@ frame_needed = 0, uses_anonymous_args = 0
+ 956              		@ link register save eliminated.
+ 957 08a8 0120A0E3 		mov	r2, #1
+ 958 08ac FEFFFFEA 		b	_ZN7cString10eraseAfterEii
+ 960              		.align	2
+ 961              		.global	_ZN7cString20eraseAllSpecialCharsEv
+ 963              	_ZN7cString20eraseAllSpecialCharsEv:
+ 964              		@ args = 0, pretend = 0, frame = 0
+ 965              		@ frame_needed = 0, uses_anonymous_args = 0
+ 966 08b0 70402DE9 		stmfd	sp!, {r4, r5, r6, lr}
+ 967 08b4 0060A0E1 		mov	r6, r0
+ 968 08b8 0040A0E3 		mov	r4, #0
+ 969 08bc 080000EA 		b	.L162
+ 970              	.L164:
+ 971 08c0 0430D5E7 		ldrb	r3, [r5, r4]	@ zero_extendqisi2
+ 972 08c4 302043E2 		sub	r2, r3, #48
+ 973 08c8 413043E2 		sub	r3, r3, #65
+ 974 08cc 390053E3 		cmp	r3, #57
+ 975 08d0 09005283 		cmphi	r2, #9
+ 976 08d4 0410A081 		movhi	r1, r4
+ 977 08d8 0600A081 		movhi	r0, r6
+ 978 08dc FEFFFF8B 		blhi	_ZN7cString11eraseCharAtEi
+ 979              	.L163:
+ 980 08e0 014084E2 		add	r4, r4, #1
+ 981              	.L162:
+ 982 08e4 0C5096E5 		ldr	r5, [r6, #12]
+ 983 08e8 0500A0E1 		mov	r0, r5
+ 984 08ec FEFFFFEB 		bl	strlen
+ 985 08f0 000054E1 		cmp	r4, r0
+ 986 08f4 F1FFFFBA 		blt	.L164
+ 987 08f8 7080BDE8 		ldmfd	sp!, {r4, r5, r6, pc}
+ 989              		.align	2
+ 990              		.global	_ZN7cString10eraseFirstEi
+ 992              	_ZN7cString10eraseFirstEi:
+ 993              		@ args = 0, pretend = 0, frame = 0
+ 994              		@ frame_needed = 0, uses_anonymous_args = 0
+ 995 08fc 30402DE9 		stmfd	sp!, {r4, r5, lr}
+ 996 0900 0C5090E5 		ldr	r5, [r0, #12]
+ 997 0904 0500A0E1 		mov	r0, r5
+ 998 0908 0140A0E1 		mov	r4, r1
+ 999 090c FEFFFFEB 		bl	strlen
+ 1000 0910 000054E3 		cmp	r4, #0
+ 1001 0914 0030A0D3 		movle	r3, #0
+ 1002 0918 0130A0C3 		movgt	r3, #1
+ 1003 091c 000054E1 		cmp	r4, r0
+ 1004 0920 0030A0C3 		movgt	r3, #0
+ 1005 0924 000053E3 		cmp	r3, #0
+ 1006 0928 3080BD08 		ldmeqfd	sp!, {r4, r5, pc}
+ 1007 092c 012080E2 		add	r2, r0, #1
+ 1008 0930 022064E0 		rsb	r2, r4, r2
+ 1009 0934 0500A0E1 		mov	r0, r5
+ 1010 0938 041085E0 		add	r1, r5, r4
+ 1011 093c 3040BDE8 		ldmfd	sp!, {r4, r5, lr}
+ 1012 0940 FEFFFFEA 		b	memmove
+ 1014              		.align	2
+ 1015              		.global	_ZN7cString9trimStartEPKc
+ 1017              	_ZN7cString9trimStartEPKc:
+ 1018              		@ args = 0, pretend = 0, frame = 0
+ 1019              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1020 0944 F0412DE9 		stmfd	sp!, {r4, r5, r6, r7, r8, lr}
+ 1021 0948 0C6090E5 		ldr	r6, [r0, #12]
+ 1022 094c 0080A0E1 		mov	r8, r0
+ 1023 0950 0600A0E1 		mov	r0, r6
+ 1024 0954 0150A0E1 		mov	r5, r1
+ 1025 0958 FEFFFFEB 		bl	strlen
+ 1026 095c 0040A0E3 		mov	r4, #0
+ 1027 0960 0070A0E1 		mov	r7, r0
+ 1028 0964 0C0000EA 		b	.L170
+ 1029              	.L175:
+ 1030 0968 0500A0E1 		mov	r0, r5
+ 1031 096c FEFFFFEB 		bl	strlen
+ 1032 0970 0010A0E3 		mov	r1, #0
+ 1033 0974 050000EA 		b	.L171
+ 1034              	.L173:
+ 1035 0978 0120D5E7 		ldrb	r2, [r5, r1]	@ zero_extendqisi2
+ 1036 097c 0430D6E7 		ldrb	r3, [r6, r4]	@ zero_extendqisi2
+ 1037 0980 030052E1 		cmp	r2, r3
+ 1038 0984 01408402 		addeq	r4, r4, #1
+ 1039 0988 0300000A 		beq	.L170
+ 1040              	.L172:
+ 1041 098c 011081E2 		add	r1, r1, #1
+ 1042              	.L171:
+ 1043 0990 000051E1 		cmp	r1, r0
+ 1044 0994 F7FFFFBA 		blt	.L173
+ 1045 0998 010000EA 		b	.L174
+ 1046              	.L170:
+ 1047 099c 070054E1 		cmp	r4, r7
+ 1048 09a0 F0FFFFBA 		blt	.L175
+ 1049              	.L174:
+ 1050 09a4 000054E3 		cmp	r4, #0
+ 1051 09a8 F081BD08 		ldmeqfd	sp!, {r4, r5, r6, r7, r8, pc}
+ 1052 09ac 0800A0E1 		mov	r0, r8
+ 1053 09b0 0410A0E1 		mov	r1, r4
+ 1054 09b4 F041BDE8 		ldmfd	sp!, {r4, r5, r6, r7, r8, lr}
+ 1055 09b8 FEFFFFEA 		b	_ZN7cString10eraseFirstEi
+ 1057              		.align	2
+ 1058              		.global	_ZN7cString8insertAtEiPKc
+ 1060              	_ZN7cString8insertAtEiPKc:
+ 1061              		@ args = 0, pretend = 0, frame = 0
+ 1062              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1063 09bc F0412DE9 		stmfd	sp!, {r4, r5, r6, r7, r8, lr}
+ 1064 09c0 0070A0E1 		mov	r7, r0
+ 1065 09c4 0200A0E1 		mov	r0, r2
+ 1066 09c8 0150A0E1 		mov	r5, r1
+ 1067 09cc 0280A0E1 		mov	r8, r2
+ 1068 09d0 FEFFFFEB 		bl	strlen
+ 1069 09d4 0060A0E1 		mov	r6, r0
+ 1070 09d8 0610A0E1 		mov	r1, r6
+ 1071 09dc 0700A0E1 		mov	r0, r7
+ 1072 09e0 FEFFFFEB 		bl	_ZN7cString26ensureMemoryToInsertNCharsEi
+ 1073 09e4 000055E3 		cmp	r5, #0
+ 1074 09e8 F081BDB8 		ldmltfd	sp!, {r4, r5, r6, r7, r8, pc}
+ 1075 09ec 0C4097E5 		ldr	r4, [r7, #12]
+ 1076 09f0 0400A0E1 		mov	r0, r4
+ 1077 09f4 FEFFFFEB 		bl	strlen
+ 1078 09f8 000055E1 		cmp	r5, r0
+ 1079 09fc F081BDC8 		ldmgtfd	sp!, {r4, r5, r6, r7, r8, pc}
+ 1080 0a00 000056E3 		cmp	r6, #0
+ 1081 0a04 F081BDD8 		ldmlefd	sp!, {r4, r5, r6, r7, r8, pc}
+ 1082 0a08 012080E2 		add	r2, r0, #1
+ 1083 0a0c 060085E0 		add	r0, r5, r6
+ 1084 0a10 051084E0 		add	r1, r4, r5
+ 1085 0a14 022065E0 		rsb	r2, r5, r2
+ 1086 0a18 000084E0 		add	r0, r4, r0
+ 1087 0a1c FEFFFFEB 		bl	memmove
+ 1088 0a20 0C0097E5 		ldr	r0, [r7, #12]
+ 1089 0a24 0810A0E1 		mov	r1, r8
+ 1090 0a28 050080E0 		add	r0, r0, r5
+ 1091 0a2c 0620A0E1 		mov	r2, r6
+ 1092 0a30 F041BDE8 		ldmfd	sp!, {r4, r5, r6, r7, r8, lr}
+ 1093 0a34 FEFFFFEA 		b	memcpy
+ 1095              		.align	2
+ 1096              		.global	_ZN7cString11insertAtBegEPKc
+ 1098              	_ZN7cString11insertAtBegEPKc:
+ 1099              		@ args = 0, pretend = 0, frame = 0
+ 1100              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1101              		@ link register save eliminated.
+ 1102 0a38 0120A0E1 		mov	r2, r1
+ 1103 0a3c 0010A0E3 		mov	r1, #0
+ 1104 0a40 FEFFFFEA 		b	_ZN7cString8insertAtEiPKc
+ 1106              		.align	2
+ 1107              		.global	_ZN7cString7countOfEPKc
+ 1109              	_ZN7cString7countOfEPKc:
+ 1110              		@ args = 0, pretend = 0, frame = 0
+ 1111              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1112 0a44 70402DE9 		stmfd	sp!, {r4, r5, r6, lr}
+ 1113 0a48 0040A0E1 		mov	r4, r0
+ 1114 0a4c 0100A0E1 		mov	r0, r1
+ 1115 0a50 0150A0E1 		mov	r5, r1
+ 1116 0a54 FEFFFFEB 		bl	strlen
+ 1117 0a58 0510A0E1 		mov	r1, r5
+ 1118 0a5c 0060A0E1 		mov	r6, r0
+ 1119 0a60 0C0094E5 		ldr	r0, [r4, #12]
+ 1120 0a64 FEFFFFEB 		bl	strstr
+ 1121 0a68 0040A0E3 		mov	r4, #0
+ 1122 0a6c 0030A0E1 		mov	r3, r0
+ 1123 0a70 020000EA 		b	.L184
+ 1124              	.L185:
+ 1125 0a74 FEFFFFEB 		bl	strstr
+ 1126 0a78 014084E2 		add	r4, r4, #1
+ 1127 0a7c 0030A0E1 		mov	r3, r0
+ 1128              	.L184:
+ 1129 0a80 000053E3 		cmp	r3, #0
+ 1130 0a84 060083E0 		add	r0, r3, r6
+ 1131 0a88 0510A0E1 		mov	r1, r5
+ 1132 0a8c F8FFFF1A 		bne	.L185
+ 1133 0a90 0400A0E1 		mov	r0, r4
+ 1134 0a94 7080BDE8 		ldmfd	sp!, {r4, r5, r6, pc}
+ 1136              		.section	.rodata.str1.1
+ 1137              	.LC2:
+ 1138 004b 2E00     		.ascii	".\000"
+ 1139              		.text
+ 1140              		.align	2
+ 1141              		.global	_ZN7cString7isFloatEv
+ 1143              	_ZN7cString7isFloatEv:
+ 1144              		@ args = 0, pretend = 0, frame = 0
+ 1145              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1146 0a98 30402DE9 		stmfd	sp!, {r4, r5, lr}
+ 1147 0a9c 0040A0E1 		mov	r4, r0
+ 1148 0aa0 0C0090E5 		ldr	r0, [r0, #12]
+ 1149 0aa4 FEFFFFEB 		bl	strlen
+ 1150 0aa8 64109FE5 		ldr	r1, .L193
+ 1151 0aac 0050A0E1 		mov	r5, r0
+ 1152 0ab0 0400A0E1 		mov	r0, r4
+ 1153 0ab4 FEFFFFEB 		bl	_ZN7cString7countOfEPKc
+ 1154 0ab8 010050E3 		cmp	r0, #1
+ 1155 0abc 0000A0C3 		movgt	r0, #0
+ 1156 0ac0 0100A0D3 		movle	r0, #1
+ 1157 0ac4 000050E3 		cmp	r0, #0
+ 1158 0ac8 3080BD08 		ldmeqfd	sp!, {r4, r5, pc}
+ 1159 0acc 0C2094E5 		ldr	r2, [r4, #12]
+ 1160 0ad0 0030D2E5 		ldrb	r3, [r2, #0]	@ zero_extendqisi2
+ 1161 0ad4 2D0053E3 		cmp	r3, #45
+ 1162 0ad8 0010A013 		movne	r1, #0
+ 1163 0adc 0110A003 		moveq	r1, #1
+ 1164 0ae0 01C082E0 		add	ip, r2, r1
+ 1165 0ae4 060000EA 		b	.L189
+ 1166              	.L191:
+ 1167 0ae8 0120DCE4 		ldrb	r2, [ip], #1	@ zero_extendqisi2
+ 1168 0aec 303042E2 		sub	r3, r2, #48
+ 1169 0af0 2E0052E3 		cmp	r2, #46
+ 1170 0af4 09005313 		cmpne	r3, #9
+ 1171 0af8 0100009A 		bls	.L189
+ 1172 0afc 0000A0E3 		mov	r0, #0
+ 1173 0b00 3080BDE8 		ldmfd	sp!, {r4, r5, pc}
+ 1174              	.L189:
+ 1175 0b04 050051E1 		cmp	r1, r5
+ 1176 0b08 011081E2 		add	r1, r1, #1
+ 1177 0b0c F5FFFFBA 		blt	.L191
+ 1178 0b10 3080BDE8 		ldmfd	sp!, {r4, r5, pc}
+ 1179              	.L194:
+ 1180              		.align	2
+ 1181              	.L193:
+ 1182 0b14 4B000000 		.word	.LC2
+ 1184              		.global	__truncdfsf2
+ 1185              		.global	__subsf3
+ 1186              		.align	2
+ 1187              		.global	_ZN7cStringmIEf
+ 1189              	_ZN7cStringmIEf:
+ 1190              		@ args = 0, pretend = 0, frame = 0
+ 1191              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1192 0b18 30402DE9 		stmfd	sp!, {r4, r5, lr}
+ 1193 0b1c 0150A0E1 		mov	r5, r1
+ 1194 0b20 0040A0E1 		mov	r4, r0
+ 1195 0b24 FEFFFFEB 		bl	_ZN7cString7isFloatEv
+ 1196 0b28 000050E3 		cmp	r0, #0
+ 1197 0b2c 3080BD08 		ldmeqfd	sp!, {r4, r5, pc}
+ 1198 0b30 0C0094E5 		ldr	r0, [r4, #12]
+ 1199 0b34 FEFFFFEB 		bl	atof
+ 1200 0b38 FEFFFFEB 		bl	__truncdfsf2
+ 1201 0b3c 0510A0E1 		mov	r1, r5
+ 1202 0b40 FEFFFFEB 		bl	__subsf3
+ 1203 0b44 0010A0E1 		mov	r1, r0
+ 1204 0b48 0400A0E1 		mov	r0, r4
+ 1205 0b4c 3040BDE8 		ldmfd	sp!, {r4, r5, lr}
+ 1206 0b50 FEFFFFEA 		b	_ZN7cStringaSEf
+ 1208              		.global	__addsf3
+ 1209              		.align	2
+ 1210              		.global	_ZN7cStringpLEf
+ 1212              	_ZN7cStringpLEf:
+ 1213              		@ args = 0, pretend = 0, frame = 0
+ 1214              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1215 0b54 30402DE9 		stmfd	sp!, {r4, r5, lr}
+ 1216 0b58 0150A0E1 		mov	r5, r1
+ 1217 0b5c 0040A0E1 		mov	r4, r0
+ 1218 0b60 FEFFFFEB 		bl	_ZN7cString7isFloatEv
+ 1219 0b64 000050E3 		cmp	r0, #0
+ 1220 0b68 3080BD08 		ldmeqfd	sp!, {r4, r5, pc}
+ 1221 0b6c 0C0094E5 		ldr	r0, [r4, #12]
+ 1222 0b70 FEFFFFEB 		bl	atof
+ 1223 0b74 FEFFFFEB 		bl	__truncdfsf2
+ 1224 0b78 0510A0E1 		mov	r1, r5
+ 1225 0b7c FEFFFFEB 		bl	__addsf3
+ 1226 0b80 0010A0E1 		mov	r1, r0
+ 1227 0b84 0400A0E1 		mov	r0, r4
+ 1228 0b88 3040BDE8 		ldmfd	sp!, {r4, r5, lr}
+ 1229 0b8c FEFFFFEA 		b	_ZN7cStringaSEf
+ 1231              		.align	2
+ 1232              		.global	_ZN7cString11lastIndexOfEPKc
+ 1234              	_ZN7cString11lastIndexOfEPKc:
+ 1235              		@ args = 0, pretend = 0, frame = 0
+ 1236              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1237 0b90 F0402DE9 		stmfd	sp!, {r4, r5, r6, r7, lr}
+ 1238 0b94 0040A0E1 		mov	r4, r0
+ 1239 0b98 0100A0E1 		mov	r0, r1
+ 1240 0b9c 0150A0E1 		mov	r5, r1
+ 1241 0ba0 FEFFFFEB 		bl	strlen
+ 1242 0ba4 0C6094E5 		ldr	r6, [r4, #12]
+ 1243 0ba8 0070A0E1 		mov	r7, r0
+ 1244 0bac 0510A0E1 		mov	r1, r5
+ 1245 0bb0 0600A0E1 		mov	r0, r6
+ 1246 0bb4 FEFFFFEB 		bl	strstr
+ 1247 0bb8 0040A0E1 		mov	r4, r0
+ 1248 0bbc 0030A0E1 		mov	r3, r0
+ 1249 0bc0 020000EA 		b	.L202
+ 1250              	.L203:
+ 1251 0bc4 FEFFFFEB 		bl	strstr
+ 1252 0bc8 0430A0E1 		mov	r3, r4
+ 1253 0bcc 0040A0E1 		mov	r4, r0
+ 1254              	.L202:
+ 1255 0bd0 000054E3 		cmp	r4, #0
+ 1256 0bd4 070084E0 		add	r0, r4, r7
+ 1257 0bd8 0510A0E1 		mov	r1, r5
+ 1258 0bdc F8FFFF1A 		bne	.L203
+ 1259 0be0 000053E3 		cmp	r3, #0
+ 1260 0be4 0000E003 		mvneq	r0, #0
+ 1261 0be8 03006610 		rsbne	r0, r6, r3
+ 1262 0bec F080BDE8 		ldmfd	sp!, {r4, r5, r6, r7, pc}
+ 1264              		.section	.rodata.str1.1
+ 1265              	.LC3:
+ 1266 004d 3A00     		.ascii	":\000"
+ 1267              		.text
+ 1268              		.align	2
+ 1269              		.global	_ZN7cString15checksum_VerifyEv
+ 1271              	_ZN7cString15checksum_VerifyEv:
+ 1272              		@ args = 0, pretend = 0, frame = 0
+ 1273              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1274 0bf0 70402DE9 		stmfd	sp!, {r4, r5, r6, lr}
+ 1275 0bf4 5C109FE5 		ldr	r1, .L211
+ 1276 0bf8 0050A0E1 		mov	r5, r0
+ 1277 0bfc FEFFFFEB 		bl	_ZN7cString11lastIndexOfEPKc
+ 1278 0c00 010070E3 		cmn	r0, #1
+ 1279 0c04 0060A0E1 		mov	r6, r0
+ 1280 0c08 0000A003 		moveq	r0, #0
+ 1281 0c0c 7080BD08 		ldmeqfd	sp!, {r4, r5, r6, pc}
+ 1282 0c10 0C2095E5 		ldr	r2, [r5, #12]
+ 1283 0c14 0030A0E3 		mov	r3, #0
+ 1284 0c18 0630C2E7 		strb	r3, [r2, r6]
+ 1285 0c1c 0C3095E5 		ldr	r3, [r5, #12]
+ 1286 0c20 011086E2 		add	r1, r6, #1
+ 1287 0c24 011083E0 		add	r1, r3, r1
+ 1288 0c28 0500A0E1 		mov	r0, r5
+ 1289 0c2c FEFFFFEB 		bl	_ZN7cString17hexStrDigitsToIntEPc
+ 1290 0c30 0040A0E1 		mov	r4, r0
+ 1291 0c34 0500A0E1 		mov	r0, r5
+ 1292 0c38 FEFFFFEB 		bl	_ZN7cString12checksum_GetEv
+ 1293 0c3c 0C2095E5 		ldr	r2, [r5, #12]
+ 1294 0c40 3A30A0E3 		mov	r3, #58
+ 1295 0c44 0630C2E7 		strb	r3, [r2, r6]
+ 1296 0c48 000054E1 		cmp	r4, r0
+ 1297 0c4c 0000A013 		movne	r0, #0
+ 1298 0c50 0100A003 		moveq	r0, #1
+ 1299 0c54 7080BDE8 		ldmfd	sp!, {r4, r5, r6, pc}
+ 1300              	.L212:
+ 1301              		.align	2
+ 1302              	.L211:
+ 1303 0c58 4D000000 		.word	.LC3
+ 1305              		.align	2
+ 1306              		.global	_ZN7cString15checksum_RemoveEv
+ 1308              	_ZN7cString15checksum_RemoveEv:
+ 1309              		@ args = 0, pretend = 0, frame = 0
+ 1310              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1311 0c5c 10402DE9 		stmfd	sp!, {r4, lr}
+ 1312 0c60 14109FE5 		ldr	r1, .L215
+ 1313 0c64 0040A0E1 		mov	r4, r0
+ 1314 0c68 FEFFFFEB 		bl	_ZN7cString11lastIndexOfEPKc
+ 1315 0c6c 0010A0E1 		mov	r1, r0
+ 1316 0c70 0400A0E1 		mov	r0, r4
+ 1317 0c74 1040BDE8 		ldmfd	sp!, {r4, lr}
+ 1318 0c78 FEFFFFEA 		b	_ZN7cString13eraseAllAfterEi
+ 1319              	.L216:
+ 1320              		.align	2
+ 1321              	.L215:
+ 1322 0c7c 4D000000 		.word	.LC3
+ 1324              		.align	2
+ 1325              		.global	_ZN7cString11replaceLastEPKcS1_
+ 1327              	_ZN7cString11replaceLastEPKcS1_:
+ 1328              		@ args = 0, pretend = 0, frame = 0
+ 1329              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1330 0c80 F0402DE9 		stmfd	sp!, {r4, r5, r6, r7, lr}
+ 1331 0c84 0270A0E1 		mov	r7, r2
+ 1332 0c88 0060A0E1 		mov	r6, r0
+ 1333 0c8c 0150A0E1 		mov	r5, r1
+ 1334 0c90 FEFFFFEB 		bl	_ZN7cString11lastIndexOfEPKc
+ 1335 0c94 010070E3 		cmn	r0, #1
+ 1336 0c98 0040A0E1 		mov	r4, r0
+ 1337 0c9c 0000A003 		moveq	r0, #0
+ 1338 0ca0 F080BD08 		ldmeqfd	sp!, {r4, r5, r6, r7, pc}
+ 1339 0ca4 0500A0E1 		mov	r0, r5
+ 1340 0ca8 FEFFFFEB 		bl	strlen
+ 1341 0cac 0410A0E1 		mov	r1, r4
+ 1342 0cb0 0020A0E1 		mov	r2, r0
+ 1343 0cb4 0600A0E1 		mov	r0, r6
+ 1344 0cb8 FEFFFFEB 		bl	_ZN7cString10eraseAfterEii
+ 1345 0cbc 0600A0E1 		mov	r0, r6
+ 1346 0cc0 0410A0E1 		mov	r1, r4
+ 1347 0cc4 0720A0E1 		mov	r2, r7
+ 1348 0cc8 FEFFFFEB 		bl	_ZN7cString8insertAtEiPKc
+ 1349 0ccc 0100A0E3 		mov	r0, #1
+ 1350 0cd0 F080BDE8 		ldmfd	sp!, {r4, r5, r6, r7, pc}
+ 1352              		.align	2
+ 1353              		.global	_ZN7cString12firstIndexOfEPKc
+ 1355              	_ZN7cString12firstIndexOfEPKc:
+ 1356              		@ args = 0, pretend = 0, frame = 0
+ 1357              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1358 0cd4 10402DE9 		stmfd	sp!, {r4, lr}
+ 1359 0cd8 0C4090E5 		ldr	r4, [r0, #12]
+ 1360 0cdc 0400A0E1 		mov	r0, r4
+ 1361 0ce0 FEFFFFEB 		bl	strstr
+ 1362 0ce4 000050E3 		cmp	r0, #0
+ 1363 0ce8 0000E003 		mvneq	r0, #0
+ 1364 0cec 00006410 		rsbne	r0, r4, r0
+ 1365 0cf0 1080BDE8 		ldmfd	sp!, {r4, pc}
+ 1367              		.align	2
+ 1368              		.global	_ZN7cString9subStringEcc
+ 1370              	_ZN7cString9subStringEcc:
+ 1371              		@ args = 0, pretend = 0, frame = 4
+ 1372              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1373 0cf4 70402DE9 		stmfd	sp!, {r4, r5, r6, lr}
+ 1374 0cf8 0040A0E3 		mov	r4, #0
+ 1375 0cfc 04D04DE2 		sub	sp, sp, #4
+ 1376 0d00 B240CDE1 		strh	r4, [sp, #2]	@ movhi
+ 1377 0d04 B040CDE1 		strh	r4, [sp, #0]	@ movhi
+ 1378 0d08 0210CDE5 		strb	r1, [sp, #2]
+ 1379 0d0c 0020CDE5 		strb	r2, [sp, #0]
+ 1380 0d10 02108DE2 		add	r1, sp, #2
+ 1381 0d14 0060A0E1 		mov	r6, r0
+ 1382 0d18 FEFFFFEB 		bl	_ZN7cString12firstIndexOfEPKc
+ 1383 0d1c 0D10A0E1 		mov	r1, sp
+ 1384 0d20 0050A0E1 		mov	r5, r0
+ 1385 0d24 0600A0E1 		mov	r0, r6
+ 1386 0d28 FEFFFFEB 		bl	_ZN7cString11lastIndexOfEPKc
+ 1387 0d2c 0030A0E1 		mov	r3, r0
+ 1388 0d30 100096E5 		ldr	r0, [r6, #16]
+ 1389 0d34 040055E1 		cmp	r5, r4
+ 1390 0d38 040053A1 		cmpge	r3, r4
+ 1391 0d3c 0040C0E5 		strb	r4, [r0, #0]
+ 1392 0d40 012065A2 		rsbge	r2, r5, #1
+ 1393 0d44 032082A0 		addge	r2, r2, r3
+ 1394 0d48 0600A0A1 		movge	r0, r6
+ 1395 0d4c 0510A0A1 		movge	r1, r5
+ 1396 0d50 FEFFFFAB 		blge	_ZN7cString9subStringEii
+ 1397              	.L226:
+ 1398 0d54 04D08DE2 		add	sp, sp, #4
+ 1399 0d58 7080BDE8 		ldmfd	sp!, {r4, r5, r6, pc}
+ 1401              		.align	2
+ 1402              		.global	_ZN7cString9subStringEPKci
+ 1404              	_ZN7cString9subStringEPKci:
+ 1405              		@ args = 0, pretend = 0, frame = 0
+ 1406              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1407 0d5c 30402DE9 		stmfd	sp!, {r4, r5, lr}
+ 1408 0d60 0250A0E1 		mov	r5, r2
+ 1409 0d64 0040A0E1 		mov	r4, r0
+ 1410 0d68 FEFFFFEB 		bl	_ZN7cString12firstIndexOfEPKc
+ 1411 0d6c 0520A0E1 		mov	r2, r5
+ 1412 0d70 0010A0E1 		mov	r1, r0
+ 1413 0d74 0400A0E1 		mov	r0, r4
+ 1414 0d78 3040BDE8 		ldmfd	sp!, {r4, r5, lr}
+ 1415 0d7c FEFFFFEA 		b	_ZN7cString9subStringEii
+ 1417              		.align	2
+ 1418              		.global	_ZN7cString9subStringEci
+ 1420              	_ZN7cString9subStringEci:
+ 1421              		@ args = 0, pretend = 0, frame = 4
+ 1422              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1423 0d80 04E02DE5 		str	lr, [sp, #-4]!
+ 1424 0d84 04D04DE2 		sub	sp, sp, #4
+ 1425 0d88 04308DE2 		add	r3, sp, #4
+ 1426 0d8c 00C0A0E3 		mov	ip, #0	@ movhi
+ 1427 0d90 B2C0CDE1 		strh	ip, [sp, #2]	@ movhi
+ 1428 0d94 021063E5 		strb	r1, [r3, #-2]!
+ 1429 0d98 0310A0E1 		mov	r1, r3
+ 1430 0d9c FEFFFFEB 		bl	_ZN7cString9subStringEPKci
+ 1431 0da0 04D08DE2 		add	sp, sp, #4
+ 1432 0da4 0080BDE8 		ldmfd	sp!, {pc}
+ 1434              		.align	2
+ 1435              		.global	_ZN7cString9subStringEPKc
+ 1437              	_ZN7cString9subStringEPKc:
+ 1438              		@ args = 0, pretend = 0, frame = 0
+ 1439              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1440 0da8 10402DE9 		stmfd	sp!, {r4, lr}
+ 1441 0dac 0040A0E1 		mov	r4, r0
+ 1442 0db0 FEFFFFEB 		bl	_ZN7cString12firstIndexOfEPKc
+ 1443 0db4 0010A0E1 		mov	r1, r0
+ 1444 0db8 0400A0E1 		mov	r0, r4
+ 1445 0dbc 1040BDE8 		ldmfd	sp!, {r4, lr}
+ 1446 0dc0 FEFFFFEA 		b	_ZN7cString9subStringEi
+ 1448              		.align	2
+ 1449              		.global	_ZN7cString9subStringEc
+ 1451              	_ZN7cString9subStringEc:
+ 1452              		@ args = 0, pretend = 0, frame = 4
+ 1453              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1454 0dc4 04E02DE5 		str	lr, [sp, #-4]!
+ 1455 0dc8 04D04DE2 		sub	sp, sp, #4
+ 1456 0dcc 04308DE2 		add	r3, sp, #4
+ 1457 0dd0 0020A0E3 		mov	r2, #0	@ movhi
+ 1458 0dd4 B220CDE1 		strh	r2, [sp, #2]	@ movhi
+ 1459 0dd8 021063E5 		strb	r1, [r3, #-2]!
+ 1460 0ddc 0310A0E1 		mov	r1, r3
+ 1461 0de0 FEFFFFEB 		bl	_ZN7cString9subStringEPKc
+ 1462 0de4 04D08DE2 		add	sp, sp, #4
+ 1463 0de8 0080BDE8 		ldmfd	sp!, {pc}
+ 1465              		.align	2
+ 1466              		.global	_ZN7cString10replaceAllEPKcS1_
+ 1468              	_ZN7cString10replaceAllEPKcS1_:
+ 1469              		@ args = 0, pretend = 0, frame = 0
+ 1470              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1471 0dec F0412DE9 		stmfd	sp!, {r4, r5, r6, r7, r8, lr}
+ 1472 0df0 0060A0E1 		mov	r6, r0
+ 1473 0df4 0170A0E1 		mov	r7, r1
+ 1474 0df8 0280A0E1 		mov	r8, r2
+ 1475 0dfc 0050A0E3 		mov	r5, #0
+ 1476 0e00 090000EA 		b	.L237
+ 1477              	.L238:
+ 1478 0e04 FEFFFFEB 		bl	strlen
+ 1479 0e08 0410A0E1 		mov	r1, r4
+ 1480 0e0c 0020A0E1 		mov	r2, r0
+ 1481 0e10 0600A0E1 		mov	r0, r6
+ 1482 0e14 FEFFFFEB 		bl	_ZN7cString10eraseAfterEii
+ 1483 0e18 0600A0E1 		mov	r0, r6
+ 1484 0e1c 0410A0E1 		mov	r1, r4
+ 1485 0e20 0820A0E1 		mov	r2, r8
+ 1486 0e24 FEFFFFEB 		bl	_ZN7cString8insertAtEiPKc
+ 1487 0e28 015085E2 		add	r5, r5, #1
+ 1488              	.L237:
+ 1489 0e2c 0710A0E1 		mov	r1, r7
+ 1490 0e30 0600A0E1 		mov	r0, r6
+ 1491 0e34 FEFFFFEB 		bl	_ZN7cString12firstIndexOfEPKc
+ 1492 0e38 0040A0E1 		mov	r4, r0
+ 1493 0e3c 010074E3 		cmn	r4, #1
+ 1494 0e40 0700A0E1 		mov	r0, r7
+ 1495 0e44 EEFFFF1A 		bne	.L238
+ 1496 0e48 0500A0E1 		mov	r0, r5
+ 1497 0e4c F081BDE8 		ldmfd	sp!, {r4, r5, r6, r7, r8, pc}
+ 1499              		.align	2
+ 1500              		.global	_ZN7cString12replaceFirstEPKcS1_
+ 1502              	_ZN7cString12replaceFirstEPKcS1_:
+ 1503              		@ args = 0, pretend = 0, frame = 0
+ 1504              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1505 0e50 F0402DE9 		stmfd	sp!, {r4, r5, r6, r7, lr}
+ 1506 0e54 0270A0E1 		mov	r7, r2
+ 1507 0e58 0060A0E1 		mov	r6, r0
+ 1508 0e5c 0150A0E1 		mov	r5, r1
+ 1509 0e60 FEFFFFEB 		bl	_ZN7cString12firstIndexOfEPKc
+ 1510 0e64 010070E3 		cmn	r0, #1
+ 1511 0e68 0040A0E1 		mov	r4, r0
+ 1512 0e6c 0000A003 		moveq	r0, #0
+ 1513 0e70 F080BD08 		ldmeqfd	sp!, {r4, r5, r6, r7, pc}
+ 1514 0e74 0500A0E1 		mov	r0, r5
+ 1515 0e78 FEFFFFEB 		bl	strlen
+ 1516 0e7c 0410A0E1 		mov	r1, r4
+ 1517 0e80 0020A0E1 		mov	r2, r0
+ 1518 0e84 0600A0E1 		mov	r0, r6
+ 1519 0e88 FEFFFFEB 		bl	_ZN7cString10eraseAfterEii
+ 1520 0e8c 0600A0E1 		mov	r0, r6
+ 1521 0e90 0410A0E1 		mov	r1, r4
+ 1522 0e94 0720A0E1 		mov	r2, r7
+ 1523 0e98 FEFFFFEB 		bl	_ZN7cString8insertAtEiPKc
+ 1524 0e9c 0100A0E3 		mov	r0, #1
+ 1525 0ea0 F080BDE8 		ldmfd	sp!, {r4, r5, r6, r7, pc}
+ 1527              		.align	2
+ 1528              		.global	_ZN7cString5eraseEPKc
+ 1530              	_ZN7cString5eraseEPKc:
+ 1531              		@ args = 0, pretend = 0, frame = 0
+ 1532              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1533 0ea4 70402DE9 		stmfd	sp!, {r4, r5, r6, lr}
+ 1534 0ea8 0060A0E1 		mov	r6, r0
+ 1535 0eac 0150A0E1 		mov	r5, r1
+ 1536 0eb0 FEFFFFEB 		bl	_ZN7cString12firstIndexOfEPKc
+ 1537 0eb4 010070E3 		cmn	r0, #1
+ 1538 0eb8 0040A0E1 		mov	r4, r0
+ 1539 0ebc 0000A003 		moveq	r0, #0
+ 1540 0ec0 7080BD08 		ldmeqfd	sp!, {r4, r5, r6, pc}
+ 1541 0ec4 0500A0E1 		mov	r0, r5
+ 1542 0ec8 FEFFFFEB 		bl	strlen
+ 1543 0ecc 0410A0E1 		mov	r1, r4
+ 1544 0ed0 0020A0E1 		mov	r2, r0
+ 1545 0ed4 0600A0E1 		mov	r0, r6
+ 1546 0ed8 FEFFFFEB 		bl	_ZN7cString10eraseAfterEii
+ 1547 0edc 0100A0E3 		mov	r0, #1
+ 1548 0ee0 7080BDE8 		ldmfd	sp!, {r4, r5, r6, pc}
+ 1550              		.align	2
+ 1551              		.global	_ZN7cStringmIEPKc
+ 1553              	_ZN7cStringmIEPKc:
+ 1554              		@ args = 0, pretend = 0, frame = 0
+ 1555              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1556              		@ link register save eliminated.
+ 1557 0ee4 FEFFFFEA 		b	_ZN7cString5eraseEPKc
+ 1559              		.align	2
+ 1560              		.global	_ZN7cString8containsEPKc
+ 1562              	_ZN7cString8containsEPKc:
+ 1563              		@ args = 0, pretend = 0, frame = 0
+ 1564              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1565 0ee8 04E02DE5 		str	lr, [sp, #-4]!
+ 1566 0eec FEFFFFEB 		bl	_ZN7cString12firstIndexOfEPKc
+ 1567 0ef0 010090E2 		adds	r0, r0, #1
+ 1568 0ef4 0100A013 		movne	r0, #1
+ 1569 0ef8 04F09DE4 		ldr	pc, [sp], #4
+ 1571              		.align	2
+ 1572              		.global	_ZN7cString19compareToIgnoreCaseEPKc
+ 1574              	_ZN7cString19compareToIgnoreCaseEPKc:
+ 1575              		@ args = 0, pretend = 0, frame = 0
+ 1576              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1577 0efc F0412DE9 		stmfd	sp!, {r4, r5, r6, r7, r8, lr}
+ 1578 0f00 0C8090E5 		ldr	r8, [r0, #12]
+ 1579 0f04 0800A0E1 		mov	r0, r8
+ 1580 0f08 0170A0E1 		mov	r7, r1
+ 1581 0f0c FEFFFFEB 		bl	strlen
+ 1582 0f10 0060A0E1 		mov	r6, r0
+ 1583 0f14 0700A0E1 		mov	r0, r7
+ 1584 0f18 FEFFFFEB 		bl	strlen
+ 1585 0f1c 000056E1 		cmp	r6, r0
+ 1586 0f20 0050A003 		moveq	r5, #0
+ 1587 0f24 0C00001A 		bne	.L253
+ 1588 0f28 070000EA 		b	.L254
+ 1589              	.L255:
+ 1590 0f2c 0500D8E7 		ldrb	r0, [r8, r5]	@ zero_extendqisi2
+ 1591 0f30 FEFFFFEB 		bl	tolower
+ 1592 0f34 0040A0E1 		mov	r4, r0
+ 1593 0f38 0500D7E7 		ldrb	r0, [r7, r5]	@ zero_extendqisi2
+ 1594 0f3c FEFFFFEB 		bl	tolower
+ 1595 0f40 000054E1 		cmp	r4, r0
+ 1596 0f44 0400001A 		bne	.L253
+ 1597 0f48 015085E2 		add	r5, r5, #1
+ 1598              	.L254:
+ 1599 0f4c 060055E1 		cmp	r5, r6
+ 1600 0f50 F5FFFFBA 		blt	.L255
+ 1601 0f54 0100A0E3 		mov	r0, #1
+ 1602 0f58 F081BDE8 		ldmfd	sp!, {r4, r5, r6, r7, r8, pc}
+ 1603              	.L253:
+ 1604 0f5c 0000A0E3 		mov	r0, #0
+ 1605 0f60 F081BDE8 		ldmfd	sp!, {r4, r5, r6, r7, r8, pc}
+ 1607              		.align	2
+ 1608              		.global	_ZN7cString7toLowerEv
+ 1610              	_ZN7cString7toLowerEv:
+ 1611              		@ args = 0, pretend = 0, frame = 0
+ 1612              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1613 0f64 F0402DE9 		stmfd	sp!, {r4, r5, r6, r7, lr}
+ 1614 0f68 0060A0E1 		mov	r6, r0
+ 1615 0f6c 0C0090E5 		ldr	r0, [r0, #12]
+ 1616 0f70 FEFFFFEB 		bl	strlen
+ 1617 0f74 0050A0E3 		mov	r5, #0
+ 1618 0f78 0070A0E1 		mov	r7, r0
+ 1619 0f7c 040000EA 		b	.L259
+ 1620              	.L260:
+ 1621 0f80 0C4096E5 		ldr	r4, [r6, #12]
+ 1622 0f84 0500D4E7 		ldrb	r0, [r4, r5]	@ zero_extendqisi2
+ 1623 0f88 FEFFFFEB 		bl	tolower
+ 1624 0f8c 0500C4E7 		strb	r0, [r4, r5]
+ 1625 0f90 015085E2 		add	r5, r5, #1
+ 1626              	.L259:
+ 1627 0f94 070055E1 		cmp	r5, r7
+ 1628 0f98 F8FFFFBA 		blt	.L260
+ 1629 0f9c F080BDE8 		ldmfd	sp!, {r4, r5, r6, r7, pc}
+ 1631              		.align	2
+ 1632              		.global	_ZN7cString22getWordIndexIgnoreCaseEPKc
+ 1634              	_ZN7cString22getWordIndexIgnoreCaseEPKc:
+ 1635              		@ args = 0, pretend = 0, frame = 0
+ 1636              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1637 0fa0 F04F2DE9 		stmfd	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, lr}
+ 1638 0fa4 00A0D1E5 		ldrb	sl, [r1, #0]	@ zero_extendqisi2
+ 1639 0fa8 00005AE3 		cmp	sl, #0
+ 1640 0fac 3100000A 		beq	.L263
+ 1641 0fb0 0C4090E5 		ldr	r4, [r0, #12]
+ 1642 0fb4 0030D4E5 		ldrb	r3, [r4, #0]	@ zero_extendqisi2
+ 1643 0fb8 000053E3 		cmp	r3, #0
+ 1644 0fbc 01B08112 		addne	fp, r1, #1
+ 1645 0fc0 0080E013 		mvnne	r8, #0
+ 1646 0fc4 2700001A 		bne	.L264
+ 1647 0fc8 2A0000EA 		b	.L263
+ 1648              	.L271:
+ 1649 0fcc 0A00A0E1 		mov	r0, sl
+ 1650 0fd0 FEFFFFEB 		bl	tolower
+ 1651 0fd4 0010A0E1 		mov	r1, r0
+ 1652 0fd8 0400A0E1 		mov	r0, r4
+ 1653 0fdc FEFFFFEB 		bl	strchr
+ 1654 0fe0 000050E3 		cmp	r0, #0
+ 1655 0fe4 0600001A 		bne	.L265
+ 1656 0fe8 0A00A0E1 		mov	r0, sl
+ 1657 0fec FEFFFFEB 		bl	toupper
+ 1658 0ff0 0010A0E1 		mov	r1, r0
+ 1659 0ff4 0400A0E1 		mov	r0, r4
+ 1660 0ff8 FEFFFFEB 		bl	strchr
+ 1661 0ffc 000050E3 		cmp	r0, #0
+ 1662 1000 1C00000A 		beq	.L263
+ 1663              	.L265:
+ 1664 1004 008064E0 		rsb	r8, r4, r0
+ 1665 1008 0070A0E1 		mov	r7, r0
+ 1666 100c 0B60A0E1 		mov	r6, fp
+ 1667 1010 019080E2 		add	r9, r0, #1
+ 1668 1014 070000EA 		b	.L266
+ 1669              	.L269:
+ 1670 1018 FEFFFFEB 		bl	tolower
+ 1671 101c 0040A0E1 		mov	r4, r0
+ 1672 1020 0500A0E1 		mov	r0, r5
+ 1673 1024 FEFFFFEB 		bl	tolower
+ 1674 1028 000054E1 		cmp	r4, r0
+ 1675 102c 0080E013 		mvnne	r8, #0
+ 1676 1030 0800001A 		bne	.L268
+ 1677              	.L267:
+ 1678 1034 016086E2 		add	r6, r6, #1
+ 1679              	.L266:
+ 1680 1038 0130D7E5 		ldrb	r3, [r7, #1]	@ zero_extendqisi2
+ 1681 103c 000053E3 		cmp	r3, #0
+ 1682 1040 0300A0E1 		mov	r0, r3
+ 1683 1044 017087E2 		add	r7, r7, #1
+ 1684 1048 0200000A 		beq	.L268
+ 1685 104c 0050D6E5 		ldrb	r5, [r6, #0]	@ zero_extendqisi2
+ 1686 1050 000055E3 		cmp	r5, #0
+ 1687 1054 EFFFFF1A 		bne	.L269
+ 1688              	.L268:
+ 1689 1058 0030D6E5 		ldrb	r3, [r6, #0]	@ zero_extendqisi2
+ 1690 105c 000053E3 		cmp	r3, #0
+ 1691 1060 0940A0E1 		mov	r4, r9
+ 1692 1064 0400000A 		beq	.L270
+ 1693              	.L264:
+ 1694 1068 0030D4E5 		ldrb	r3, [r4, #0]	@ zero_extendqisi2
+ 1695 106c 000053E3 		cmp	r3, #0
+ 1696 1070 D5FFFF1A 		bne	.L271
+ 1697 1074 000000EA 		b	.L270
+ 1698              	.L263:
+ 1699 1078 0080E0E3 		mvn	r8, #0
+ 1700              	.L270:
+ 1701 107c 0800A0E1 		mov	r0, r8
+ 1702 1080 F08FBDE8 		ldmfd	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, pc}
+ 1704              		.align	2
+ 1705              		.global	_ZN7cString18containsIgnoreCaseEPKc
+ 1707              	_ZN7cString18containsIgnoreCaseEPKc:
+ 1708              		@ args = 0, pretend = 0, frame = 0
+ 1709              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1710 1084 04E02DE5 		str	lr, [sp, #-4]!
+ 1711 1088 FEFFFFEB 		bl	_ZN7cString22getWordIndexIgnoreCaseEPKc
+ 1712 108c 010090E2 		adds	r0, r0, #1
+ 1713 1090 0100A013 		movne	r0, #1
+ 1714 1094 04F09DE4 		ldr	pc, [sp], #4
+ 1716              		.align	2
+ 1717              		.global	_ZN7cString7toUpperEv
+ 1719              	_ZN7cString7toUpperEv:
+ 1720              		@ args = 0, pretend = 0, frame = 0
+ 1721              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1722 1098 F0402DE9 		stmfd	sp!, {r4, r5, r6, r7, lr}
+ 1723 109c 0060A0E1 		mov	r6, r0
+ 1724 10a0 0C0090E5 		ldr	r0, [r0, #12]
+ 1725 10a4 FEFFFFEB 		bl	strlen
+ 1726 10a8 0050A0E3 		mov	r5, #0
+ 1727 10ac 0070A0E1 		mov	r7, r0
+ 1728 10b0 040000EA 		b	.L276
+ 1729              	.L277:
+ 1730 10b4 0C4096E5 		ldr	r4, [r6, #12]
+ 1731 10b8 0500D4E7 		ldrb	r0, [r4, r5]	@ zero_extendqisi2
+ 1732 10bc FEFFFFEB 		bl	toupper
+ 1733 10c0 0500C4E7 		strb	r0, [r4, r5]
+ 1734 10c4 015085E2 		add	r5, r5, #1
+ 1735              	.L276:
+ 1736 10c8 070055E1 		cmp	r5, r7
+ 1737 10cc F8FFFFBA 		blt	.L277
+ 1738 10d0 F080BDE8 		ldmfd	sp!, {r4, r5, r6, r7, pc}
+ 1740              		.align	2
+ 1741              		.global	_ZN7cString9compareToEPKc
+ 1743              	_ZN7cString9compareToEPKc:
+ 1744              		@ args = 0, pretend = 0, frame = 0
+ 1745              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1746 10d4 0030A0E1 		mov	r3, r0
+ 1747 10d8 04E02DE5 		str	lr, [sp, #-4]!
+ 1748 10dc 0100A0E1 		mov	r0, r1
+ 1749 10e0 0C1093E5 		ldr	r1, [r3, #12]
+ 1750 10e4 FEFFFFEB 		bl	strcmp
+ 1751 10e8 010070E2 		rsbs	r0, r0, #1
+ 1752 10ec 0000A033 		movcc	r0, #0
+ 1753 10f0 04F09DE4 		ldr	pc, [sp], #4
+ 1755              		.align	2
+ 1756              		.global	_ZN7cStringeqEPKc
+ 1758              	_ZN7cStringeqEPKc:
+ 1759              		@ args = 0, pretend = 0, frame = 0
+ 1760              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1761              		@ link register save eliminated.
+ 1762 10f4 FEFFFFEA 		b	_ZN7cString9compareToEPKc
+ 1764              		.align	2
+ 1765              		.global	_ZN7cStringneEPKc
+ 1767              	_ZN7cStringneEPKc:
+ 1768              		@ args = 0, pretend = 0, frame = 0
+ 1769              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1770 10f8 04E02DE5 		str	lr, [sp, #-4]!
+ 1771 10fc FEFFFFEB 		bl	_ZN7cString9compareToEPKc
+ 1772 1100 010020E2 		eor	r0, r0, #1
+ 1773 1104 FF0000E2 		and	r0, r0, #255
+ 1774 1108 04F09DE4 		ldr	pc, [sp], #4
+ 1776              		.align	2
+ 1777              		.global	_ZN7cString11insertAtEndEPKc
+ 1779              	_ZN7cString11insertAtEndEPKc:
+ 1780              		@ args = 0, pretend = 0, frame = 0
+ 1781              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1782 110c 30402DE9 		stmfd	sp!, {r4, r5, lr}
+ 1783 1110 0040A0E1 		mov	r4, r0
+ 1784 1114 0100A0E1 		mov	r0, r1
+ 1785 1118 0150A0E1 		mov	r5, r1
+ 1786 111c FEFFFFEB 		bl	strlen
+ 1787 1120 0010A0E1 		mov	r1, r0
+ 1788 1124 0400A0E1 		mov	r0, r4
+ 1789 1128 FEFFFFEB 		bl	_ZN7cString26ensureMemoryToInsertNCharsEi
+ 1790 112c 0C0094E5 		ldr	r0, [r4, #12]
+ 1791 1130 0510A0E1 		mov	r1, r5
+ 1792 1134 3040BDE8 		ldmfd	sp!, {r4, r5, lr}
+ 1793 1138 FEFFFFEA 		b	strcat
+ 1795              		.align	2
+ 1796              		.global	_ZN7cString6appendEPKc
+ 1798              	_ZN7cString6appendEPKc:
+ 1799              		@ args = 0, pretend = 0, frame = 0
+ 1800              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1801              		@ link register save eliminated.
+ 1802 113c FEFFFFEA 		b	_ZN7cString11insertAtEndEPKc
+ 1804              		.align	2
+ 1805              		.global	_ZN7cStringpLEc
+ 1807              	_ZN7cStringpLEc:
+ 1808              		@ args = 0, pretend = 0, frame = 4
+ 1809              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1810 1140 04E02DE5 		str	lr, [sp, #-4]!
+ 1811 1144 04D04DE2 		sub	sp, sp, #4
+ 1812 1148 04308DE2 		add	r3, sp, #4
+ 1813 114c 0020A0E3 		mov	r2, #0	@ movhi
+ 1814 1150 B220CDE1 		strh	r2, [sp, #2]	@ movhi
+ 1815 1154 021063E5 		strb	r1, [r3, #-2]!
+ 1816 1158 0310A0E1 		mov	r1, r3
+ 1817 115c FEFFFFEB 		bl	_ZN7cString11insertAtEndEPKc
+ 1818 1160 04D08DE2 		add	sp, sp, #4
+ 1819 1164 0080BDE8 		ldmfd	sp!, {pc}
+ 1821              		.align	2
+ 1822              		.global	_ZN7cStringpLEPKc
+ 1824              	_ZN7cStringpLEPKc:
+ 1825              		@ args = 0, pretend = 0, frame = 0
+ 1826              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1827              		@ link register save eliminated.
+ 1828 1168 FEFFFFEA 		b	_ZN7cString11insertAtEndEPKc
+ 1830              		.section	.rodata.str1.1
+ 1831              	.LC4:
+ 1832 004f 25303258 		.ascii	"%02X\000"
+ 1832      00
+ 1833              		.text
+ 1834              		.align	2
+ 1835              		.global	_ZN7cString11appendAsHexEj
+ 1837              	_ZN7cString11appendAsHexEj:
+ 1838              		@ args = 0, pretend = 0, frame = 32
+ 1839              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1840 116c 30402DE9 		stmfd	sp!, {r4, r5, lr}
+ 1841 1170 20D04DE2 		sub	sp, sp, #32
+ 1842 1174 0120A0E1 		mov	r2, r1
+ 1843 1178 0050A0E1 		mov	r5, r0
+ 1844 117c 1C109FE5 		ldr	r1, .L295
+ 1845 1180 0D00A0E1 		mov	r0, sp
+ 1846 1184 FEFFFFEB 		bl	sprintf
+ 1847 1188 0500A0E1 		mov	r0, r5
+ 1848 118c 0D10A0E1 		mov	r1, sp
+ 1849 1190 0D40A0E1 		mov	r4, sp
+ 1850 1194 FEFFFFEB 		bl	_ZN7cString11insertAtEndEPKc
+ 1851 1198 20D08DE2 		add	sp, sp, #32
+ 1852 119c 3080BDE8 		ldmfd	sp!, {r4, r5, pc}
+ 1853              	.L296:
+ 1854              		.align	2
+ 1855              	.L295:
+ 1856 11a0 4F000000 		.word	.LC4
+ 1858              		.align	2
+ 1859              		.global	_ZN7cString15checksum_AppendEv
+ 1861              	_ZN7cString15checksum_AppendEv:
+ 1862              		@ args = 0, pretend = 0, frame = 0
+ 1863              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1864 11a4 30402DE9 		stmfd	sp!, {r4, r5, lr}
+ 1865 11a8 0040A0E1 		mov	r4, r0
+ 1866 11ac FEFFFFEB 		bl	_ZN7cString12checksum_GetEv
+ 1867 11b0 18109FE5 		ldr	r1, .L299
+ 1868 11b4 0050A0E1 		mov	r5, r0
+ 1869 11b8 0400A0E1 		mov	r0, r4
+ 1870 11bc FEFFFFEB 		bl	_ZN7cString11insertAtEndEPKc
+ 1871 11c0 0400A0E1 		mov	r0, r4
+ 1872 11c4 0510A0E1 		mov	r1, r5
+ 1873 11c8 3040BDE8 		ldmfd	sp!, {r4, r5, lr}
+ 1874 11cc FEFFFFEA 		b	_ZN7cString11appendAsHexEj
+ 1875              	.L300:
+ 1876              		.align	2
+ 1877              	.L299:
+ 1878 11d0 4D000000 		.word	.LC3
+ 1880              		.align	2
+ 1881              		.global	_ZN7cString6appendEf
+ 1883              	_ZN7cString6appendEf:
+ 1884              		@ args = 0, pretend = 0, frame = 32
+ 1885              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1886 11d4 30402DE9 		stmfd	sp!, {r4, r5, lr}
+ 1887 11d8 0050A0E1 		mov	r5, r0
+ 1888 11dc 20D04DE2 		sub	sp, sp, #32
+ 1889 11e0 0100A0E1 		mov	r0, r1
+ 1890 11e4 FEFFFFEB 		bl	__extendsfdf2
+ 1891 11e8 0020A0E1 		mov	r2, r0
+ 1892 11ec 0130A0E1 		mov	r3, r1
+ 1893 11f0 0D00A0E1 		mov	r0, sp
+ 1894 11f4 18109FE5 		ldr	r1, .L303
+ 1895 11f8 FEFFFFEB 		bl	sprintf
+ 1896 11fc 0500A0E1 		mov	r0, r5
+ 1897 1200 0D10A0E1 		mov	r1, sp
+ 1898 1204 0D40A0E1 		mov	r4, sp
+ 1899 1208 FEFFFFEB 		bl	_ZN7cString11insertAtEndEPKc
+ 1900 120c 20D08DE2 		add	sp, sp, #32
+ 1901 1210 3080BDE8 		ldmfd	sp!, {r4, r5, pc}
+ 1902              	.L304:
+ 1903              		.align	2
+ 1904              	.L303:
+ 1905 1214 48000000 		.word	.LC1
+ 1907              		.section	.rodata.str1.1
+ 1908              	.LC5:
+ 1909 0054 256900   		.ascii	"%i\000"
+ 1910              		.text
+ 1911              		.align	2
+ 1912              		.global	_ZN7cString6appendEi
+ 1914              	_ZN7cString6appendEi:
+ 1915              		@ args = 0, pretend = 0, frame = 32
+ 1916              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1917 1218 30402DE9 		stmfd	sp!, {r4, r5, lr}
+ 1918 121c 20D04DE2 		sub	sp, sp, #32
+ 1919 1220 0120A0E1 		mov	r2, r1
+ 1920 1224 0050A0E1 		mov	r5, r0
+ 1921 1228 1C109FE5 		ldr	r1, .L307
+ 1922 122c 0D00A0E1 		mov	r0, sp
+ 1923 1230 FEFFFFEB 		bl	sprintf
+ 1924 1234 0500A0E1 		mov	r0, r5
+ 1925 1238 0D10A0E1 		mov	r1, sp
+ 1926 123c 0D40A0E1 		mov	r4, sp
+ 1927 1240 FEFFFFEB 		bl	_ZN7cString11insertAtEndEPKc
+ 1928 1244 20D08DE2 		add	sp, sp, #32
+ 1929 1248 3080BDE8 		ldmfd	sp!, {r4, r5, pc}
+ 1930              	.L308:
+ 1931              		.align	2
+ 1932              	.L307:
+ 1933 124c 54000000 		.word	.LC5
+ 1935              		.align	2
+ 1936              		.global	_ZN7cStringD1Ev
+ 1938              	_ZN7cStringD1Ev:
+ 1939              		@ args = 0, pretend = 0, frame = 0
+ 1940              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1941 1250 10402DE9 		stmfd	sp!, {r4, lr}
+ 1942 1254 0040A0E1 		mov	r4, r0
+ 1943 1258 0C0090E5 		ldr	r0, [r0, #12]
+ 1944 125c 000050E3 		cmp	r0, #0
+ 1945 1260 FEFFFF1B 		blne	_ZdlPv
+ 1946              	.L310:
+ 1947 1264 100094E5 		ldr	r0, [r4, #16]
+ 1948 1268 000050E3 		cmp	r0, #0
+ 1949 126c 1080BD08 		ldmeqfd	sp!, {r4, pc}
+ 1950 1270 1040BDE8 		ldmfd	sp!, {r4, lr}
+ 1951 1274 FEFFFFEA 		b	_ZdlPv
+ 1953              		.align	2
+ 1954              		.global	_ZN7cStringD2Ev
+ 1956              	_ZN7cStringD2Ev:
+ 1957              		@ args = 0, pretend = 0, frame = 0
+ 1958              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1959 1278 10402DE9 		stmfd	sp!, {r4, lr}
+ 1960 127c 0040A0E1 		mov	r4, r0
+ 1961 1280 0C0090E5 		ldr	r0, [r0, #12]
+ 1962 1284 000050E3 		cmp	r0, #0
+ 1963 1288 FEFFFF1B 		blne	_ZdlPv
+ 1964              	.L314:
+ 1965 128c 100094E5 		ldr	r0, [r4, #16]
+ 1966 1290 000050E3 		cmp	r0, #0
+ 1967 1294 1080BD08 		ldmeqfd	sp!, {r4, pc}
+ 1968 1298 1040BDE8 		ldmfd	sp!, {r4, lr}
+ 1969 129c FEFFFFEA 		b	_ZdlPv
+ 1971              		.ident	"GCC: (GNU) 4.3.2"
+DEFINED SYMBOLS
+                            *ABS*:00000000 cString.cpp
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:11     .text:00000000 _ZN7cString4itoaEiPci
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:14     .text:00000000 $a
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:62     .text:000000a0 $d
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:67     .text:000000a4 _ZNK7cStringclEv
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:71     .text:000000a4 $a
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:77     .text:000000ac _ZN7cString18singleHexCharToIntEh
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:103    .text:000000e8 _ZN7cString17hexStrDigitsToIntEPc
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:143    .text:00000150 _ZN7cString7encryptEPKci
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:174    .text:000001a4 _ZN7cString7decryptEPKc
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:184    .text:000001ac _ZNK7cString6getLenEv
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:194    .text:000001b4 _ZN7cStringixEi
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:210    .text:000001d8 _ZN7cString12checksum_GetEv
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:233    .text:00000210 _ZN7cString7encryptEPKc
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:251    .text:0000023c _ZN7cString5isIntEv
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:281    .text:00000290 _ZN7cString6isUintEv
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:308    .text:000002d4 _ZN7cString14isAlphaNumericEv
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:337    .text:00000320 _ZN7cString10isAllAlphaEv
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:364    .text:00000364 _ZN7cString9subStringEi
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:385    .text:00000398 _ZN7cString7trimEndEPKc
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:423    .text:00000404 _ZN7cString13eraseAllAfterEi
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:440    .text:0000042c _ZN7cString9eraseLastEi
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:457    .text:00000454 _ZN7cString5clearEv
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:469    .text:00000464 _ZN7cString13reAllocateMemEi
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:495    .text:000004ac _ZN7cString8copyFromEPKc
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:519    .text:000004ec _ZN7cStringaSEi
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:538    .text:0000051c _ZN7cStringaSEPKc
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:547    .text:00000520 _ZN7cStringaSERKS_
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:562    .text:0000053c _ZN7cString26ensureMemoryToInsertNCharsEi
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:581    .text:0000056c _ZN7cString4initEi
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:596    .text:00000588 _ZN7cStringC1ERKS_
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:615    .text:000005b8 _ZN7cStringC2ERKS_
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:634    .text:000005e8 _ZN7cStringC1EPKc
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:653    .text:00000618 _ZN7cStringC2EPKc
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:672    .text:00000648 _ZN7cStringC1Ev
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:682    .text:00000650 _ZN7cStringC2Ev
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:692    .text:00000658 _ZN7cString27ensureMemoryForBackupStringEi
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:709    .text:00000680 _ZN7cStringcviEv
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:719    .text:00000688 _ZN7cString15toBaseNumberStrEi
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:748    .text:000006dc _ZN7cStringeqEi
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:763    .text:000006fc _ZN7cStringneEi
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:777    .text:00000718 _ZN7cStringmIEi
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:796    .text:00000748 _ZN7cStringmmEi
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:806    .text:00000750 _ZN7cStringmmEv
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:816    .text:00000758 _ZN7cStringpLEi
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:835    .text:00000788 _ZN7cStringppEi
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:845    .text:00000790 _ZN7cStringppEv
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:860    .text:00000798 _ZN7cStringaSEf
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:882    .text:000007d8 $d
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:887    .text:000007dc _ZN7cString9subStringEii
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:890    .text:000007dc $a
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:921    .text:00000844 _ZN7cString10eraseAfterEii
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:953    .text:000008a8 _ZN7cString11eraseCharAtEi
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:963    .text:000008b0 _ZN7cString20eraseAllSpecialCharsEv
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:992    .text:000008fc _ZN7cString10eraseFirstEi
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:1017   .text:00000944 _ZN7cString9trimStartEPKc
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:1060   .text:000009bc _ZN7cString8insertAtEiPKc
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:1098   .text:00000a38 _ZN7cString11insertAtBegEPKc
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:1109   .text:00000a44 _ZN7cString7countOfEPKc
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:1143   .text:00000a98 _ZN7cString7isFloatEv
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:1182   .text:00000b14 $d
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:1189   .text:00000b18 _ZN7cStringmIEf
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:1192   .text:00000b18 $a
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:1212   .text:00000b54 _ZN7cStringpLEf
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:1234   .text:00000b90 _ZN7cString11lastIndexOfEPKc
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:1271   .text:00000bf0 _ZN7cString15checksum_VerifyEv
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:1303   .text:00000c58 $d
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:1308   .text:00000c5c _ZN7cString15checksum_RemoveEv
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:1311   .text:00000c5c $a
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:1322   .text:00000c7c $d
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:1327   .text:00000c80 _ZN7cString11replaceLastEPKcS1_
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:1330   .text:00000c80 $a
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:1355   .text:00000cd4 _ZN7cString12firstIndexOfEPKc
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:1370   .text:00000cf4 _ZN7cString9subStringEcc
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:1404   .text:00000d5c _ZN7cString9subStringEPKci
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:1420   .text:00000d80 _ZN7cString9subStringEci
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:1437   .text:00000da8 _ZN7cString9subStringEPKc
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:1451   .text:00000dc4 _ZN7cString9subStringEc
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:1468   .text:00000dec _ZN7cString10replaceAllEPKcS1_
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:1502   .text:00000e50 _ZN7cString12replaceFirstEPKcS1_
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:1530   .text:00000ea4 _ZN7cString5eraseEPKc
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:1553   .text:00000ee4 _ZN7cStringmIEPKc
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:1562   .text:00000ee8 _ZN7cString8containsEPKc
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:1574   .text:00000efc _ZN7cString19compareToIgnoreCaseEPKc
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:1610   .text:00000f64 _ZN7cString7toLowerEv
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:1634   .text:00000fa0 _ZN7cString22getWordIndexIgnoreCaseEPKc
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:1707   .text:00001084 _ZN7cString18containsIgnoreCaseEPKc
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:1719   .text:00001098 _ZN7cString7toUpperEv
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:1743   .text:000010d4 _ZN7cString9compareToEPKc
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:1758   .text:000010f4 _ZN7cStringeqEPKc
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:1767   .text:000010f8 _ZN7cStringneEPKc
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:1779   .text:0000110c _ZN7cString11insertAtEndEPKc
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:1798   .text:0000113c _ZN7cString6appendEPKc
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:1807   .text:00001140 _ZN7cStringpLEc
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:1824   .text:00001168 _ZN7cStringpLEPKc
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:1837   .text:0000116c _ZN7cString11appendAsHexEj
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:1856   .text:000011a0 $d
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:1861   .text:000011a4 _ZN7cString15checksum_AppendEv
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:1864   .text:000011a4 $a
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:1878   .text:000011d0 $d
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:1883   .text:000011d4 _ZN7cString6appendEf
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:1886   .text:000011d4 $a
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:1905   .text:00001214 $d
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:1914   .text:00001218 _ZN7cString6appendEi
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:1917   .text:00001218 $a
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:1933   .text:0000124c $d
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:1938   .text:00001250 _ZN7cStringD1Ev
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:1941   .text:00001250 $a
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccTSuqBk.s:1956   .text:00001278 _ZN7cStringD2Ev
+
+UNDEFINED SYMBOLS
+__divsi3
+strlen
+memset
+malloc
+realloc
+memcpy
+atoi
+__extendsfdf2
+sprintf
+strncpy
+memmove
+strstr
+__truncdfsf2
+__subsf3
+atof
+__addsf3
+tolower
+strchr
+toupper
+strcmp
+strcat
+_ZdlPv

@@ -1,0 +1,228 @@
+   1              		.file	"main.cpp"
+   2              		.section	.rodata.str1.1,"aMS",%progbits,1
+   3              	.LC0:
+   4 0000 55617274 		.ascii	"Uart UI\000"
+   4      20554900 
+   5              	.LC1:
+   6 0008 4C454420 		.ascii	"LED Task\000"
+   6      5461736B 
+   6      00
+   7              	.LC2:
+   8 0011 53445F53 		.ascii	"SD_STATUS\000"
+   8      54415455 
+   8      5300
+   9              	.LC3:
+  10 001b 4552524F 		.ascii	"ERROR:  OUT OF MEMORY: Check OS Stack Size or task "
+  10      523A2020 
+  10      4F555420 
+  10      4F46204D 
+  10      454D4F52 
+  11 004e 73746163 		.ascii	"stack size.\012\000"
+  11      6B207369 
+  11      7A652E0A 
+  11      00
+  12              	.LC4:
+  13 005b 0A2D2D20 		.ascii	"\012-- Starting FreeRTOS --\012\000"
+  13      53746172 
+  13      74696E67 
+  13      20467265 
+  13      6552544F 
+  14              	.LC5:
+  15 0075 4552524F 		.ascii	"ERROR: Unexpected OS Exit!\012\000"
+  15      523A2055 
+  15      6E657870 
+  15      65637465 
+  15      64204F53 
+  16              		.text
+  17              		.align	2
+  18              		.global	main
+  20              	main:
+  21              		@ args = 0, pretend = 0, frame = 12
+  22              		@ frame_needed = 0, uses_anonymous_args = 0
+  23 0000 70402DE9 		stmfd	sp!, {r4, r5, r6, lr}
+  24 0004 1CD04DE2 		sub	sp, sp, #28
+  25 0008 FEFFFFEB 		bl	cpuSetupHardware
+  26 000c D8009FE5 		ldr	r0, .L5
+  27 0010 FEFFFFEB 		bl	watchdogDelayUs
+  28 0014 960CA0E3 		mov	r0, #38400
+  29 0018 FEFFFFEB 		bl	uart0Init
+  30 001c CC009FE5 		ldr	r0, .L5+4
+  31 0020 FEFFFFEB 		bl	rprintf_devopen
+  32 0024 10608DE2 		add	r6, sp, #16
+  33 0028 FEFFFFEB 		bl	cpuPrintMemoryInfo
+  34 002c B8009FE5 		ldr	r0, .L5
+  35 0030 FEFFFFEB 		bl	watchdogDelayUs
+  36 0034 0050A0E3 		mov	r5, #0
+  37 0038 01C0A0E3 		mov	ip, #1
+  38 003c 044086E2 		add	r4, r6, #4
+  39 0040 AC009FE5 		ldr	r0, .L5+8
+  40 0044 AC109FE5 		ldr	r1, .L5+12
+  41 0048 062CA0E3 		mov	r2, #1536
+  42 004c 0630A0E1 		mov	r3, r6
+  43 0050 00C08DE5 		str	ip, [sp, #0]
+  44 0054 30008DE9 		stmib	sp, {r4, r5}	@ phole stm
+  45 0058 0C508DE5 		str	r5, [sp, #12]
+  46 005c FEFFFFEB 		bl	xTaskGenericCreate
+  47 0060 010050E3 		cmp	r0, #1
+  48 0064 00C0A0E1 		mov	ip, r0
+  49 0068 1500001A 		bne	.L2
+  50 006c 88009FE5 		ldr	r0, .L5+16
+  51 0070 88109FE5 		ldr	r1, .L5+20
+  52 0074 8020A0E3 		mov	r2, #128
+  53 0078 0630A0E1 		mov	r3, r6
+  54 007c 00C08DE5 		str	ip, [sp, #0]
+  55 0080 30008DE9 		stmib	sp, {r4, r5}	@ phole stm
+  56 0084 0C508DE5 		str	r5, [sp, #12]
+  57 0088 FEFFFFEB 		bl	xTaskGenericCreate
+  58 008c 010050E3 		cmp	r0, #1
+  59 0090 00C0A0E1 		mov	ip, r0
+  60 0094 0A00001A 		bne	.L2
+  61 0098 0630A0E1 		mov	r3, r6
+  62 009c 60009FE5 		ldr	r0, .L5+24
+  63 00a0 60109FE5 		ldr	r1, .L5+28
+  64 00a4 8020A0E3 		mov	r2, #128
+  65 00a8 00C08DE5 		str	ip, [sp, #0]
+  66 00ac 04408DE5 		str	r4, [sp, #4]
+  67 00b0 0C508DE5 		str	r5, [sp, #12]
+  68 00b4 08508DE5 		str	r5, [sp, #8]
+  69 00b8 FEFFFFEB 		bl	xTaskGenericCreate
+  70 00bc 010050E3 		cmp	r0, #1
+  71 00c0 0100000A 		beq	.L3
+  72              	.L2:
+  73 00c4 40009FE5 		ldr	r0, .L5+32
+  74 00c8 FEFFFFEB 		bl	rprintf
+  75              	.L3:
+  76 00cc 3C009FE5 		ldr	r0, .L5+36
+  77 00d0 FEFFFFEB 		bl	rprintf
+  78 00d4 FEFFFFEB 		bl	vTaskStartScheduler
+  79 00d8 34009FE5 		ldr	r0, .L5+40
+  80 00dc FEFFFFEB 		bl	rprintf
+  81 00e0 0000A0E3 		mov	r0, #0
+  82 00e4 1CD08DE2 		add	sp, sp, #28
+  83 00e8 7080BDE8 		ldmfd	sp!, {r4, r5, r6, pc}
+  84              	.L6:
+  85              		.align	2
+  86              	.L5:
+  87 00ec 40420F00 		.word	1000000
+  88 00f0 00000000 		.word	uart0PutChar
+  89 00f4 00000000 		.word	_Z6uartUIPv
+  90 00f8 00000000 		.word	.LC0
+  91 00fc 00000000 		.word	_Z8led_taskPv
+  92 0100 08000000 		.word	.LC1
+  93 0104 00000000 		.word	_Z9SD_StatusPv
+  94 0108 11000000 		.word	.LC2
+  95 010c 1B000000 		.word	.LC3
+  96 0110 5B000000 		.word	.LC4
+  97 0114 75000000 		.word	.LC5
+  99              		.align	2
+ 100              		.global	_Z8led_taskPv
+ 102              	_Z8led_taskPv:
+ 103              		@ args = 0, pretend = 0, frame = 0
+ 104              		@ frame_needed = 0, uses_anonymous_args = 0
+ 105 0118 4C209FE5 		ldr	r2, .L12
+ 106 011c 003092E5 		ldr	r3, [r2, #0]
+ 107 0120 0F3BC3E3 		bic	r3, r3, #15360
+ 108 0124 003082E5 		str	r3, [r2, #0]
+ 109 0128 012942E2 		sub	r2, r2, #16384
+ 110 012c 083092E5 		ldr	r3, [r2, #8]
+ 111 0130 403083E3 		orr	r3, r3, #64
+ 112 0134 083082E5 		str	r3, [r2, #8]
+ 113 0138 083092E5 		ldr	r3, [r2, #8]
+ 114 013c 2030C3E3 		bic	r3, r3, #32
+ 115 0140 083082E5 		str	r3, [r2, #8]
+ 116 0144 30402DE9 		stmfd	sp!, {r4, r5, lr}
+ 117 0148 0240A0E1 		mov	r4, r2
+ 118 014c 4050A0E3 		mov	r5, #64
+ 119              	.L10:
+ 120 0150 003094E5 		ldr	r3, [r4, #0]
+ 121 0154 200013E3 		tst	r3, #32
+ 122 0158 04508415 		strne	r5, [r4, #4]
+ 123 015c 0C508405 		streq	r5, [r4, #12]
+ 124 0160 0A00A0E3 		mov	r0, #10
+ 125 0164 FEFFFFEB 		bl	vTaskDelay
+ 126 0168 F8FFFFEA 		b	.L10
+ 127              	.L13:
+ 128              		.align	2
+ 129              	.L12:
+ 130 016c 00C002E0 		.word	-536690688
+ 132              		.section	.rodata.str1.1
+ 133              	.LC6:
+ 134 0091 53442043 		.ascii	"SD Card Detect: %i\012\000"
+ 134      61726420 
+ 134      44657465 
+ 134      63743A20 
+ 134      25690A00 
+ 135              	.LC7:
+ 136 00a5 53442043 		.ascii	"SD Card Write-Protect: %i\012\000"
+ 136      61726420 
+ 136      57726974 
+ 136      652D5072 
+ 136      6F746563 
+ 137              		.text
+ 138              		.align	2
+ 139              		.global	_Z9SD_StatusPv
+ 141              	_Z9SD_StatusPv:
+ 142              		@ args = 0, pretend = 0, frame = 0
+ 143              		@ frame_needed = 0, uses_anonymous_args = 0
+ 144 0170 6C109FE5 		ldr	r1, .L17
+ 145 0174 043091E5 		ldr	r3, [r1, #4]
+ 146 0178 0130C3E3 		bic	r3, r3, #1
+ 147 017c 043081E5 		str	r3, [r1, #4]
+ 148 0180 60209FE5 		ldr	r2, .L17+4
+ 149 0184 083092E5 		ldr	r3, [r2, #8]
+ 150 0188 0138C3E3 		bic	r3, r3, #65536
+ 151 018c 083082E5 		str	r3, [r2, #8]
+ 152 0190 043091E5 		ldr	r3, [r1, #4]
+ 153 0194 013BC3E3 		bic	r3, r3, #1024
+ 154 0198 043081E5 		str	r3, [r1, #4]
+ 155 019c 083092E5 		ldr	r3, [r2, #8]
+ 156 01a0 0236C3E3 		bic	r3, r3, #2097152
+ 157 01a4 083082E5 		str	r3, [r2, #8]
+ 158 01a8 10402DE9 		stmfd	sp!, {r4, lr}
+ 159 01ac 0240A0E1 		mov	r4, r2
+ 160              	.L15:
+ 161 01b0 001094E5 		ldr	r1, [r4, #0]
+ 162 01b4 2118A0E1 		mov	r1, r1, lsr #16
+ 163 01b8 011001E2 		and	r1, r1, #1
+ 164 01bc 28009FE5 		ldr	r0, .L17+8
+ 165 01c0 FEFFFFEB 		bl	rprintf
+ 166 01c4 001094E5 		ldr	r1, [r4, #0]
+ 167 01c8 A11AA0E1 		mov	r1, r1, lsr #21
+ 168 01cc 011001E2 		and	r1, r1, #1
+ 169 01d0 18009FE5 		ldr	r0, .L17+12
+ 170 01d4 FEFFFFEB 		bl	rprintf
+ 171 01d8 FA0FA0E3 		mov	r0, #1000
+ 172 01dc FEFFFFEB 		bl	vTaskDelay
+ 173 01e0 F2FFFFEA 		b	.L15
+ 174              	.L18:
+ 175              		.align	2
+ 176              	.L17:
+ 177 01e4 00C002E0 		.word	-536690688
+ 178 01e8 008002E0 		.word	-536707072
+ 179 01ec 91000000 		.word	.LC6
+ 180 01f0 A5000000 		.word	.LC7
+ 182              		.ident	"GCC: (GNU) 4.3.2"
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.cpp
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccmAk9qc.s:20     .text:00000000 main
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccmAk9qc.s:23     .text:00000000 $a
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccmAk9qc.s:87     .text:000000ec $d
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccmAk9qc.s:102    .text:00000118 _Z8led_taskPv
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccmAk9qc.s:141    .text:00000170 _Z9SD_StatusPv
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccmAk9qc.s:105    .text:00000118 $a
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccmAk9qc.s:130    .text:0000016c $d
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccmAk9qc.s:144    .text:00000170 $a
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccmAk9qc.s:177    .text:000001e4 $d
+
+UNDEFINED SYMBOLS
+cpuSetupHardware
+watchdogDelayUs
+uart0Init
+rprintf_devopen
+cpuPrintMemoryInfo
+xTaskGenericCreate
+rprintf
+vTaskStartScheduler
+uart0PutChar
+_Z6uartUIPv
+vTaskDelay

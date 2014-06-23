@@ -1,0 +1,89 @@
+   1              		.file	"ssp_spi.c"
+   2              		.text
+   3              		.align	2
+   4              		.global	initialize_SSPSPI
+   6              	initialize_SSPSPI:
+   7              		@ args = 0, pretend = 0, frame = 0
+   8              		@ frame_needed = 0, uses_anonymous_args = 0
+   9              		@ link register save eliminated.
+  10 0000 64209FE5 		ldr	r2, .L3
+  11 0004 043092E5 		ldr	r3, [r2, #4]
+  12 0008 0C30C3E3 		bic	r3, r3, #12
+  13 000c 043082E5 		str	r3, [r2, #4]
+  14 0010 043092E5 		ldr	r3, [r2, #4]
+  15 0014 3030C3E3 		bic	r3, r3, #48
+  16 0018 043082E5 		str	r3, [r2, #4]
+  17 001c 043092E5 		ldr	r3, [r2, #4]
+  18 0020 C030C3E3 		bic	r3, r3, #192
+  19 0024 043082E5 		str	r3, [r2, #4]
+  20 0028 043092E5 		ldr	r3, [r2, #4]
+  21 002c 083083E3 		orr	r3, r3, #8
+  22 0030 043082E5 		str	r3, [r2, #4]
+  23 0034 043092E5 		ldr	r3, [r2, #4]
+  24 0038 203083E3 		orr	r3, r3, #32
+  25 003c 043082E5 		str	r3, [r2, #4]
+  26 0040 043092E5 		ldr	r3, [r2, #4]
+  27 0044 24109FE5 		ldr	r1, .L3+4
+  28 0048 803083E3 		orr	r3, r3, #128
+  29 004c 043082E5 		str	r3, [r2, #4]
+  30 0050 0730A0E3 		mov	r3, #7
+  31 0054 003081E5 		str	r3, [r1, #0]
+  32 0058 0230A0E3 		mov	r3, #2
+  33 005c 043081E5 		str	r3, [r1, #4]
+  34 0060 033083E0 		add	r3, r3, r3
+  35 0064 103081E5 		str	r3, [r1, #16]
+  36 0068 1EFF2FE1 		bx	lr
+  37              	.L4:
+  38              		.align	2
+  39              	.L3:
+  40 006c 00C002E0 		.word	-536690688
+  41 0070 008006E0 		.word	-536444928
+  43              		.align	2
+  44              		.global	rxTxByteSSPSPI
+  46              	rxTxByteSSPSPI:
+  47              		@ args = 0, pretend = 0, frame = 0
+  48              		@ frame_needed = 0, uses_anonymous_args = 0
+  49              		@ link register save eliminated.
+  50 0074 24309FE5 		ldr	r3, .L9
+  51 0078 FF0000E2 		and	r0, r0, #255
+  52 007c 080083E5 		str	r0, [r3, #8]
+  53 0080 0320A0E1 		mov	r2, r3
+  54              	.L6:
+  55 0084 0C3092E5 		ldr	r3, [r2, #12]
+  56 0088 100013E3 		tst	r3, #16
+  57 008c FCFFFF1A 		bne	.L6
+  58 0090 08309FE5 		ldr	r3, .L9
+  59 0094 080093E5 		ldr	r0, [r3, #8]
+  60 0098 FF0000E2 		and	r0, r0, #255
+  61 009c 1EFF2FE1 		bx	lr
+  62              	.L10:
+  63              		.align	2
+  64              	.L9:
+  65 00a0 008006E0 		.word	-536444928
+  67              		.align	2
+  68              		.global	setSSPSPI_Divider
+  70              	setSSPSPI_Divider:
+  71              		@ args = 0, pretend = 0, frame = 0
+  72              		@ frame_needed = 0, uses_anonymous_args = 0
+  73              		@ link register save eliminated.
+  74 00a4 04309FE5 		ldr	r3, .L13
+  75 00a8 100083E5 		str	r0, [r3, #16]
+  76 00ac 1EFF2FE1 		bx	lr
+  77              	.L14:
+  78              		.align	2
+  79              	.L13:
+  80 00b0 008006E0 		.word	-536444928
+  82              		.ident	"GCC: (GNU) 4.3.2"
+DEFINED SYMBOLS
+                            *ABS*:00000000 ssp_spi.c
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccVz6Cwa.s:6      .text:00000000 initialize_SSPSPI
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccVz6Cwa.s:10     .text:00000000 $a
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccVz6Cwa.s:40     .text:0000006c $d
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccVz6Cwa.s:46     .text:00000074 rxTxByteSSPSPI
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccVz6Cwa.s:50     .text:00000074 $a
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccVz6Cwa.s:65     .text:000000a0 $d
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccVz6Cwa.s:70     .text:000000a4 setSSPSPI_Divider
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccVz6Cwa.s:74     .text:000000a4 $a
+/cygdrive/c/Users/ADMINI~1/AppData/Local/Temp/ccVz6Cwa.s:80     .text:000000b0 $d
+
+NO UNDEFINED SYMBOLS
