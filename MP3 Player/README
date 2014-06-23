@@ -1,0 +1,41 @@
+These incremental projects were developed in SJSU CMPE 146 (Embedded System Design).  They were developed for an LPC2148 ARM7 microcontroller running FreeRTOS and written in C++.
+
+The following are short descriptions of each project and particular files to pay the most attention to (as many of the files are common among projects and not developed by me).
+
+L1 (UART)
+—————————————————————————————————————————————
+This is the project in which the UART driver was configured.  Initialization of pins/ports, baud rate, word size, etc.  Get/put char functions to facilitate basic IO using dedicated registers.
+
+Files:
+./drivers/uart0.c
+./main.cpp
+
+L2 (SPI)
+—————————————————————————————————————————————
+Similar to L1, this project included initialization and configuration of the SPI driver.  Validation was done by communicating with an SD card.  This project also introduces the use of semaphores to ensure no contention on the SPI lines.
+
+Files:
+./drivers/ssp_spi.c
+./chipSelectSrc.c
+./chipSelectSrc.h
+./main.cpp
+./osHandles.h
+
+L3 (I2C)
+—————————————————————————————————————————————
+I2C initialization and configuration in order to read/write commands to an expansion board which contained an array of LEDs and buttons.  This implementation is interrupt driven and makes use of semaphores to protect read operations.
+
+Files:
+./drivers/i2c.c
+./main.cpp
+./osHandles.h
+
+L4 (MP3)
+————————————————————————————————————————————
+This project utilizes the previous 3 to create a functional MP3 player.  All communication drivers and concepts (tasks, inter-task communication queues, interrupts, semaphores, etc.) were used in the design of this project.  Interaction with the development board’s MP3 decoder, DAC and array of buttons and LEDs were also included.
+
+Files:
+./MP3/*
+./main.cpp
+./osHandles.h
+
